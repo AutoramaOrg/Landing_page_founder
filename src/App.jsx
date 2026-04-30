@@ -215,19 +215,12 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-asphalt/82 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#top" className="group flex items-center gap-3" aria-label="Autorama Racing">
-          <span className="relative flex h-9 w-12 items-center justify-center overflow-hidden border border-white/20 bg-white/5">
-            <span className="absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80" />
-            <span className="relative h-3 w-8 bg-asphalt shadow-[7px_0_0_#05070d,-7px_0_0_#05070d]" />
-          </span>
-          <span className="leading-none">
-            <span className="block font-display text-xl font-black uppercase tracking-[.08em] text-white sm:text-2xl">
-              Autorama
-            </span>
-            <span className="block text-right font-display text-[11px] font-bold uppercase tracking-[.34em] text-chrome/80">
-              Racing
-            </span>
-          </span>
+        <a href="#top" className="group flex shrink-0 items-center" aria-label="Autorama Racing">
+          <img
+            src="/autorama_white.png"
+            alt=""
+            className="h-8 w-auto transition duration-300 group-hover:opacity-90 sm:h-10"
+          />
         </a>
 
         <nav className="hidden items-center gap-8 lg:flex">
@@ -244,39 +237,6 @@ function Header() {
         </a>
       </div>
     </header>
-  )
-}
-
-function TrackScene() {
-  return (
-    <div className="hero-visual" aria-label="Cena futurista de corrida Autorama Racing">
-      <div className="screen-wall">
-        <span>SYNCOIL</span>
-      </div>
-      <div className="crowd-row">
-        {Array.from({ length: 28 }).map((_, index) => (
-          <i key={index} style={{ '--delay': `${index * 0.08}s` }} />
-        ))}
-      </div>
-      <div className="track-lanes">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="slot-car">
-        <div className="car-body">
-          <span className="window" />
-          <span className="stripe" />
-          <span className="headlight left" />
-          <span className="headlight right" />
-        </div>
-        <span className="wheel front" />
-        <span className="wheel rear" />
-      </div>
-      <div className="driver-stand" />
-      <div className="blue-beam" />
-      <div className="red-beam" />
-    </div>
   )
 }
 
@@ -362,8 +322,8 @@ function App() {
       <main>
         <section className="hero-section">
           <div className="hero-backdrop" />
-          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-32 sm:px-6 lg:grid-cols-[.88fr_1.12fr] lg:px-8 lg:pb-20 lg:pt-36">
-            <div className="relative z-10 max-w-2xl">
+          <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
+            <div className="max-w-2xl">
               <div className="eyebrow">
                 <span />
                 Acesse. Corra. Lidere.
@@ -385,11 +345,9 @@ function App() {
                 </a>
               </div>
             </div>
-
-            <TrackScene />
           </div>
 
-          <div id="beneficios" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div id="beneficios" className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="benefits-grid">
               {benefits.map((benefit) => (
                 <BenefitCard key={benefit.title} benefit={benefit} />
@@ -466,14 +424,12 @@ function App() {
       <footer className="footer">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
           <div>
-            <a href="#top" className="inline-flex items-center gap-3" aria-label="Autorama Racing">
-              <span className="relative flex h-8 w-11 items-center justify-center overflow-hidden border border-white/20 bg-white/5">
-                <span className="absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80" />
-                <span className="relative h-2.5 w-7 bg-asphalt shadow-[6px_0_0_#05070d,-6px_0_0_#05070d]" />
-              </span>
-              <span className="font-display text-xl font-black uppercase tracking-[.08em] text-white">
-                Autorama Racing
-              </span>
+            <a href="#top" className="inline-flex items-center" aria-label="Autorama Racing">
+              <img
+                src="/autorama_white.png"
+                alt=""
+                className="h-9 w-auto sm:h-11"
+              />
             </a>
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
               Corrida, coleção e competição em uma experiência neon feita para quem gosta de largar na frente.

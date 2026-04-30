@@ -207,21 +207,13 @@ function Header() {
     className: "mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
   }, React.createElement("a", {
     href: "#top",
-    className: "group flex items-center gap-3",
+    className: "group flex shrink-0 items-center",
     "aria-label": "Autorama Racing"
-  }, React.createElement("span", {
-    className: "relative flex h-9 w-12 items-center justify-center overflow-hidden border border-white/20 bg-white/5"
-  }, React.createElement("span", {
-    className: "absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80"
-  }), React.createElement("span", {
-    className: "relative h-3 w-8 bg-asphalt shadow-[7px_0_0_#05070d,-7px_0_0_#05070d]"
-  })), React.createElement("span", {
-    className: "leading-none"
-  }, React.createElement("span", {
-    className: "block font-display text-xl font-black uppercase tracking-[.08em] text-white sm:text-2xl"
-  }, "Autorama"), React.createElement("span", {
-    className: "block text-right font-display text-[11px] font-bold uppercase tracking-[.34em] text-chrome/80"
-  }, "Racing"))), React.createElement("nav", {
+  }, React.createElement("img", {
+    src: "/autorama_white.png",
+    alt: "",
+    className: "h-8 w-auto transition duration-300 group-hover:opacity-90 sm:h-10"
+  })), React.createElement("nav", {
     className: "hidden items-center gap-8 lg:flex"
   }, navItems.map(item => React.createElement("a", {
     key: item.href,
@@ -233,47 +225,6 @@ function Header() {
   }, "Quero ser fundador", React.createElement("span", {
     "aria-hidden": "true"
   }, "\u203A\u203A"))));
-}
-function TrackScene() {
-  return React.createElement("div", {
-    className: "hero-visual",
-    "aria-label": "Cena futurista de corrida Autorama Racing"
-  }, React.createElement("div", {
-    className: "screen-wall"
-  }, React.createElement("span", null, "SYNCOIL")), React.createElement("div", {
-    className: "crowd-row"
-  }, Array.from({
-    length: 28
-  }).map((_, index) => React.createElement("i", {
-    key: index,
-    style: {
-      '--delay': `${index * 0.08}s`
-    }
-  }))), React.createElement("div", {
-    className: "track-lanes"
-  }, React.createElement("span", null), React.createElement("span", null), React.createElement("span", null)), React.createElement("div", {
-    className: "slot-car"
-  }, React.createElement("div", {
-    className: "car-body"
-  }, React.createElement("span", {
-    className: "window"
-  }), React.createElement("span", {
-    className: "stripe"
-  }), React.createElement("span", {
-    className: "headlight left"
-  }), React.createElement("span", {
-    className: "headlight right"
-  })), React.createElement("span", {
-    className: "wheel front"
-  }), React.createElement("span", {
-    className: "wheel rear"
-  })), React.createElement("div", {
-    className: "driver-stand"
-  }), React.createElement("div", {
-    className: "blue-beam"
-  }), React.createElement("div", {
-    className: "red-beam"
-  }));
 }
 function BenefitCard({
   benefit
@@ -345,9 +296,9 @@ function App() {
   }, React.createElement("div", {
     className: "hero-backdrop"
   }), React.createElement("div", {
-    className: "mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-32 sm:px-6 lg:grid-cols-[.88fr_1.12fr] lg:px-8 lg:pb-20 lg:pt-36"
+    className: "relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36"
   }, React.createElement("div", {
-    className: "relative z-10 max-w-2xl"
+    className: "max-w-2xl"
   }, React.createElement("div", {
     className: "eyebrow"
   }, React.createElement("span", null), "Acesse. Corra. Lidere."), React.createElement("h1", {
@@ -368,9 +319,9 @@ function App() {
     className: "ghost-button"
   }, "Ver pacotes", React.createElement("span", {
     "aria-hidden": "true"
-  }, "\u203A")))), React.createElement(TrackScene, null)), React.createElement("div", {
+  }, "\u203A"))))), React.createElement("div", {
     id: "beneficios",
-    className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
+    className: "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
   }, React.createElement("div", {
     className: "benefits-grid"
   }, benefits.map(benefit => React.createElement(BenefitCard, {
@@ -441,17 +392,13 @@ function App() {
     className: "mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8"
   }, React.createElement("div", null, React.createElement("a", {
     href: "#top",
-    className: "inline-flex items-center gap-3",
+    className: "inline-flex items-center",
     "aria-label": "Autorama Racing"
-  }, React.createElement("span", {
-    className: "relative flex h-8 w-11 items-center justify-center overflow-hidden border border-white/20 bg-white/5"
-  }, React.createElement("span", {
-    className: "absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80"
-  }), React.createElement("span", {
-    className: "relative h-2.5 w-7 bg-asphalt shadow-[6px_0_0_#05070d,-6px_0_0_#05070d]"
-  })), React.createElement("span", {
-    className: "font-display text-xl font-black uppercase tracking-[.08em] text-white"
-  }, "Autorama Racing")), React.createElement("p", {
+  }, React.createElement("img", {
+    src: "/autorama_white.png",
+    alt: "",
+    className: "h-9 w-auto sm:h-11"
+  })), React.createElement("p", {
     className: "mt-5 max-w-sm text-sm leading-6 text-slate-400"
   }, "Corrida, cole\xE7\xE3o e competi\xE7\xE3o em uma experi\xEAncia neon feita para quem gosta de largar na frente.")), React.createElement(FooterList, {
     title: "Jogo",
