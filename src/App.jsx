@@ -10,6 +10,10 @@ const assets = {
   wallpaper: '/assets/wallpaper-fuel.png',
   kartParts: '/assets/kart-partes.png',
   formula: '/assets/formula2.png',
+  mechanics: '/assets/pecas-mecanica.png',
+  mechanicsTwo: '/assets/pecas-mecanica-2.png',
+  showroom: '/assets/salao-tipos-de-carro.png',
+  pier: '/assets/pier-estacionamento.png',
 }
 
 const benefits = [
@@ -91,14 +95,14 @@ const universe = [
     text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
     icon: 'helmet',
     gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
-    image: assets.wallpaper,
+    image: assets.pier,
   },
   {
     title: 'Mecânica',
     text: 'Monte, pinte e evolua carros com personalidade de competição.',
     icon: 'gear',
     gradient: 'from-lime-400/20 via-transparent to-trophy/15',
-    image: assets.kartParts,
+    image: assets.mechanics,
   },
   {
     title: 'Eventos',
@@ -112,7 +116,36 @@ const universe = [
     text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
     icon: 'market',
     gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
-    image: assets.wallpaper,
+    image: assets.showroom,
+  },
+]
+
+const garageHighlights = [
+  {
+    title: 'Peças de performance',
+    text: 'Monte setups com aerofólios, chassis, spoilers e módulos visuais de fundador.',
+    image: assets.mechanics,
+    focus: '50% 46%',
+    featured: true,
+  },
+  {
+    title: 'Oficina neon',
+    text: 'Componentes raros para transformar cada carro em assinatura de pista.',
+    image: assets.mechanicsTwo,
+    focus: '52% 46%',
+  },
+  {
+    title: 'Salão de carros',
+    text: 'Compare estilos, categorias e carrocerias antes de entrar no grid.',
+    image: assets.showroom,
+    focus: '50% 48%',
+  },
+  {
+    title: 'Pier de encontro',
+    text: 'Um hub social para exibir garagem, encontrar pilotos e fechar desafios.',
+    image: assets.pier,
+    focus: '52% 50%',
+    featured: true,
   },
 ]
 
@@ -339,6 +372,26 @@ function UniverseCard({ item }) {
   )
 }
 
+function GarageCard({ item, index }) {
+  return (
+    <article className={`garage-card ${item.featured ? 'featured' : ''}`}>
+      <img
+        className="garage-image"
+        src={item.image}
+        alt=""
+        loading="lazy"
+        style={{ objectPosition: item.focus }}
+      />
+      <div className="garage-sheen" />
+      <div className="garage-copy">
+        <span>{String(index + 1).padStart(2, '0')}</span>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </div>
+    </article>
+  )
+}
+
 function ReasonCard({ reason }) {
   return (
     <article className="reason-card">
@@ -405,6 +458,20 @@ function App() {
           <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
             {packages.map((pack) => (
               <PackageCard key={pack.name} pack={pack} />
+            ))}
+          </div>
+        </section>
+
+        <section className="section-shell garage-section pt-20">
+          <div className="section-heading">
+            <span className="signal-bars" />
+            <h2>Garagem de fundador</h2>
+            <span className="signal-bars right" />
+          </div>
+
+          <div className="garage-grid mx-auto mt-9 max-w-7xl px-4 sm:px-6 lg:px-8">
+            {garageHighlights.map((item, index) => (
+              <GarageCard key={item.title} item={item} index={index} />
             ))}
           </div>
         </section>

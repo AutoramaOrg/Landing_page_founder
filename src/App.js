@@ -17,7 +17,11 @@ const assets = {
   logo: '/assets/autorama-logo.png',
   wallpaper: '/assets/wallpaper-fuel.png',
   kartParts: '/assets/kart-partes.png',
-  formula: '/assets/formula2.png'
+  formula: '/assets/formula2.png',
+  mechanics: '/assets/pecas-mecanica.png',
+  mechanicsTwo: '/assets/pecas-mecanica-2.png',
+  showroom: '/assets/salao-tipos-de-carro.png',
+  pier: '/assets/pier-estacionamento.png'
 };
 const benefits = [{
   title: 'Acesso antecipado',
@@ -70,13 +74,13 @@ const universe = [{
   text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
   icon: 'helmet',
   gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
-  image: assets.wallpaper
+  image: assets.pier
 }, {
   title: 'Mecânica',
   text: 'Monte, pinte e evolua carros com personalidade de competição.',
   icon: 'gear',
   gradient: 'from-lime-400/20 via-transparent to-trophy/15',
-  image: assets.kartParts
+  image: assets.mechanics
 }, {
   title: 'Eventos',
   text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
@@ -88,7 +92,30 @@ const universe = [{
   text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
   icon: 'market',
   gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
-  image: assets.wallpaper
+  image: assets.showroom
+}];
+const garageHighlights = [{
+  title: 'Peças de performance',
+  text: 'Monte setups com aerofólios, chassis, spoilers e módulos visuais de fundador.',
+  image: assets.mechanics,
+  focus: '50% 46%',
+  featured: true
+}, {
+  title: 'Oficina neon',
+  text: 'Componentes raros para transformar cada carro em assinatura de pista.',
+  image: assets.mechanicsTwo,
+  focus: '52% 46%'
+}, {
+  title: 'Salão de carros',
+  text: 'Compare estilos, categorias e carrocerias antes de entrar no grid.',
+  image: assets.showroom,
+  focus: '50% 48%'
+}, {
+  title: 'Pier de encontro',
+  text: 'Um hub social para exibir garagem, encontrar pilotos e fechar desafios.',
+  image: assets.pier,
+  focus: '52% 50%',
+  featured: true
 }];
 const reasons = [{
   title: 'Você faz parte da história',
@@ -332,6 +359,26 @@ function UniverseCard({
     className: "h-11 w-11"
   })), React.createElement("h3", null, item.title), React.createElement("p", null, item.text));
 }
+function GarageCard({
+  item,
+  index
+}) {
+  return React.createElement("article", {
+    className: `garage-card ${item.featured ? 'featured' : ''}`
+  }, React.createElement("img", {
+    className: "garage-image",
+    src: item.image,
+    alt: "",
+    loading: "lazy",
+    style: {
+      objectPosition: item.focus
+    }
+  }), React.createElement("div", {
+    className: "garage-sheen"
+  }), React.createElement("div", {
+    className: "garage-copy"
+  }, React.createElement("span", null, String(index + 1).padStart(2, '0')), React.createElement("h3", null, item.title), React.createElement("p", null, item.text)));
+}
 function ReasonCard({
   reason
 }) {
@@ -396,6 +443,20 @@ function App() {
   }, packages.map(pack => React.createElement(PackageCard, {
     key: pack.name,
     pack: pack
+  })))), React.createElement("section", {
+    className: "section-shell garage-section pt-20"
+  }, React.createElement("div", {
+    className: "section-heading"
+  }, React.createElement("span", {
+    className: "signal-bars"
+  }), React.createElement("h2", null, "Garagem de fundador"), React.createElement("span", {
+    className: "signal-bars right"
+  })), React.createElement("div", {
+    className: "garage-grid mx-auto mt-9 max-w-7xl px-4 sm:px-6 lg:px-8"
+  }, garageHighlights.map((item, index) => React.createElement(GarageCard, {
+    key: item.title,
+    item: item,
+    index: index
   })))), React.createElement("section", {
     id: "universo",
     className: "section-shell pt-20"
