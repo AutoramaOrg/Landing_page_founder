@@ -5,6 +5,13 @@ const navItems = [
   { label: 'Entrar Agora', href: '#entrar' },
 ]
 
+const assets = {
+  logo: '/assets/autorama-logo.png',
+  wallpaper: '/assets/wallpaper-fuel.png',
+  kartParts: '/assets/kart-partes.png',
+  formula: '/assets/formula2.png',
+}
+
 const benefits = [
   {
     title: 'Acesso antecipado',
@@ -77,30 +84,35 @@ const universe = [
     text: 'Pistas velozes, atalhos arriscados e disputas decididas no reflexo.',
     icon: 'flag',
     gradient: 'from-sky-500/25 via-transparent to-red-500/15',
+    image: assets.formula,
   },
   {
     title: 'Bastidores',
     text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
     icon: 'helmet',
     gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
+    image: assets.wallpaper,
   },
   {
     title: 'Mecânica',
     text: 'Monte, pinte e evolua carros com personalidade de competição.',
     icon: 'gear',
     gradient: 'from-lime-400/20 via-transparent to-trophy/15',
+    image: assets.kartParts,
   },
   {
     title: 'Eventos',
     text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
     icon: 'spark',
     gradient: 'from-red-500/25 via-transparent to-trophy/20',
+    image: assets.formula,
   },
   {
     title: 'Economia viva',
     text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
     icon: 'market',
     gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
+    image: assets.wallpaper,
   },
 ]
 
@@ -216,10 +228,7 @@ function Header() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-asphalt/82 backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#top" className="group flex items-center gap-3" aria-label="Autorama Racing">
-          <span className="relative flex h-9 w-12 items-center justify-center overflow-hidden border border-white/20 bg-white/5">
-            <span className="absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80" />
-            <span className="relative h-3 w-8 bg-asphalt shadow-[7px_0_0_#05070d,-7px_0_0_#05070d]" />
-          </span>
+          <img className="brand-logo" src={assets.logo} alt="" />
           <span className="leading-none">
             <span className="block font-display text-xl font-black uppercase tracking-[.08em] text-white sm:text-2xl">
               Autorama
@@ -250,30 +259,19 @@ function Header() {
 function TrackScene() {
   return (
     <div className="hero-visual" aria-label="Cena futurista de corrida Autorama Racing">
-      <div className="screen-wall">
-        <span>SYNCOIL</span>
-      </div>
-      <div className="crowd-row">
-        {Array.from({ length: 28 }).map((_, index) => (
-          <i key={index} style={{ '--delay': `${index * 0.08}s` }} />
-        ))}
-      </div>
+      <img className="hero-race-image" src={assets.formula} alt="" />
+      <div className="hero-visual-overlay" />
+      <img className="hero-logo-mark" src={assets.logo} alt="" />
       <div className="track-lanes">
         <span />
         <span />
         <span />
       </div>
-      <div className="slot-car">
-        <div className="car-body">
-          <span className="window" />
-          <span className="stripe" />
-          <span className="headlight left" />
-          <span className="headlight right" />
-        </div>
-        <span className="wheel front" />
-        <span className="wheel rear" />
+      <div className="speed-strip">
+        {Array.from({ length: 9 }).map((_, index) => (
+          <span key={index} style={{ '--delay': `${index * 0.12}s` }} />
+        ))}
       </div>
-      <div className="driver-stand" />
       <div className="blue-beam" />
       <div className="red-beam" />
     </div>
@@ -303,10 +301,8 @@ function PackageCard({ pack }) {
       </div>
 
       <div className="car-preview" data-tone={pack.tone}>
+        <img className="package-kart-image" src={assets.kartParts} alt="" />
         <span className="car-shadow" />
-        <span className="mini-car">
-          <span />
-        </span>
       </div>
 
       <div className="price-row">
@@ -333,6 +329,7 @@ function PackageCard({ pack }) {
 function UniverseCard({ item }) {
   return (
     <article className={`universe-card bg-gradient-to-br ${item.gradient}`}>
+      <img className="universe-image" src={item.image} alt="" loading="lazy" />
       <div className="universe-art">
         <Icon name={item.icon} className="h-11 w-11" />
       </div>
@@ -467,10 +464,7 @@ function App() {
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
           <div>
             <a href="#top" className="inline-flex items-center gap-3" aria-label="Autorama Racing">
-              <span className="relative flex h-8 w-11 items-center justify-center overflow-hidden border border-white/20 bg-white/5">
-                <span className="absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80" />
-                <span className="relative h-2.5 w-7 bg-asphalt shadow-[6px_0_0_#05070d,-6px_0_0_#05070d]" />
-              </span>
+              <img className="brand-logo footer-logo" src={assets.logo} alt="" />
               <span className="font-display text-xl font-black uppercase tracking-[.08em] text-white">
                 Autorama Racing
               </span>

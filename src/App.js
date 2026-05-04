@@ -13,6 +13,12 @@ const navItems = [{
   label: 'Entrar Agora',
   href: '#entrar'
 }];
+const assets = {
+  logo: '/assets/autorama-logo.png',
+  wallpaper: '/assets/wallpaper-fuel.png',
+  kartParts: '/assets/kart-partes.png',
+  formula: '/assets/formula2.png'
+};
 const benefits = [{
   title: 'Acesso antecipado',
   text: 'Jogue antes do lançamento oficial e sinta a pista na primeira largada.',
@@ -57,27 +63,32 @@ const universe = [{
   title: 'Corridas',
   text: 'Pistas velozes, atalhos arriscados e disputas decididas no reflexo.',
   icon: 'flag',
-  gradient: 'from-sky-500/25 via-transparent to-red-500/15'
+  gradient: 'from-sky-500/25 via-transparent to-red-500/15',
+  image: assets.formula
 }, {
   title: 'Bastidores',
   text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
   icon: 'helmet',
-  gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15'
+  gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
+  image: assets.wallpaper
 }, {
   title: 'Mecânica',
   text: 'Monte, pinte e evolua carros com personalidade de competição.',
   icon: 'gear',
-  gradient: 'from-lime-400/20 via-transparent to-trophy/15'
+  gradient: 'from-lime-400/20 via-transparent to-trophy/15',
+  image: assets.kartParts
 }, {
   title: 'Eventos',
   text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
   icon: 'spark',
-  gradient: 'from-red-500/25 via-transparent to-trophy/20'
+  gradient: 'from-red-500/25 via-transparent to-trophy/20',
+  image: assets.formula
 }, {
   title: 'Economia viva',
   text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
   icon: 'market',
-  gradient: 'from-voltage/20 via-transparent to-emerald-400/15'
+  gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
+  image: assets.wallpaper
 }];
 const reasons = [{
   title: 'Você faz parte da história',
@@ -209,13 +220,11 @@ function Header() {
     href: "#top",
     className: "group flex items-center gap-3",
     "aria-label": "Autorama Racing"
-  }, React.createElement("span", {
-    className: "relative flex h-9 w-12 items-center justify-center overflow-hidden border border-white/20 bg-white/5"
-  }, React.createElement("span", {
-    className: "absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80"
+  }, React.createElement("img", {
+    className: "brand-logo",
+    src: assets.logo,
+    alt: ""
   }), React.createElement("span", {
-    className: "relative h-3 w-8 bg-asphalt shadow-[7px_0_0_#05070d,-7px_0_0_#05070d]"
-  })), React.createElement("span", {
     className: "leading-none"
   }, React.createElement("span", {
     className: "block font-display text-xl font-black uppercase tracking-[.08em] text-white sm:text-2xl"
@@ -238,38 +247,28 @@ function TrackScene() {
   return React.createElement("div", {
     className: "hero-visual",
     "aria-label": "Cena futurista de corrida Autorama Racing"
-  }, React.createElement("div", {
-    className: "screen-wall"
-  }, React.createElement("span", null, "SYNCOIL")), React.createElement("div", {
-    className: "crowd-row"
-  }, Array.from({
-    length: 28
-  }).map((_, index) => React.createElement("i", {
-    key: index,
-    style: {
-      '--delay': `${index * 0.08}s`
-    }
-  }))), React.createElement("div", {
+  }, React.createElement("img", {
+    className: "hero-race-image",
+    src: assets.formula,
+    alt: ""
+  }), React.createElement("div", {
+    className: "hero-visual-overlay"
+  }), React.createElement("img", {
+    className: "hero-logo-mark",
+    src: assets.logo,
+    alt: ""
+  }), React.createElement("div", {
     className: "track-lanes"
   }, React.createElement("span", null), React.createElement("span", null), React.createElement("span", null)), React.createElement("div", {
-    className: "slot-car"
-  }, React.createElement("div", {
-    className: "car-body"
-  }, React.createElement("span", {
-    className: "window"
-  }), React.createElement("span", {
-    className: "stripe"
-  }), React.createElement("span", {
-    className: "headlight left"
-  }), React.createElement("span", {
-    className: "headlight right"
-  })), React.createElement("span", {
-    className: "wheel front"
-  }), React.createElement("span", {
-    className: "wheel rear"
-  })), React.createElement("div", {
-    className: "driver-stand"
-  }), React.createElement("div", {
+    className: "speed-strip"
+  }, Array.from({
+    length: 9
+  }).map((_, index) => React.createElement("span", {
+    key: index,
+    style: {
+      '--delay': `${index * 0.12}s`
+    }
+  }))), React.createElement("div", {
     className: "blue-beam"
   }), React.createElement("div", {
     className: "red-beam"
@@ -299,11 +298,13 @@ function PackageCard({
   }), React.createElement("h3", null, pack.name), React.createElement("p", null, pack.tagline)), React.createElement("div", {
     className: "car-preview",
     "data-tone": pack.tone
-  }, React.createElement("span", {
-    className: "car-shadow"
+  }, React.createElement("img", {
+    className: "package-kart-image",
+    src: assets.kartParts,
+    alt: ""
   }), React.createElement("span", {
-    className: "mini-car"
-  }, React.createElement("span", null))), React.createElement("div", {
+    className: "car-shadow"
+  })), React.createElement("div", {
     className: "price-row"
   }, React.createElement("span", null, pack.price), React.createElement("small", null, "pagamento \xFAnico")), React.createElement("ul", {
     className: "perk-list"
@@ -319,7 +320,12 @@ function UniverseCard({
 }) {
   return React.createElement("article", {
     className: `universe-card bg-gradient-to-br ${item.gradient}`
-  }, React.createElement("div", {
+  }, React.createElement("img", {
+    className: "universe-image",
+    src: item.image,
+    alt: "",
+    loading: "lazy"
+  }), React.createElement("div", {
     className: "universe-art"
   }, React.createElement(Icon, {
     name: item.icon,
@@ -443,13 +449,11 @@ function App() {
     href: "#top",
     className: "inline-flex items-center gap-3",
     "aria-label": "Autorama Racing"
-  }, React.createElement("span", {
-    className: "relative flex h-8 w-11 items-center justify-center overflow-hidden border border-white/20 bg-white/5"
-  }, React.createElement("span", {
-    className: "absolute inset-0 bg-[linear-gradient(120deg,#ff263d_0_28%,transparent_28%_41%,#1ca7ff_41%_58%,transparent_58%_68%,#ffffff_68%)] opacity-80"
+  }, React.createElement("img", {
+    className: "brand-logo footer-logo",
+    src: assets.logo,
+    alt: ""
   }), React.createElement("span", {
-    className: "relative h-2.5 w-7 bg-asphalt shadow-[6px_0_0_#05070d,-6px_0_0_#05070d]"
-  })), React.createElement("span", {
     className: "font-display text-xl font-black uppercase tracking-[.08em] text-white"
   }, "Autorama Racing")), React.createElement("p", {
     className: "mt-5 max-w-sm text-sm leading-6 text-slate-400"

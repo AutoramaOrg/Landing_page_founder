@@ -75,6 +75,20 @@ body::before {
     transform: scaleX(1);
   }
 
+  .brand-logo {
+    width: 3.05rem;
+    height: 3.05rem;
+    object-fit: contain;
+    filter:
+      drop-shadow(0 0 14px rgba(255, 255, 255, 0.22))
+      drop-shadow(0 0 18px rgba(28, 167, 255, 0.22));
+  }
+
+  .footer-logo {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
   .glow-button {
     @apply inline-flex items-center justify-center gap-3 bg-ember px-7 py-4 font-display text-sm font-black uppercase tracking-[.08em] text-white shadow-redglow transition duration-300;
     clip-path: polygon(0 0, calc(100% - 13px) 0, 100% 50%, calc(100% - 13px) 100%, 0 100%, 9px 50%);
@@ -137,9 +151,11 @@ body::before {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(5, 7, 13, 0.98) 0%, rgba(5, 7, 13, 0.82) 35%, rgba(5, 7, 13, 0.42) 65%, rgba(5, 7, 13, 0.95) 100%),
+      linear-gradient(90deg, rgba(5, 7, 13, 0.98) 0%, rgba(5, 7, 13, 0.86) 35%, rgba(5, 7, 13, 0.48) 65%, rgba(5, 7, 13, 0.95) 100%),
       radial-gradient(circle at 68% 28%, rgba(255, 38, 61, 0.42), transparent 18rem),
       radial-gradient(circle at 82% 12%, rgba(28, 167, 255, 0.25), transparent 22rem),
+      linear-gradient(180deg, rgba(5, 7, 13, 0.18), #05070d 96%),
+      url('/assets/wallpaper-fuel.png') center / cover no-repeat,
       linear-gradient(120deg, #05070d, #12131d 45%, #080b12);
   }
 
@@ -188,6 +204,68 @@ body::before {
       linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
     background-size: 88px 74px;
     opacity: 0.45;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-race-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 52% 50%;
+    opacity: 0.94;
+    transform: scale(1.04);
+    filter: saturate(1.22) contrast(1.1) brightness(0.74);
+  }
+
+  .hero-visual-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(3, 5, 10, 0.32), transparent 42%, rgba(3, 5, 10, 0.55)),
+      linear-gradient(180deg, rgba(3, 5, 10, 0.06), rgba(3, 5, 10, 0.72) 88%),
+      radial-gradient(circle at 22% 70%, rgba(28, 167, 255, 0.26), transparent 14rem),
+      radial-gradient(circle at 68% 46%, rgba(255, 38, 61, 0.34), transparent 15rem);
+  }
+
+  .hero-logo-mark {
+    position: absolute;
+    z-index: 4;
+    top: 28px;
+    left: 28px;
+    width: 82px;
+    height: 82px;
+    object-fit: contain;
+    padding: 12px;
+    background: rgba(3, 5, 10, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 0 26px rgba(28, 167, 255, 0.22),
+      inset 0 0 24px rgba(255, 255, 255, 0.05);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .speed-strip {
+    position: absolute;
+    z-index: 4;
+    right: 26px;
+    bottom: 94px;
+    display: flex;
+    gap: 10px;
+    transform: skewX(-18deg);
+  }
+
+  .speed-strip span {
+    width: 42px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ff263d, #1ca7ff);
+    box-shadow: 0 0 16px rgba(255, 38, 61, 0.56);
+    opacity: 0.4;
+    animation: pulseGlow 2.4s ease-in-out infinite;
+    animation-delay: var(--delay);
   }
 
   .screen-wall {
@@ -247,6 +325,7 @@ body::before {
 
   .track-lanes {
     position: absolute;
+    z-index: 3;
     right: -12%;
     bottom: -44px;
     left: -12%;
@@ -382,6 +461,7 @@ body::before {
   .blue-beam,
   .red-beam {
     position: absolute;
+    z-index: 3;
     top: -16%;
     width: 130px;
     height: 116%;
@@ -564,11 +644,12 @@ body::before {
 
   .car-preview {
     position: relative;
-    height: 190px;
+    height: 210px;
     margin: 20px 0 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background:
+      linear-gradient(180deg, rgba(3, 5, 10, 0.08), rgba(3, 5, 10, 0.74)),
       radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 7rem),
       linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.2));
   }
@@ -596,8 +677,41 @@ body::before {
     box-shadow: inset 0 0 54px rgba(245, 166, 35, 0.28);
   }
 
+  .package-kart-image {
+    position: absolute;
+    inset: -18% -62% -8% -62%;
+    z-index: 1;
+    width: 224%;
+    height: 126%;
+    object-fit: cover;
+    filter: saturate(1.24) contrast(1.08) drop-shadow(0 18px 18px rgba(0, 0, 0, 0.55));
+    transition: transform 360ms ease, filter 360ms ease;
+  }
+
+  .car-preview[data-tone="bronze"] .package-kart-image {
+    object-position: 10% 18%;
+  }
+
+  .car-preview[data-tone="silver"] .package-kart-image {
+    object-position: 50% 20%;
+  }
+
+  .car-preview[data-tone="gold"] .package-kart-image {
+    object-position: 88% 18%;
+    filter:
+      saturate(1.35)
+      contrast(1.1)
+      drop-shadow(0 0 18px rgba(245, 166, 35, 0.28))
+      drop-shadow(0 18px 18px rgba(0, 0, 0, 0.6));
+  }
+
+  .founder-card:hover .package-kart-image {
+    transform: scale(1.04) translateY(-3px);
+  }
+
   .car-shadow {
     position: absolute;
+    z-index: 2;
     left: 18%;
     right: 12%;
     bottom: 42px;
@@ -713,10 +827,27 @@ body::before {
     clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
   }
 
+  .universe-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.54;
+    filter: saturate(1.18) contrast(1.12) brightness(0.62);
+    transition: transform 360ms ease, opacity 360ms ease;
+  }
+
   .universe-card:hover {
     z-index: 5;
     transform: translateY(-6px) scale(1.02);
     border-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .universe-card:hover .universe-image {
+    transform: scale(1.08);
+    opacity: 0.72;
   }
 
   .universe-card::before {
@@ -732,6 +863,7 @@ body::before {
   .universe-art {
     position: absolute;
     inset: 0;
+    z-index: 1;
     display: grid;
     place-items: center;
     color: rgba(255, 255, 255, 0.28);
@@ -748,11 +880,11 @@ body::before {
   }
 
   .universe-card h3 {
-    @apply relative mt-40 font-display text-xl font-black uppercase tracking-[.08em] text-white;
+    @apply relative z-10 mt-40 font-display text-xl font-black uppercase tracking-[.08em] text-white;
   }
 
   .universe-card p {
-    @apply relative mt-3 text-sm leading-6 text-slate-300;
+    @apply relative z-10 mt-3 text-sm leading-6 text-slate-300;
   }
 
   .reason-card {
@@ -785,6 +917,7 @@ body::before {
     background:
       linear-gradient(90deg, rgba(5, 7, 13, 0.96), rgba(5, 7, 13, 0.62), rgba(5, 7, 13, 0.96)),
       radial-gradient(circle at 70% 45%, rgba(255, 38, 61, 0.38), transparent 23rem),
+      url('/assets/formula2.png') center / cover no-repeat,
       linear-gradient(120deg, #10131c, #05070d);
   }
 
