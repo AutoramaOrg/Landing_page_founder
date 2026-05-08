@@ -1,14 +1,13 @@
 // Generated from App.jsx by scripts/compile-jsx.mjs.
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 const assets = {
-  logo: 'assets/autorama-logo.png',
-  formula: 'assets/formula2.png',
-  kartParts: 'assets/kart-partes.png',
-  mechanics: 'assets/pecas-mecanica.png',
-  mechanicsTwo: 'assets/pecas-mecanica-2.png',
-  showroom: 'assets/salao-tipos-de-carro.png',
-  pier: 'assets/pier-estacionamento.png',
-  wallpaper: 'assets/wallpaper-fuel.png'
+  logo: 'assets/autorama_logo_reduzido.png',
+  kart: 'assets/Kart.png',
+  kartParts: 'assets/Kart_partes%20(1).png',
+  mechanics: 'assets/Pecas_Mecanica.png',
+  mechanicsTwo: 'assets/Pecas_Mecanica2.png',
+  pier: 'assets/PIER_ESTACIONAMENTO.png',
+  wallpaper: 'assets/Wallpaper_Fuel%20(1).png'
 };
 const navItems = [{
   label: 'O jogo',
@@ -70,7 +69,7 @@ const universeCards = [{
   title: 'Corridas',
   label: 'Pistas neon',
   text: 'Disputas intensas em circuitos de alta voltagem, com ultrapassagens no limite e clima de arena.',
-  image: assets.formula,
+  image: assets.kart,
   icon: 'flag',
   tone: 'blue'
 }, {
@@ -98,7 +97,7 @@ const universeCards = [{
   title: 'Colecao',
   label: 'Salao e pier',
   text: 'Explore carros, encontros, hubs sociais e oportunidades para exibir conquistas de fundador.',
-  image: assets.showroom,
+  image: assets.kartParts,
   altImage: assets.pier,
   icon: 'map',
   tone: 'white'
@@ -277,7 +276,7 @@ function HeroVisual() {
     className: "hero-visual",
     "aria-label": "Cena de corrida Autorama Racing"
   }, React.createElement("img", {
-    src: assets.formula,
+    src: assets.kart,
     alt: "",
     className: "hero-image"
   }), React.createElement("div", {
@@ -393,7 +392,7 @@ function App() {
     className: "min-h-screen overflow-hidden bg-asphalt text-white",
     style: {
       '--wallpaper-image': `url("${assets.wallpaper}")`,
-      '--formula-image': `url("${assets.formula}")`
+      '--formula-image': `url("${assets.kart}")`
     }
   }, React.createElement(Header, null), React.createElement("main", null, React.createElement("section", {
     className: "hero-section"
