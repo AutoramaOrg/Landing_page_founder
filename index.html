@@ -1,18 +1,300 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Pacotes de Fundador do Autorama Racing. Entre antes de todos, receba itens exclusivos e acelere sua largada."
-    />
-    <title>Autorama Racing | Pacotes de Fundador</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="/vendor/react.production.min.js"></script>
-    <script src="/vendor/react-dom.production.min.js"></script>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pacotes de Fundador do Autorama Racing. Entre antes de todos, receba itens exclusivos e acelere sua largada." />
+  <title>Autorama Racing | Pacotes de Fundador</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070c;
+      --panel: rgba(9, 14, 24, .82);
+      --line: rgba(76, 178, 255, .34);
+      --red: #ff2436;
+      --blue: #2fb7ff;
+      --gold: #ffbf3c;
+      --text: #f8fbff;
+      --muted: #aeb7c6;
+      --radius: 6px;
+      font-family: Inter, Rajdhani, Orbitron, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 72% 12%, rgba(255, 36, 54, .34), transparent 28rem),
+        radial-gradient(circle at 14% 18%, rgba(47, 183, 255, .24), transparent 25rem),
+        radial-gradient(circle at 56% 72%, rgba(255, 191, 60, .14), transparent 28rem),
+        linear-gradient(180deg, #070a11 0%, #03050a 42%, #070912 100%);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0 23%, rgba(47, 183, 255, .09) 23.3% 23.7%, transparent 24% 48%, rgba(255, 36, 54, .09) 48.2% 48.6%, transparent 49%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.04) 0 1px, transparent 1px 86px),
+        radial-gradient(circle at center, transparent 0 45%, rgba(0,0,0,.58) 100%);
+      mix-blend-mode: screen;
+      opacity: .7;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(4, 7, 12, .76);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+    .mark { width: 34px; height: 18px; position: relative; border-left: 6px solid var(--red); border-right: 6px solid var(--blue); transform: skew(-14deg); box-shadow: 0 0 22px rgba(47,183,255,.7); }
+    .mark::after { content: ""; position: absolute; right: -23px; top: 0; width: 18px; height: 18px; background: conic-gradient(#fff 0 25%, #111 0 50%, #fff 0 75%, #111 0); background-size: 9px 9px; }
+    .menu { display: flex; align-items: center; gap: 26px; color: #d7deea; font-size: .78rem; font-weight: 850; text-transform: uppercase; letter-spacing: .08em; }
+    .menu a { opacity: .82; transition: .2s ease; }
+    .menu a:hover { color: var(--blue); opacity: 1; text-shadow: 0 0 18px rgba(47,183,255,.8); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border: 1px solid rgba(255,255,255,.16);
+      clip-path: polygon(9px 0, 100% 0, calc(100% - 9px) 100%, 0 100%);
+      background: linear-gradient(135deg, #ff1f34, #b70716);
+      color: white;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      box-shadow: 0 0 28px rgba(255,36,54,.45), inset 0 0 18px rgba(255,255,255,.12);
+      transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+    }
+    .btn:hover { transform: translateY(-3px); filter: brightness(1.12); box-shadow: 0 0 40px rgba(255,36,54,.72), 0 0 20px rgba(47,183,255,.35); }
+    .btn.alt { background: rgba(5, 12, 23, .62); border-color: rgba(47,183,255,.58); box-shadow: 0 0 22px rgba(47,183,255,.22), inset 0 0 18px rgba(47,183,255,.1); }
+    section { position: relative; padding: 82px 0; }
+    .hero { min-height: 760px; display: grid; align-items: center; padding-top: 116px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: 48px; align-items: center; }
+    .eyebrow { color: var(--red); font-weight: 950; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 0 18px rgba(255,36,54,.55); }
+    h1, h2, h3 { margin: 0; text-transform: uppercase; line-height: .92; letter-spacing: .02em; }
+    h1 { margin-top: 16px; font-size: clamp(3.4rem, 9vw, 7.8rem); max-width: 720px; font-style: italic; text-shadow: 0 4px 0 rgba(0,0,0,.5), 0 0 36px rgba(47,183,255,.2); }
+    h2 { font-size: clamp(2rem, 5vw, 3.6rem); text-align: center; }
+    h3 { font-size: 1.7rem; }
+    p { color: var(--muted); line-height: 1.7; margin: 0; }
+    .hero p { margin-top: 22px; max-width: 560px; font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+    .stage {
+      min-height: 440px;
+      position: relative;
+      isolation: isolate;
+      border: 1px solid rgba(47,183,255,.22);
+      clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+      background:
+        linear-gradient(180deg, rgba(255,36,54,.18), transparent 42%),
+        radial-gradient(circle at 50% 16%, rgba(255,36,54,.72), transparent 11rem),
+        linear-gradient(145deg, rgba(47,183,255,.14), rgba(0,0,0,.2) 36%, rgba(255,191,60,.14)),
+        #0a0d13;
+      box-shadow: 0 0 42px rgba(47,183,255,.2), inset 0 0 60px rgba(255,255,255,.05);
+      animation: floaty 5s ease-in-out infinite;
+    }
+    .stage::before {
+      content: "SYNCOLA";
+      position: absolute;
+      top: 78px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: clamp(2.8rem, 8vw, 6.8rem);
+      font-weight: 950;
+      letter-spacing: .1em;
+      opacity: .92;
+      text-shadow: 0 0 30px rgba(255,36,54,.8);
+    }
+    .stage::after {
+      content: "";
+      position: absolute;
+      inset: auto 8% 48px 10%;
+      height: 138px;
+      background:
+        radial-gradient(circle at 18% 88%, #081015 0 15px, #63e1ff 16px 24px, transparent 25px),
+        radial-gradient(circle at 79% 88%, #081015 0 17px, #ffd966 18px 26px, transparent 27px),
+        linear-gradient(9deg, transparent 0 23%, #0dd9ff 24% 27%, #f5ffff 28% 46%, #ff4aa3 47% 61%, #1a1d26 62% 100%);
+      clip-path: polygon(11% 36%, 30% 12%, 64% 9%, 85% 36%, 95% 72%, 7% 76%);
+      filter: drop-shadow(0 0 28px rgba(47,183,255,.95)) drop-shadow(0 0 24px rgba(255,36,54,.7));
+    }
+    .statbar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; margin-top: -44px; position: relative; z-index: 4; border: 1px solid rgba(47,183,255,.28); clip-path: polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%); background: rgba(47,183,255,.2); box-shadow: 0 0 38px rgba(47,183,255,.18); }
+    .benefit { padding: 28px; background: rgba(6, 11, 20, .9); min-height: 142px; }
+    .benefit strong { display: block; margin: 8px 0 7px; text-transform: uppercase; font-size: .94rem; }
+    .benefit i { color: var(--blue); font-style: normal; font-size: 2rem; text-shadow: 0 0 18px rgba(47,183,255,.8); }
+    .section-title { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 34px; }
+    .slashes { width: 34px; height: 10px; background: linear-gradient(90deg, var(--red) 0 40%, transparent 40% 55%, var(--blue) 55%); transform: skew(-24deg); }
+    .packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+    .pack { position: relative; padding: 30px; min-height: 510px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025)), var(--panel); border: 1px solid rgba(255,255,255,.16); clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; overflow: hidden; }
+    .pack::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 24%, var(--tone), transparent 16rem); opacity: .28; pointer-events: none; }
+    .pack:hover { transform: translateY(-8px); border-color: var(--tone); box-shadow: 0 0 42px color-mix(in srgb, var(--tone), transparent 55%); }
+    .pack.bronze { --tone: #c27643; }
+    .pack.silver { --tone: #d9e1ea; }
+    .pack.gold { --tone: var(--gold); transform: translateY(-14px) scale(1.03); border-color: rgba(255,191,60,.85); box-shadow: 0 0 58px rgba(255,191,60,.32); }
+    .badge { position: absolute; top: 0; right: 0; padding: 11px 18px; background: linear-gradient(135deg, #ff2538, #a90415); font-size: .78rem; font-weight: 950; text-transform: uppercase; clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%); }
+    .pack-head { position: relative; text-align: center; min-height: 190px; }
+    .pack-name { color: var(--tone); font-size: clamp(2.1rem, 4vw, 3.1rem); text-shadow: 0 0 18px color-mix(in srgb, var(--tone), transparent 35%); }
+    .car { margin: 28px auto 0; width: 82%; height: 84px; background: linear-gradient(10deg, transparent 0 16%, #0ee2ff 17% 20%, #f3fbff 21% 43%, #ff5a7c 44% 59%, #151922 60% 100%); clip-path: polygon(9% 44%, 26% 18%, 66% 16%, 88% 43%, 96% 73%, 5% 76%); filter: drop-shadow(0 0 16px color-mix(in srgb, var(--tone), transparent 30%)); }
+    .pack ul { position: relative; list-style: none; padding: 0; margin: 0; display: grid; gap: 13px; }
+    .pack li { color: #e8edf6; padding: 12px 12px 12px 34px; background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.06); position: relative; }
+    .pack li::before { content: "✓"; position: absolute; left: 12px; color: var(--tone); font-weight: 950; }
+    .price { position: relative; margin: 24px 0; color: var(--tone); font-weight: 950; text-transform: uppercase; text-align: center; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(47,183,255,.18); border-top: 1px solid rgba(47,183,255,.22); border-bottom: 1px solid rgba(47,183,255,.22); }
+    .world { min-height: 310px; padding: 24px; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(180deg, transparent 0, rgba(0,0,0,.88) 74%), radial-gradient(circle at 50% 25%, var(--world), transparent 11rem), #0b0f17; overflow: hidden; }
+    .world:nth-child(1) { --world: rgba(47,183,255,.8); }
+    .world:nth-child(2) { --world: rgba(255,36,54,.7); }
+    .world:nth-child(3) { --world: rgba(149,255,80,.58); }
+    .world:nth-child(4) { --world: rgba(255,75,174,.75); }
+    .world:nth-child(5) { --world: rgba(255,191,60,.7); }
+    .world strong { text-transform: uppercase; margin-bottom: 8px; }
+    .reasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .reason { padding: 26px; min-height: 170px; border: 1px solid rgba(255,36,54,.36); background: linear-gradient(180deg, rgba(255,36,54,.11), rgba(8,12,22,.86)); clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%); transition: transform .22s ease, border-color .22s ease; }
+    .reason:hover { transform: translateY(-6px); border-color: var(--red); box-shadow: 0 0 28px rgba(255,36,54,.26); }
+    .reason span { color: var(--red); font-size: 2rem; font-weight: 950; }
+    .cta { padding: 76px 0; background: linear-gradient(90deg, rgba(2,4,9,.92), rgba(255,36,54,.2), rgba(47,183,255,.13)), radial-gradient(circle at 70% 45%, rgba(255,191,60,.18), transparent 20rem); border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cta h2 { text-align: left; color: white; }
+    footer { padding: 46px 0; background: #05070c; color: #828d9e; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 28px; }
+    footer strong { display: block; color: white; text-transform: uppercase; margin-bottom: 12px; }
+    footer a, footer span { display: block; margin: 8px 0; color: #aab4c3; }
+    @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @media (max-width: 980px) {
+      .menu { display: none; }
+      .hero-grid, .packages, .reasons, .footer-grid { grid-template-columns: 1fr; }
+      .stage { min-height: 360px; }
+      .statbar, .grid-5 { grid-template-columns: repeat(2, 1fr); }
+      .pack.gold { transform: none; }
+      .cta-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 22px, 1180px); }
+      .nav { height: 68px; }
+      .logo span { font-size: .84rem; }
+      .hero { min-height: auto; padding-top: 104px; }
+      .hero-grid { gap: 30px; }
+      .stage { min-height: 300px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+      .statbar, .grid-5 { grid-template-columns: 1fr; }
+      .benefit, .pack, .reason { padding: 22px; }
+      .btn { width: 100%; }
+      section { padding: 62px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, html { scroll-behavior: auto; animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="logo" href="#top" aria-label="Autorama Racing"><i class="mark"></i><span>Autorama Racing</span></a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#jogo">O Jogo</a>
+        <a href="#beneficios">Benefícios</a>
+        <a href="#pacotes">Pacotes</a>
+        <a href="#universo">Universo</a>
+      </nav>
+      <a class="btn" href="#pacotes">Quero ser fundador</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Acesse. Corra. Lidere.</div>
+          <h1>Pacotes de Fundador</h1>
+          <p>Entre antes de todos, desbloqueie itens únicos e acelere sua história no Autorama Racing com status especial desde a largada.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#pacotes">Quero ser fundador</a>
+            <a class="btn alt" href="#beneficios">Ver benefícios</a>
+          </div>
+        </div>
+        <div class="stage" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <div id="beneficios" class="wrap statbar">
+      <article class="benefit"><i>01</i><strong>Acesso antecipado</strong><p>Jogue antes do lançamento oficial e comece na frente.</p></article>
+      <article class="benefit"><i>02</i><strong>Itens únicos</strong><p>Carros, visuais e itens exclusivos de fundador.</p></article>
+      <article class="benefit"><i>03</i><strong>Conteúdo exclusivo</strong><p>Eventos, desafios e recompensas para fundadores.</p></article>
+      <article class="benefit"><i>04</i><strong>Status especial</strong><p>Destaque seu nome e conquiste reconhecimento.</p></article>
+    </div>
+
+    <section id="pacotes">
+      <div class="wrap">
+        <div class="section-title"><i class="slashes"></i><h2>Escolha seu pacote de fundador</h2><i class="slashes"></i></div>
+        <div class="packages">
+          <article class="pack bronze">
+            <div class="pack-head"><h3 class="pack-name">Bronze</h3><div class="car"></div></div>
+            <ul><li>Acesso antecipado ao jogo</li><li>Itens únicos de fundador</li><li>1 carro Founder Premium</li></ul>
+            <div><p class="price">Entrada oficial</p><a class="btn alt" href="#cta">Escolher Bronze</a></div>
+          </article>
+          <article class="pack silver">
+            <div class="pack-head"><h3 class="pack-name">Prata</h3><div class="car"></div></div>
+            <ul><li>Acesso antecipado ao jogo</li><li>Itens únicos de fundador</li><li>1 carro Founder Premium</li><li>1 carro raro</li></ul>
+            <div><p class="price">Upgrade competitivo</p><a class="btn alt" href="#cta">Escolher Prata</a></div>
+          </article>
+          <article class="pack gold">
+            <span class="badge">Mais Popular</span>
+            <div class="pack-head"><h3 class="pack-name">Ouro</h3><div class="car"></div></div>
+            <ul><li>Acesso antecipado ao jogo</li><li>Itens únicos de fundador</li><li>1 carro Founder Premium</li><li>1 carro raro</li><li>1 carro épico</li></ul>
+            <div><p class="price">Pacote completo</p><a class="btn" href="#cta">Escolher Ouro</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="universo">
+      <div class="section-title"><i class="slashes"></i><h2>Um universo feito para corredores</h2><i class="slashes"></i></div>
+      <div class="grid-5">
+        <article class="world"><strong>Corridas</strong><p>Competições intensas em pistas cheias de adrenalina.</p></article>
+        <article class="world"><strong>Bastidores</strong><p>Viva o dia a dia do paddock e construa sua reputação.</p></article>
+        <article class="world"><strong>Mecânica</strong><p>Personalize, ajuste e evolua seus carros nos mínimos detalhes.</p></article>
+        <article class="world"><strong>Eventos</strong><p>Participe de eventos únicos e conquiste recompensas raras.</p></article>
+        <article class="world"><strong>Economia viva</strong><p>Negocie, invista e acompanhe um mercado dinâmico.</p></article>
+      </div>
+    </section>
+
+    <section id="jogo">
+      <div class="wrap">
+        <div class="section-title"><i class="slashes"></i><h2>Por que entrar agora?</h2><i class="slashes"></i></div>
+        <div class="reasons">
+          <article class="reason"><span>01</span><strong>Você faz parte da história</strong><p>Fundadores ajudam a moldar o futuro do jogo.</p></article>
+          <article class="reason"><span>02</span><strong>Vantagem desde o início</strong><p>Comece com itens exclusivos e progressão acelerada.</p></article>
+          <article class="reason"><span>03</span><strong>Recompensas duradouras</strong><p>Itens de fundador são limitados e não voltam sempre.</p></article>
+          <article class="reason"><span>04</span><strong>Investimento que vale a pena</strong><p>Apoie o projeto e receba muito mais em retorno.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+      <div class="wrap cta-inner">
+        <div><h2>Garanta seu lugar entre os fundadores</h2><p>Os melhores chegam antes. Não fique de fora dessa largada.</p></div>
+        <a class="btn" href="#pacotes">Quero ser fundador</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div><strong>Autorama Racing</strong><p>Pacotes de Fundador para quem quer acelerar antes da multidão.</p></div>
+      <div><strong>Jogo</strong><a href="#jogo">Visão geral</a><a href="#universo">Universo</a><a href="#pacotes">Pacotes</a></div>
+      <div><strong>Comunidade</strong><span>Notícias</span><span>Eventos</span><span>Discord</span></div>
+      <div><strong>Suporte</strong><span>FAQ</span><span>Política de Privacidade</span><span>Termos de Uso</span></div>
+    </div>
+  </footer>
+</body>
 </html>
