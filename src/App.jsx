@@ -1,130 +1,146 @@
+const assets = {
+  logo: 'assets/autorama-logo.png',
+  formula: 'assets/formula2.png',
+  kartParts: 'assets/kart-partes.png',
+  mechanics: 'assets/pecas-mecanica.png',
+  mechanicsTwo: 'assets/pecas-mecanica-2.png',
+  showroom: 'assets/salao-tipos-de-carro.png',
+  pier: 'assets/pier-estacionamento.png',
+  wallpaper: 'assets/wallpaper-fuel.png',
+}
+
 const navItems = [
-  { label: 'O Jogo', href: '#universo' },
-  { label: 'Benefícios', href: '#beneficios' },
+  { label: 'O jogo', href: '#universo' },
+  { label: 'Beneficios', href: '#beneficios' },
   { label: 'Pacotes', href: '#pacotes' },
-  { label: 'Entrar Agora', href: '#entrar' },
+  { label: 'Fundadores', href: '#entrar' },
 ]
 
 const benefits = [
   {
     title: 'Acesso antecipado',
-    text: 'Jogue antes do lançamento oficial e sinta a pista na primeira largada.',
+    text: 'Entre antes do lancamento oficial e comece a evoluir sua garagem desde a primeira largada.',
     icon: 'clock',
   },
   {
-    title: 'Itens únicos',
-    text: 'Garanta visuais, efeitos e bônus criados para fundadores.',
+    title: 'Itens unicos',
+    text: 'Receba visuais, pecas e cosmeticos criados apenas para pilotos fundadores.',
     icon: 'star',
   },
   {
-    title: 'Conteúdo exclusivo',
-    text: 'Eventos, desafios e recompensas reservados para a comunidade inicial.',
+    title: 'Conteudo exclusivo',
+    text: 'Participe de desafios, eventos e recompensas liberadas primeiro para a comunidade inicial.',
     icon: 'lock',
   },
   {
-    title: 'Status fundador',
-    text: 'Mostre seu nome entre os pilotos que aceleraram desde o dia 1.',
+    title: 'Status especial',
+    text: 'Mostre no perfil que voce estava no grid desde o dia 1 de Autorama Racing.',
     icon: 'crown',
   },
 ]
 
-const packages = [
+const founderPacks = [
   {
     name: 'Bronze',
     tone: 'bronze',
+    eyebrow: 'Largada inicial',
     price: 'R$ 49',
-    tagline: 'Entrada oficial no grid fundador.',
-    perks: [
-      'Acesso antecipado ao jogo',
-      'Itens únicos de fundador',
-      'Badge fundador Bronze',
-      '1 carro Founder Premium',
-    ],
-    button: 'Escolher Bronze',
+    text: 'O passe essencial para garantir sua entrada no grid fundador.',
+    perks: ['Acesso antecipado ao jogo', 'Itens unicos de fundador', 'Badge Bronze no perfil', '1 conjunto Founder Kart'],
+    cta: 'Escolher Bronze',
   },
   {
     name: 'Prata',
     tone: 'silver',
+    eyebrow: 'Garage boost',
     price: 'R$ 89',
-    tagline: 'Mais estilo, mais garagem, mais vantagem.',
-    perks: [
-      'Tudo do pacote Bronze',
-      '1 carro raro adicional',
-      'Skin neon exclusiva',
-      'Créditos extras de largada',
-    ],
-    button: 'Escolher Prata',
+    text: 'Mais vantagem, mais personalizacao e uma garagem pronta para evoluir.',
+    perks: ['Tudo do pacote Bronze', '1 carro raro de fundador', 'Pintura neon exclusiva', 'Creditos extras de largada'],
+    cta: 'Escolher Prata',
   },
   {
     name: 'Ouro',
     tone: 'gold',
+    eyebrow: 'Founder elite',
     price: 'R$ 149',
-    tagline: 'A experiência máxima para fundadores.',
+    text: 'A experiencia mais completa para quem quer chegar com presenca maxima.',
     popular: true,
-    perks: [
-      'Tudo do pacote Prata',
-      '1 carro épico fundador',
-      'Efeito de largada dourado',
-      'Nome no mural dos pioneiros',
-    ],
-    button: 'Escolher Ouro',
+    perks: ['Tudo do pacote Prata', '1 carro epico Founder Premium', 'Efeito de largada dourado', 'Nome no mural dos pioneiros'],
+    cta: 'Escolher Ouro',
   },
 ]
 
-const universe = [
+const universeCards = [
   {
     title: 'Corridas',
-    text: 'Pistas velozes, atalhos arriscados e disputas decididas no reflexo.',
+    label: 'Pistas neon',
+    text: 'Disputas intensas em circuitos de alta voltagem, com ultrapassagens no limite e clima de arena.',
+    image: assets.formula,
     icon: 'flag',
-    gradient: 'from-sky-500/25 via-transparent to-red-500/15',
+    tone: 'blue',
   },
   {
     title: 'Bastidores',
-    text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
-    icon: 'helmet',
-    gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
+    label: 'Equipe viva',
+    text: 'Da oficina ao paddock, cada detalhe ajuda sua reputacao a crescer antes da temporada abrir.',
+    image: assets.wallpaper,
+    icon: 'crew',
+    tone: 'red',
   },
   {
-    title: 'Mecânica',
-    text: 'Monte, pinte e evolua carros com personalidade de competição.',
+    title: 'Mecanica',
+    label: 'Setup fino',
+    text: 'Ajuste pecas, upgrades e componentes visuais para transformar seu kart em assinatura de pista.',
+    image: assets.mechanics,
     icon: 'gear',
-    gradient: 'from-lime-400/20 via-transparent to-trophy/15',
+    tone: 'gold',
   },
   {
-    title: 'Eventos',
-    text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
-    icon: 'spark',
-    gradient: 'from-red-500/25 via-transparent to-trophy/20',
+    title: 'Oficina',
+    label: 'Pecas raras',
+    text: 'Descubra partes especiais, kits de performance e combinacoes que deixam sua garagem unica.',
+    image: assets.mechanicsTwo,
+    icon: 'wrench',
+    tone: 'cyan',
   },
   {
-    title: 'Economia viva',
-    text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
-    icon: 'market',
-    gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
+    title: 'Colecao',
+    label: 'Salao e pier',
+    text: 'Explore carros, encontros, hubs sociais e oportunidades para exibir conquistas de fundador.',
+    image: assets.showroom,
+    altImage: assets.pier,
+    icon: 'map',
+    tone: 'white',
   },
 ]
 
 const reasons = [
   {
-    title: 'Você faz parte da história',
-    text: 'Fundadores moldam o futuro do jogo com feedback e presença.',
+    title: 'Voce entra na historia',
+    text: 'Fundadores ajudam a moldar o equilibrio, a economia e a identidade da primeira temporada.',
     icon: 'crew',
   },
   {
-    title: 'Vantagem desde o início',
-    text: 'Comece com itens exclusivos e progressão acelerada.',
+    title: 'Vantagem desde o inicio',
+    text: 'Comece com itens limitados, progressao acelerada e mais liberdade para testar builds.',
     icon: 'rocket',
   },
   {
     title: 'Recompensas duradouras',
-    text: 'Itens de fundador são limitados e não voltam para a loja comum.',
+    text: 'Itens de fundador sao limitados e permanecem como marca de origem dentro do jogo.',
     icon: 'trophy',
   },
   {
-    title: 'Investimento que vale a pena',
-    text: 'Apoie o projeto e receba benefícios de alto valor no lançamento.',
+    title: 'Valor real no lancamento',
+    text: 'Entre com beneficios que acompanham sua conta quando o grid abrir para todos.',
     icon: 'shield',
   },
+]
+
+const stats = [
+  { value: '04', label: 'beneficios principais' },
+  { value: '03', label: 'pacotes fundadores' },
+  { value: '01', label: 'temporada de largada' },
 ]
 
 function Icon({ name, className = '' }) {
@@ -140,68 +156,66 @@ function Icon({ name, className = '' }) {
     clock: (
       <>
         <circle cx="12" cy="12" r="8.5" />
-        <path d="M12 7.5v5l3.4 2" />
+        <path d="M12 7.2v5l3.5 2.1" />
       </>
     ),
-    star: <path d="m12 3 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.9-5.4 2.9 1-6-4.3-4.2 6-.9L12 3Z" />,
+    star: <path d="m12 3 2.7 5.5 6 .9-4.4 4.2 1.1 5.9-5.4-2.8-5.4 2.8 1.1-5.9-4.4-4.2 6-.9L12 3Z" />,
     lock: (
       <>
-        <rect x="5.2" y="10" width="13.6" height="10" rx="1.8" />
-        <path d="M8.2 10V7.7a3.8 3.8 0 0 1 7.6 0V10" />
+        <rect x="5" y="10" width="14" height="10" rx="2" />
+        <path d="M8.4 10V7.8a3.6 3.6 0 0 1 7.2 0V10" />
       </>
     ),
-    crown: <path d="M4 8.5 8.4 13 12 6l3.6 7L20 8.5V18H4V8.5Z" />,
+    crown: <path d="m4 8.5 4.2 4.2L12 5.8l3.8 6.9L20 8.5V18H4V8.5Z" />,
     flag: (
       <>
-        <path d="M5 20V5" />
-        <path d="M5 5c3-1.8 5.4 1.5 8.4-.3 1.6-1 3-.9 5.6.3v8.2c-2.6-1.2-4-1.3-5.6-.3-3 1.8-5.4-1.5-8.4.3" />
-      </>
-    ),
-    helmet: (
-      <>
-        <path d="M4 13.2A8 8 0 0 1 19.5 10H12l-2 3.2H4Z" />
-        <path d="M4.5 13.2c.7 4.1 3.8 6.1 7.6 6.1 2 0 4.1-.5 6.4-1.6" />
-        <path d="M12 10h8" />
-      </>
-    ),
-    gear: (
-      <>
-        <circle cx="12" cy="12" r="3.2" />
-        <path d="M12 2.8v3M12 18.2v3M4 6.3l2.2 2M17.8 15.7l2.2 2M2.8 12h3M18.2 12h3M4 17.7l2.2-2M17.8 8.3l2.2-2" />
-      </>
-    ),
-    spark: <path d="M12 2.7 14.2 9l6.1 3-6.1 3-2.2 6.3L9.8 15l-6.1-3 6.1-3L12 2.7Z" />,
-    market: (
-      <>
-        <path d="M4 17.5 9 12l3 3 7-8" />
-        <path d="M16 7h3v3" />
-        <path d="M4 20h16" />
+        <path d="M5 21V4.5" />
+        <path d="M5 5c3.2-1.7 5.3 1.4 8.5-.2 1.6-.8 3.2-.7 5.5.3v8.2c-2.3-1-3.9-1.1-5.5-.3-3.2 1.6-5.3-1.5-8.5.2" />
       </>
     ),
     crew: (
       <>
-        <circle cx="8" cy="8.3" r="2.7" />
-        <circle cx="16" cy="8.3" r="2.7" />
-        <path d="M3.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6" />
-        <path d="M11.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6" />
+        <circle cx="8" cy="8" r="2.7" />
+        <circle cx="16" cy="8" r="2.7" />
+        <path d="M3.5 19c.6-3.1 2.2-4.7 4.5-4.7s3.9 1.6 4.5 4.7" />
+        <path d="M11.5 19c.6-3.1 2.2-4.7 4.5-4.7s3.9 1.6 4.5 4.7" />
+      </>
+    ),
+    gear: (
+      <>
+        <circle cx="12" cy="12" r="3.1" />
+        <path d="M12 2.8v3M12 18.2v3M4.2 6.2l2.1 2.1M17.7 15.7l2.1 2.1M2.8 12h3M18.2 12h3M4.2 17.8l2.1-2.1M17.7 8.3l2.1-2.1" />
+      </>
+    ),
+    wrench: (
+      <>
+        <path d="M14.7 5.3a4.1 4.1 0 0 0 4.8 5.5l-8.7 8.7a2.8 2.8 0 0 1-4-4l8.7-8.7a4.1 4.1 0 0 0-.8-1.5Z" />
+        <path d="M7.5 17.2h.1" />
+      </>
+    ),
+    map: (
+      <>
+        <path d="m9 18-5 2V6l5-2 6 2 5-2v14l-5 2-6-2Z" />
+        <path d="M9 4v14M15 6v14" />
       </>
     ),
     rocket: (
       <>
-        <path d="M13.5 4.2c2.9-.9 5.2-.7 6.3.4 1.1 1.1 1.3 3.4.4 6.3l-5.9 5.9-4.9-4.9 4.1-7.7Z" />
-        <path d="M9.4 11.9 5.3 13 7 17.7l4.2-4.2" />
-        <path d="M14.3 16.8 13.2 21l-4.7-1.7 3-3" />
-        <circle cx="16.7" cy="7.7" r="1.4" />
+        <path d="M13.4 4.1c2.9-.9 5.2-.7 6.2.4s1.3 3.3.4 6.2l-5.8 5.8-4.9-4.9 4.1-7.5Z" />
+        <path d="m9.3 11.6-4 1.2 1.8 4.8 4.1-4.2" />
+        <path d="m14.2 16.5-1.1 4 4.7-1.7-3-3" />
+        <circle cx="16.6" cy="7.6" r="1.4" />
       </>
     ),
     trophy: (
       <>
-        <path d="M8 4h8v4.5c0 3-1.7 5.3-4 5.3S8 11.5 8 8.5V4Z" />
-        <path d="M8 6H4.8c0 3 .9 4.8 3.7 5.4M16 6h3.2c0 3-.9 4.8-3.7 5.4" />
+        <path d="M8 4h8v4.5c0 3.2-1.7 5.4-4 5.4s-4-2.2-4-5.4V4Z" />
+        <path d="M8 6H4.8c0 3 .9 4.8 3.7 5.3M16 6h3.2c0 3-.9 4.8-3.7 5.3" />
         <path d="M12 14v4M8.5 20h7" />
       </>
     ),
     shield: <path d="M12 3.5 19 6v5.5c0 4.3-2.8 7.4-7 9-4.2-1.6-7-4.7-7-9V6l7-2.5Z" />,
+    bolt: <path d="M13 2 4.8 13.2h6.1L10 22l9-12.4h-6.2L13 2Z" />,
   }
 
   return (
@@ -213,17 +227,17 @@ function Icon({ name, className = '' }) {
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-asphalt/82 backdrop-blur-xl">
+    <header className="site-header">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#top" className="group flex shrink-0 items-center" aria-label="Autorama Racing">
-          <img
-            src="/autorama_white.png"
-            alt=""
-            className="h-8 w-auto transition duration-300 group-hover:opacity-90 sm:h-10"
-          />
+        <a href="#top" className="brand-lockup" aria-label="Autorama Racing">
+          <img src={assets.logo} alt="" className="brand-mark" />
+          <span>
+            <strong>Autorama</strong>
+            <small>Racing</small>
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-8 lg:flex" aria-label="Navegacao principal">
           {navItems.map((item) => (
             <a key={item.href} href={item.href} className="nav-link">
               {item.label}
@@ -231,237 +245,284 @@ function Header() {
           ))}
         </nav>
 
-        <a href="#pacotes" className="glow-button small">
+        <a href="#pacotes" className="glow-button glow-button--small">
           Quero ser fundador
-          <span aria-hidden="true">››</span>
+          <span aria-hidden="true">++</span>
         </a>
       </div>
     </header>
   )
 }
 
-function BenefitCard({ benefit }) {
+function SectionTitle({ eyebrow, title, text }) {
   return (
-    <article className="benefit-card group">
-      <Icon name={benefit.icon} className="h-11 w-11 text-voltage transition duration-300 group-hover:text-white" />
+    <div className="section-title">
+      <div className="title-line">
+        <span className="signal-bars" />
+        {eyebrow && <p>{eyebrow}</p>}
+        <span className="signal-bars signal-bars--right" />
+      </div>
+      <h2>{title}</h2>
+      {text && <span>{text}</span>}
+    </div>
+  )
+}
+
+function HeroVisual() {
+  return (
+    <div className="hero-visual" aria-label="Cena de corrida Autorama Racing">
+      <img src={assets.formula} alt="" className="hero-image" />
+      <div className="hero-hud">
+        <span>Founder Grid</span>
+        <strong>01</strong>
+      </div>
+      <div className="speed-lines">
+        {Array.from({ length: 10 }).map((_, index) => (
+          <i key={index} style={{ '--delay': `${index * 0.12}s` }} />
+        ))}
+      </div>
+      <div className="track-panel">
+        <span />
+        <span />
+        <span />
+      </div>
+    </div>
+  )
+}
+
+function BenefitCard({ item }) {
+  return (
+    <article className="benefit-card">
+      <div className="icon-frame">
+        <Icon name={item.icon} className="h-10 w-10" />
+      </div>
       <div>
-        <h3>{benefit.title}</h3>
-        <p>{benefit.text}</p>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
       </div>
     </article>
   )
 }
 
-function PackageCard({ pack }) {
+function FounderCard({ pack }) {
   return (
-    <article className={`founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`}>
+    <article className={`founder-card ${pack.tone}`}>
       {pack.popular && <span className="popular-ribbon">Mais Popular</span>}
-      <div className="package-top">
-        <span className={`tier-mark ${pack.tone}`} />
+
+      <div className="founder-card__header">
+        <span>{pack.eyebrow}</span>
         <h3>{pack.name}</h3>
-        <p>{pack.tagline}</p>
+        <p>{pack.text}</p>
       </div>
 
-      <div className="car-preview" data-tone={pack.tone}>
-        <span className="car-shadow" />
-        <span className="mini-car">
-          <span />
-        </span>
+      <div className="package-art" data-tone={pack.tone}>
+        <img src={assets.kartParts} alt="" loading="lazy" decoding="async" />
       </div>
 
       <div className="price-row">
-        <span>{pack.price}</span>
-        <small>pagamento único</small>
+        <strong>{pack.price}</strong>
+        <small>pagamento unico</small>
       </div>
 
       <ul className="perk-list">
         {pack.perks.map((perk) => (
           <li key={perk}>
-            <span>✓</span>
+            <span aria-hidden="true">+</span>
             {perk}
           </li>
         ))}
       </ul>
 
-      <a href="#entrar" className={`package-button ${pack.tone}`}>
-        {pack.button}
+      <a href="#entrar" className="package-button">
+        {pack.cta}
       </a>
     </article>
   )
 }
 
-function UniverseCard({ item }) {
+function UniverseCard({ card }) {
   return (
-    <article className={`universe-card bg-gradient-to-br ${item.gradient}`}>
-      <div className="universe-art">
-        <Icon name={item.icon} className="h-11 w-11" />
+    <article className={`universe-card ${card.tone}`}>
+      <img src={card.image} alt="" loading="lazy" decoding="async" className="universe-image" />
+      {card.altImage && <img src={card.altImage} alt="" loading="lazy" decoding="async" className="universe-alt-image" />}
+      <div className="universe-overlay" />
+      <div className="universe-content">
+        <div className="universe-icon">
+          <Icon name={card.icon} className="h-9 w-9" />
+        </div>
+        <span>{card.label}</span>
+        <h3>{card.title}</h3>
+        <p>{card.text}</p>
       </div>
-      <h3>{item.title}</h3>
-      <p>{item.text}</p>
     </article>
   )
 }
 
-function ReasonCard({ reason }) {
+function ReasonCard({ item }) {
   return (
     <article className="reason-card">
-      <Icon name={reason.icon} className="h-10 w-10 text-ember" />
+      <Icon name={item.icon} className="h-10 w-10" />
       <div>
-        <h3>{reason.title}</h3>
-        <p>{reason.text}</p>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
       </div>
     </article>
+  )
+}
+
+function FooterColumn({ title, links }) {
+  return (
+    <div className="footer-column">
+      <h3>{title}</h3>
+      <ul>
+        {links.map((link) => (
+          <li key={link}>
+            <a href="#top">{link}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
 function App() {
   return (
-    <div id="top" className="min-h-screen overflow-hidden bg-asphalt text-white">
+    <div
+      id="top"
+      className="min-h-screen overflow-hidden bg-asphalt text-white"
+      style={{ '--wallpaper-image': `url("${assets.wallpaper}")`, '--formula-image': `url("${assets.formula}")` }}
+    >
       <Header />
 
       <main>
         <section className="hero-section">
-          <div className="hero-backdrop" />
-          <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
-            <div className="max-w-2xl">
+          <div className="hero-cinema" />
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 pb-12 pt-28 sm:px-6 lg:grid-cols-[0.82fr_1.18fr] lg:px-8 lg:pb-16 lg:pt-32">
+            <div className="hero-copy">
               <div className="eyebrow">
                 <span />
                 Acesse. Corra. Lidere.
               </div>
-              <h1 className="hero-title">Pacotes de Fundador</h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
-                Entre antes de todos, receba itens únicos e acelere sua história no{' '}
-                <strong className="text-voltage">Autorama Racing</strong>.
+              <h1>Pacotes de Fundador</h1>
+              <p>
+                Entre antes de todos, receba itens exclusivos e acelere sua historia no{' '}
+                <strong>Autorama Racing</strong>.
               </p>
 
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <div className="hero-actions">
                 <a href="#pacotes" className="glow-button">
                   Quero ser fundador
-                  <span aria-hidden="true">››</span>
+                  <span aria-hidden="true">++</span>
                 </a>
                 <a href="#beneficios" className="ghost-button">
-                  Ver pacotes
-                  <span aria-hidden="true">›</span>
+                  Ver beneficios
+                  <span aria-hidden="true">+</span>
                 </a>
               </div>
-            </div>
-          </div>
 
-          <div id="beneficios" className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="stat-grid" aria-label="Resumo dos pacotes">
+                {stats.map((stat) => (
+                  <div key={stat.label}>
+                    <strong>{stat.value}</strong>
+                    <span>{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <HeroVisual />
+          </div>
+        </section>
+
+        <section id="beneficios" className="benefits-section">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="benefits-grid">
-              {benefits.map((benefit) => (
-                <BenefitCard key={benefit.title} benefit={benefit} />
+              {benefits.map((item) => (
+                <BenefitCard key={item.title} item={item} />
               ))}
             </div>
           </div>
         </section>
 
-        <section id="pacotes" className="section-shell pt-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Escolha seu pacote de fundador</h2>
-            <span className="signal-bars right" />
-          </div>
+        <section id="pacotes" className="page-section package-section">
+          <SectionTitle
+            eyebrow="Escolha seu grid"
+            title="Escolha seu pacote de fundador"
+            text="Tres niveis de entrada para quem quer acelerar antes do lancamento."
+          />
 
           <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
-            {packages.map((pack) => (
-              <PackageCard key={pack.name} pack={pack} />
+            {founderPacks.map((pack) => (
+              <FounderCard key={pack.name} pack={pack} />
             ))}
           </div>
         </section>
 
-        <section id="universo" className="section-shell pt-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Um universo feito para corredores</h2>
-            <span className="signal-bars right" />
-          </div>
+        <section id="universo" className="page-section universe-section">
+          <SectionTitle
+            eyebrow="Mundo Autorama"
+            title="Um universo feito para corredores"
+            text="Corridas, bastidores, oficina e colecao em uma experiencia gamer de alta energia."
+          />
 
-          <div className="universe-grid mx-auto mt-9 max-w-7xl px-4 sm:px-6 lg:px-8">
-            {universe.map((item) => (
-              <UniverseCard key={item.title} item={item} />
+          <div className="universe-grid mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+            {universeCards.map((card) => (
+              <UniverseCard key={card.title} card={card} />
             ))}
           </div>
         </section>
 
-        <section className="section-shell py-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Por que entrar agora?</h2>
-            <span className="signal-bars right" />
-          </div>
+        <section className="page-section reasons-section">
+          <SectionTitle eyebrow="Hora da largada" title="Por que entrar agora?" />
 
-          <div className="mx-auto mt-9 grid max-w-7xl gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
-            {reasons.map((reason) => (
-              <ReasonCard key={reason.title} reason={reason} />
+          <div className="mx-auto mt-10 grid max-w-7xl gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+            {reasons.map((item) => (
+              <ReasonCard key={item.title} item={item} />
             ))}
           </div>
         </section>
 
         <section id="entrar" className="final-cta">
-          <div className="race-blur" />
-          <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
+          <div className="final-cta__image" />
+          <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div>
-              <p className="font-display text-sm font-bold uppercase tracking-[.35em] text-trophy">
-                A largada está aberta
-              </p>
-              <h2 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase leading-[.95] tracking-wide sm:text-5xl lg:text-6xl">
+              <p>Fundador desde a primeira volta</p>
+              <h2>
                 Garanta seu lugar <span>entre os fundadores</span>
               </h2>
-              <p className="mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
-                Os melhores chegam antes. Não fique de fora da primeira temporada de Autorama Racing.
-              </p>
+              <small>Os melhores chegam antes. Nao fique de fora da primeira temporada de Autorama Racing.</small>
             </div>
-
-            <a href="#pacotes" className="glow-button cta">
+            <a href="#pacotes" className="glow-button glow-button--cta">
               Quero ser fundador
-              <span aria-hidden="true">››</span>
+              <span aria-hidden="true">++</span>
             </a>
           </div>
         </section>
       </main>
 
-      <footer className="footer">
+      <footer className="site-footer">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
           <div>
-            <a href="#top" className="inline-flex items-center" aria-label="Autorama Racing">
-              <img
-                src="/autorama_white.png"
-                alt=""
-                className="h-9 w-auto sm:h-11"
-              />
+            <a href="#top" className="brand-lockup footer-brand" aria-label="Autorama Racing">
+              <img src={assets.logo} alt="" className="brand-mark" />
+              <span>
+                <strong>Autorama</strong>
+                <small>Racing</small>
+              </span>
             </a>
             <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
-              Corrida, coleção e competição em uma experiência neon feita para quem gosta de largar na frente.
+              Corrida, colecao e competicao em uma experiencia neon feita para quem gosta de largar na frente.
             </p>
           </div>
 
-          <FooterList title="Jogo" links={['Visão Geral', 'Recursos', 'Carros', 'Pistas']} />
-          <FooterList title="Comunidade" links={['Notícias', 'Eventos', 'Mídia', 'Discord']} />
-          <FooterList title="Suporte" links={['FAQ', 'Contato', 'Privacidade', 'Termos de Uso']} />
+          <FooterColumn title="Jogo" links={['Visao geral', 'Recursos', 'Carros', 'Pistas']} />
+          <FooterColumn title="Comunidade" links={['Noticias', 'Eventos', 'Midia', 'Discord']} />
+          <FooterColumn title="Suporte" links={['FAQ', 'Contato', 'Privacidade', 'Termos de uso']} />
         </div>
-
-        <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-slate-500">
-          © 2026 Autorama Racing. Todos os direitos reservados.
+        <div className="footer-bottom">
+          <span>© 2026 Autorama Racing. Todos os direitos reservados.</span>
         </div>
       </footer>
-    </div>
-  )
-}
-
-function FooterList({ title, links }) {
-  return (
-    <div>
-      <h3 className="font-display text-sm font-black uppercase tracking-[.18em] text-white">{title}</h3>
-      <ul className="mt-4 space-y-2 text-sm text-slate-400">
-        {links.map((link) => (
-          <li key={link}>
-            <a href="#top" className="transition hover:text-white">
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }
