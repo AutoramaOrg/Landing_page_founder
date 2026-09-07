@@ -138,12 +138,21 @@ body::before {
   .hero-backdrop {
     position: absolute;
     inset: 0;
+    z-index: 1;
     background:
       linear-gradient(90deg, rgba(5, 7, 13, 0.94) 0%, rgba(5, 7, 13, 0.72) 35%, rgba(5, 7, 13, 0.34) 68%, rgba(5, 7, 13, 0.66) 100%),
-      linear-gradient(180deg, rgba(5, 7, 13, 0.24) 0%, rgba(5, 7, 13, 0.12) 46%, rgba(5, 7, 13, 0.92) 100%),
-      url('/hero-celebration.png');
-    background-position: center;
-    background-size: cover;
+      linear-gradient(180deg, rgba(5, 7, 13, 0.24) 0%, rgba(5, 7, 13, 0.12) 46%, rgba(5, 7, 13, 0.92) 100%);
+  }
+
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
   }
 
   .hero-backdrop::before,

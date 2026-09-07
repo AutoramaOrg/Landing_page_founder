@@ -367,7 +367,19 @@ function App() {
     className: "min-h-screen overflow-hidden bg-asphalt text-white"
   }, React.createElement(Header, null), React.createElement(PaymentBanner, null), React.createElement("main", null, React.createElement("section", {
     className: "hero-section"
-  }, React.createElement("div", {
+  }, React.createElement("video", {
+    className: "hero-video",
+    autoPlay: true,
+    loop: true,
+    muted: true,
+    playsInline: true,
+    preload: "metadata",
+    poster: "/hero-celebration.png",
+    "aria-hidden": "true"
+  }, React.createElement("source", {
+    src: "/hero-carro.mp4",
+    type: "video/mp4"
+  })), React.createElement("div", {
     className: "hero-backdrop"
   }), React.createElement("div", {
     className: "relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36"

@@ -425,6 +425,18 @@ function App() {
 
       <main>
         <section className="hero-section">
+          <video
+            className="hero-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            poster="/hero-celebration.png"
+            aria-hidden="true"
+          >
+            <source src="/hero-carro.mp4" type="video/mp4" />
+          </video>
           <div className="hero-backdrop" />
           <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
             <div className="max-w-2xl">

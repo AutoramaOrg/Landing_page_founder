@@ -16,13 +16,17 @@
 - URL pública esperada:
   - `/autorama_white.png`
 
-### Imagem do hero
+### Vídeo do hero
 
-- Arquivo: `public/hero-celebration.png`
+- Arquivo: `public/hero-carro.mp4`
 - Uso confirmado:
-  - background do hero em `.hero-backdrop`
+  - plano de fundo do hero em `src/App.jsx`.
+  - reprodução automática, muda, contínua e sem controles.
 - URL pública esperada:
-  - `/hero-celebration.png`
+  - `/hero-carro.mp4`
+
+`public/hero-celebration.png` é o pôster exibido enquanto o vídeo ainda está carregando. A camada
+`.hero-backdrop` preserva o contraste do texto e dos botões sobre o vídeo.
 
 ### Carros dos pacotes de fundador
 
