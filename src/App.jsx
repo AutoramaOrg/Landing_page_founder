@@ -1,3 +1,5 @@
+import { createCheckout, readPaymentResult } from './checkout.js'
+
 const navItems = [
   { label: 'O Jogo', href: '#universo' },
   { label: 'Benefícios', href: '#beneficios' },
@@ -30,41 +32,63 @@ const benefits = [
 
 const packages = [
   {
+    id: 'bronze',
     name: 'Bronze',
     tone: 'bronze',
     price: 'R$ 49',
-    tagline: 'Entrada oficial no grid fundador.',
+    tagline: 'Sua entrada oficial no grid fundador.',
+    featuredCar: {
+      name: 'Premium',
+      rarity: 'Premium',
+      image: '/founder-premium.png',
+      imageAlt: 'Carro Founder Premium com pintura vermelha, preta e branca',
+    },
+    includedCars: ['Premium'],
     perks: [
       'Acesso antecipado ao jogo',
       'Itens únicos de fundador',
       'Badge fundador Bronze',
-      '1 carro Founder Premium',
     ],
     button: 'Escolher Bronze',
   },
   {
+    id: 'prata',
     name: 'Prata',
     tone: 'silver',
     price: 'R$ 89',
-    tagline: 'Mais estilo, mais garagem, mais vantagem.',
+    tagline: 'Mais exclusividade para ampliar sua coleção.',
+    featuredCar: {
+      name: 'Raro',
+      rarity: 'Raro',
+      image: '/founder-raro.png',
+      imageAlt: 'Carro raro preto com detalhes azuis e aerofólio',
+    },
+    includedCars: ['Premium', 'Raro'],
     perks: [
-      'Tudo do pacote Bronze',
-      '1 carro raro adicional',
+      'Acesso antecipado ao jogo',
+      'Itens únicos de fundador',
       'Skin neon exclusiva',
-      'Créditos extras de largada',
     ],
     button: 'Escolher Prata',
   },
   {
+    id: 'ouro',
     name: 'Ouro',
     tone: 'gold',
     price: 'R$ 149',
-    tagline: 'A experiência máxima para fundadores.',
+    tagline: 'A coleção completa dos carros de fundador.',
     popular: true,
+    featuredCar: {
+      name: 'Épico',
+      rarity: 'Épico',
+      image: '/founder-epico.png',
+      imageAlt: 'Carro épico esportivo rosa com aerofólio',
+    },
+    includedCars: ['Premium', 'Raro', 'Épico'],
     perks: [
-      'Tudo do pacote Prata',
-      '1 carro épico fundador',
-      'Efeito de largada dourado',
+      'Acesso antecipado ao jogo',
+      'Itens únicos de fundador',
+      'Skin neon exclusiva',
       'Nome no mural dos pioneiros',
     ],
     button: 'Escolher Ouro',
@@ -73,34 +97,39 @@ const packages = [
 
 const universe = [
   {
-    title: 'Corridas',
-    text: 'Pistas velozes, atalhos arriscados e disputas decididas no reflexo.',
-    icon: 'flag',
-    gradient: 'from-sky-500/25 via-transparent to-red-500/15',
+    title: 'Novos cenários',
+    text: 'Ambientes variados para explorar e competir.',
+    image: '/universo-rio-de-janeiro.jpg',
+    imageAlt: 'Carros esportivos em uma estrada no Rio de Janeiro ao pôr do sol',
+    position: 'center center',
   },
   {
-    title: 'Bastidores',
-    text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
-    icon: 'helmet',
-    gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15',
+    title: 'Mundo em movimento',
+    text: 'Veículos e ambientes com novas possibilidades.',
+    image: '/universo-pier-estacionamento.jpg',
+    imageAlt: 'Diversos carros e veículos reunidos em uma movimentada área portuária',
+    position: 'center 62%',
   },
   {
-    title: 'Mecânica',
-    text: 'Monte, pinte e evolua carros com personalidade de competição.',
-    icon: 'gear',
-    gradient: 'from-lime-400/20 via-transparent to-trophy/15',
+    title: 'Evolução dos carros',
+    text: 'Recursos para cuidar e melhorar sua máquina.',
+    image: '/universo-mecanica.jpg',
+    imageAlt: 'Oficina completa com carros, motos, ferramentas e mecânicos',
+    position: 'center center',
   },
   {
-    title: 'Eventos',
-    text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
-    icon: 'spark',
-    gradient: 'from-red-500/25 via-transparent to-trophy/20',
+    title: 'Mais personalização',
+    text: 'Peças e escolhas para criar carros únicos.',
+    image: '/universo-montando-carro.jpg',
+    imageAlt: 'Carro esportivo sendo montado e personalizado peça por peça',
+    position: 'center center',
   },
   {
-    title: 'Economia viva',
-    text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
-    icon: 'market',
-    gradient: 'from-voltage/20 via-transparent to-emerald-400/15',
+    title: 'Eventos e comunidade',
+    text: 'Momentos para competir, encontrar e celebrar.',
+    image: '/universo-comemoracao.jpg',
+    imageAlt: 'Pilotos celebrando juntos no paddock após uma corrida',
+    position: 'center center',
   },
 ]
 
@@ -253,20 +282,52 @@ function BenefitCard({ benefit }) {
 }
 
 function PackageCard({ pack }) {
+  const [status, setStatus] = React.useState('idle')
+
+  const handleBuy = async () => {
+    setStatus('loading')
+    try {
+      const url = await createCheckout(pack.id)
+      window.location.assign(url)
+    } catch (err) {
+      console.error('Falha ao iniciar o checkout', err)
+      setStatus('error')
+    }
+  }
+
   return (
-    <article className={`founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`}>
-      {pack.popular && <span className="popular-ribbon">Mais Popular</span>}
+    <article
+      className={`founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`}
+      data-tone={pack.tone}
+    >
       <div className="package-top">
-        <span className={`tier-mark ${pack.tone}`} />
-        <h3>{pack.name}</h3>
+        <div className="package-tier">
+          <span className={`tier-mark ${pack.tone}`} />
+          <h3>{pack.name}</h3>
+        </div>
+        {pack.popular && <span className="popular-ribbon">Mais escolhido</span>}
         <p>{pack.tagline}</p>
       </div>
 
-      <div className="car-preview" data-tone={pack.tone}>
-        <span className="car-shadow" />
-        <span className="mini-car">
-          <span />
-        </span>
+      <figure className="featured-car">
+        <div className="featured-car-media">
+          <img
+            src={pack.featuredCar.image}
+            alt={pack.featuredCar.imageAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          <span>Carro em destaque</span>
+          <strong>{pack.featuredCar.name}</strong>
+          <small>{pack.featuredCar.rarity}</small>
+        </figcaption>
+      </figure>
+
+      <div className="included-cars">
+        <span>Este pacote inclui</span>
+        <strong>{pack.includedCars.join(' · ')}</strong>
       </div>
 
       <div className="price-row">
@@ -283,22 +344,64 @@ function PackageCard({ pack }) {
         ))}
       </ul>
 
-      <a href="#entrar" className={`package-button ${pack.tone}`}>
-        {pack.button}
-      </a>
+      <button
+        type="button"
+        onClick={handleBuy}
+        disabled={status === 'loading'}
+        className={`package-button ${pack.tone}`}
+      >
+        {status === 'loading' ? 'Abrindo pagamento…' : pack.button}
+      </button>
+      {status === 'error' && (
+        <p className="checkout-error">
+          Não foi possível abrir o pagamento. Tente novamente em instantes.
+        </p>
+      )}
     </article>
   )
 }
 
-function UniverseCard({ item }) {
+function PaymentBanner() {
+  const [result] = React.useState(readPaymentResult)
+
+  React.useEffect(() => {
+    if (result) {
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [result])
+
+  if (!result) return null
+
   return (
-    <article className={`universe-card bg-gradient-to-br ${item.gradient}`}>
-      <div className="universe-art">
-        <Icon name={item.icon} className="h-11 w-11" />
+    <div className="payment-banner" role="status">
+      <strong>Pagamento confirmado!</strong>
+      <span>Bem-vindo ao grid de fundadores do Autorama Racing.</span>
+      {result.receiptUrl && (
+        <a href={result.receiptUrl} target="_blank" rel="noreferrer">
+          Ver comprovante ››
+        </a>
+      )}
+    </div>
+  )
+}
+
+function UniverseThumbnail({ item }) {
+  return (
+    <figure className="universe-thumbnail">
+      <div className="universe-thumbnail-media">
+        <img
+          src={item.image}
+          alt={item.imageAlt}
+          loading="lazy"
+          decoding="async"
+          style={{ objectPosition: item.position }}
+        />
       </div>
-      <h3>{item.title}</h3>
-      <p>{item.text}</p>
-    </article>
+      <figcaption>
+        <h3>{item.title}</h3>
+        <p>{item.text}</p>
+      </figcaption>
+    </figure>
   )
 }
 
@@ -318,6 +421,7 @@ function App() {
   return (
     <div id="top" className="min-h-screen overflow-hidden bg-asphalt text-white">
       <Header />
+      <PaymentBanner />
 
       <main>
         <section className="hero-section">
@@ -363,7 +467,11 @@ function App() {
             <span className="signal-bars right" />
           </div>
 
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+          <p className="packages-intro">
+            Quanto maior o pacote, maior a garagem: Prata inclui Premium + Raro e Ouro reúne os três carros.
+          </p>
+
+          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
             {packages.map((pack) => (
               <PackageCard key={pack.name} pack={pack} />
             ))}
@@ -377,9 +485,9 @@ function App() {
             <span className="signal-bars right" />
           </div>
 
-          <div className="universe-grid mx-auto mt-9 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="universe-gallery">
             {universe.map((item) => (
-              <UniverseCard key={item.title} item={item} />
+              <UniverseThumbnail key={item.title} item={item} />
             ))}
           </div>
         </section>

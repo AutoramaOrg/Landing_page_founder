@@ -2,8 +2,8 @@
 
 ## Estado
 
-- **Status:** ausência confirmada no repositório atual.
-- **Fonte confirmada:** inspeção de `src/`, `package.json`, `index.html` e configurações.
+- **Status:** superado em `2026-07-12` — ver [[05-Integracoes/Checkout-InfinitePay|Checkout InfinitePay]].
+- **Fonte confirmada:** inspeção de `src/`, `package.json`, `index.html` e configurações (estado anterior a `2026-07-12`).
 
 ## Conclusão
 

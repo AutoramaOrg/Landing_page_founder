@@ -1,5 +1,6 @@
 // Generated from App.jsx by scripts/compile-jsx.mjs.
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
+import { createCheckout, readPaymentResult } from './checkout.js';
 const navItems = [{
   label: 'O Jogo',
   href: '#universo'
@@ -31,53 +32,82 @@ const benefits = [{
   icon: 'crown'
 }];
 const packages = [{
+  id: 'bronze',
   name: 'Bronze',
   tone: 'bronze',
   price: 'R$ 49',
-  tagline: 'Entrada oficial no grid fundador.',
-  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Badge fundador Bronze', '1 carro Founder Premium'],
+  tagline: 'Sua entrada oficial no grid fundador.',
+  featuredCar: {
+    name: 'Premium',
+    rarity: 'Premium',
+    image: '/founder-premium.png',
+    imageAlt: 'Carro Founder Premium com pintura vermelha, preta e branca'
+  },
+  includedCars: ['Premium'],
+  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Badge fundador Bronze'],
   button: 'Escolher Bronze'
 }, {
+  id: 'prata',
   name: 'Prata',
   tone: 'silver',
   price: 'R$ 89',
-  tagline: 'Mais estilo, mais garagem, mais vantagem.',
-  perks: ['Tudo do pacote Bronze', '1 carro raro adicional', 'Skin neon exclusiva', 'Créditos extras de largada'],
+  tagline: 'Mais exclusividade para ampliar sua coleção.',
+  featuredCar: {
+    name: 'Raro',
+    rarity: 'Raro',
+    image: '/founder-raro.png',
+    imageAlt: 'Carro raro preto com detalhes azuis e aerofólio'
+  },
+  includedCars: ['Premium', 'Raro'],
+  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Skin neon exclusiva'],
   button: 'Escolher Prata'
 }, {
+  id: 'ouro',
   name: 'Ouro',
   tone: 'gold',
   price: 'R$ 149',
-  tagline: 'A experiência máxima para fundadores.',
+  tagline: 'A coleção completa dos carros de fundador.',
   popular: true,
-  perks: ['Tudo do pacote Prata', '1 carro épico fundador', 'Efeito de largada dourado', 'Nome no mural dos pioneiros'],
+  featuredCar: {
+    name: 'Épico',
+    rarity: 'Épico',
+    image: '/founder-epico.png',
+    imageAlt: 'Carro épico esportivo rosa com aerofólio'
+  },
+  includedCars: ['Premium', 'Raro', 'Épico'],
+  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Skin neon exclusiva', 'Nome no mural dos pioneiros'],
   button: 'Escolher Ouro'
 }];
 const universe = [{
-  title: 'Corridas',
-  text: 'Pistas velozes, atalhos arriscados e disputas decididas no reflexo.',
-  icon: 'flag',
-  gradient: 'from-sky-500/25 via-transparent to-red-500/15'
+  title: 'Novos cenários',
+  text: 'Ambientes variados para explorar e competir.',
+  image: '/universo-rio-de-janeiro.jpg',
+  imageAlt: 'Carros esportivos em uma estrada no Rio de Janeiro ao pôr do sol',
+  position: 'center center'
 }, {
-  title: 'Bastidores',
-  text: 'Boxes, eventos, contratos e reputação dentro de uma cena viva.',
-  icon: 'helmet',
-  gradient: 'from-fuchsia-500/20 via-transparent to-sky-500/15'
+  title: 'Mundo em movimento',
+  text: 'Veículos e ambientes com novas possibilidades.',
+  image: '/universo-pier-estacionamento.jpg',
+  imageAlt: 'Diversos carros e veículos reunidos em uma movimentada área portuária',
+  position: 'center 62%'
 }, {
-  title: 'Mecânica',
-  text: 'Monte, pinte e evolua carros com personalidade de competição.',
-  icon: 'gear',
-  gradient: 'from-lime-400/20 via-transparent to-trophy/15'
+  title: 'Evolução dos carros',
+  text: 'Recursos para cuidar e melhorar sua máquina.',
+  image: '/universo-mecanica.jpg',
+  imageAlt: 'Oficina completa com carros, motos, ferramentas e mecânicos',
+  position: 'center center'
 }, {
-  title: 'Eventos',
-  text: 'Temporadas limitadas com recompensas raras para quem chega cedo.',
-  icon: 'spark',
-  gradient: 'from-red-500/25 via-transparent to-trophy/20'
+  title: 'Mais personalização',
+  text: 'Peças e escolhas para criar carros únicos.',
+  image: '/universo-montando-carro.jpg',
+  imageAlt: 'Carro esportivo sendo montado e personalizado peça por peça',
+  position: 'center center'
 }, {
-  title: 'Economia viva',
-  text: 'Mercado dinâmico, trocas e metas que movimentam o paddock.',
-  icon: 'market',
-  gradient: 'from-voltage/20 via-transparent to-emerald-400/15'
+  title: 'Eventos e comunidade',
+  text: 'Momentos para competir, encontrar e celebrar.',
+  image: '/universo-comemoracao.jpg',
+  imageAlt: 'Pilotos celebrando juntos no paddock após uma corrida',
+  position: 'center center'
 }];
 const reasons = [{
   title: 'Você faz parte da história',
@@ -239,43 +269,87 @@ function BenefitCard({
 function PackageCard({
   pack
 }) {
+  const [status, setStatus] = React.useState('idle');
+  const handleBuy = async () => {
+    setStatus('loading');
+    try {
+      const url = await createCheckout(pack.id);
+      window.location.assign(url);
+    } catch (err) {
+      console.error('Falha ao iniciar o checkout', err);
+      setStatus('error');
+    }
+  };
   return React.createElement("article", {
-    className: `founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`
-  }, pack.popular && React.createElement("span", {
-    className: "popular-ribbon"
-  }, "Mais Popular"), React.createElement("div", {
+    className: `founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`,
+    "data-tone": pack.tone
+  }, React.createElement("div", {
     className: "package-top"
+  }, React.createElement("div", {
+    className: "package-tier"
   }, React.createElement("span", {
     className: `tier-mark ${pack.tone}`
-  }), React.createElement("h3", null, pack.name), React.createElement("p", null, pack.tagline)), React.createElement("div", {
-    className: "car-preview",
-    "data-tone": pack.tone
-  }, React.createElement("span", {
-    className: "car-shadow"
-  }), React.createElement("span", {
-    className: "mini-car"
-  }, React.createElement("span", null))), React.createElement("div", {
+  }), React.createElement("h3", null, pack.name)), pack.popular && React.createElement("span", {
+    className: "popular-ribbon"
+  }, "Mais escolhido"), React.createElement("p", null, pack.tagline)), React.createElement("figure", {
+    className: "featured-car"
+  }, React.createElement("div", {
+    className: "featured-car-media"
+  }, React.createElement("img", {
+    src: pack.featuredCar.image,
+    alt: pack.featuredCar.imageAlt,
+    loading: "lazy",
+    decoding: "async"
+  })), React.createElement("figcaption", null, React.createElement("span", null, "Carro em destaque"), React.createElement("strong", null, pack.featuredCar.name), React.createElement("small", null, pack.featuredCar.rarity))), React.createElement("div", {
+    className: "included-cars"
+  }, React.createElement("span", null, "Este pacote inclui"), React.createElement("strong", null, pack.includedCars.join(' · '))), React.createElement("div", {
     className: "price-row"
   }, React.createElement("span", null, pack.price), React.createElement("small", null, "pagamento \xFAnico")), React.createElement("ul", {
     className: "perk-list"
   }, pack.perks.map(perk => React.createElement("li", {
     key: perk
-  }, React.createElement("span", null, "\u2713"), perk))), React.createElement("a", {
-    href: "#entrar",
+  }, React.createElement("span", null, "\u2713"), perk))), React.createElement("button", {
+    type: "button",
+    onClick: handleBuy,
+    disabled: status === 'loading',
     className: `package-button ${pack.tone}`
-  }, pack.button));
+  }, status === 'loading' ? 'Abrindo pagamento…' : pack.button), status === 'error' && React.createElement("p", {
+    className: "checkout-error"
+  }, "N\xE3o foi poss\xEDvel abrir o pagamento. Tente novamente em instantes."));
 }
-function UniverseCard({
+function PaymentBanner() {
+  const [result] = React.useState(readPaymentResult);
+  React.useEffect(() => {
+    if (result) {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [result]);
+  if (!result) return null;
+  return React.createElement("div", {
+    className: "payment-banner",
+    role: "status"
+  }, React.createElement("strong", null, "Pagamento confirmado!"), React.createElement("span", null, "Bem-vindo ao grid de fundadores do Autorama Racing."), result.receiptUrl && React.createElement("a", {
+    href: result.receiptUrl,
+    target: "_blank",
+    rel: "noreferrer"
+  }, "Ver comprovante \u203A\u203A"));
+}
+function UniverseThumbnail({
   item
 }) {
-  return React.createElement("article", {
-    className: `universe-card bg-gradient-to-br ${item.gradient}`
+  return React.createElement("figure", {
+    className: "universe-thumbnail"
   }, React.createElement("div", {
-    className: "universe-art"
-  }, React.createElement(Icon, {
-    name: item.icon,
-    className: "h-11 w-11"
-  })), React.createElement("h3", null, item.title), React.createElement("p", null, item.text));
+    className: "universe-thumbnail-media"
+  }, React.createElement("img", {
+    src: item.image,
+    alt: item.imageAlt,
+    loading: "lazy",
+    decoding: "async",
+    style: {
+      objectPosition: item.position
+    }
+  })), React.createElement("figcaption", null, React.createElement("h3", null, item.title), React.createElement("p", null, item.text)));
 }
 function ReasonCard({
   reason
@@ -291,7 +365,7 @@ function App() {
   return React.createElement("div", {
     id: "top",
     className: "min-h-screen overflow-hidden bg-asphalt text-white"
-  }, React.createElement(Header, null), React.createElement("main", null, React.createElement("section", {
+  }, React.createElement(Header, null), React.createElement(PaymentBanner, null), React.createElement("main", null, React.createElement("section", {
     className: "hero-section"
   }, React.createElement("div", {
     className: "hero-backdrop"
@@ -336,8 +410,10 @@ function App() {
     className: "signal-bars"
   }), React.createElement("h2", null, "Escolha seu pacote de fundador"), React.createElement("span", {
     className: "signal-bars right"
-  })), React.createElement("div", {
-    className: "mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-3 lg:px-8"
+  })), React.createElement("p", {
+    className: "packages-intro"
+  }, "Quanto maior o pacote, maior a garagem: Prata inclui Premium + Raro e Ouro re\xFAne os tr\xEAs carros."), React.createElement("div", {
+    className: "mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8"
   }, packages.map(pack => React.createElement(PackageCard, {
     key: pack.name,
     pack: pack
@@ -351,8 +427,8 @@ function App() {
   }), React.createElement("h2", null, "Um universo feito para corredores"), React.createElement("span", {
     className: "signal-bars right"
   })), React.createElement("div", {
-    className: "universe-grid mx-auto mt-9 max-w-7xl px-4 sm:px-6 lg:px-8"
-  }, universe.map(item => React.createElement(UniverseCard, {
+    className: "universe-gallery"
+  }, universe.map(item => React.createElement(UniverseThumbnail, {
     key: item.title,
     item: item
   })))), React.createElement("section", {

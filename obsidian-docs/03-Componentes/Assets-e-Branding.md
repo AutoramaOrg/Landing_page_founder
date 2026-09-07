@@ -24,6 +24,32 @@
 - URL pública esperada:
   - `/hero-celebration.png`
 
+### Carros dos pacotes de fundador
+
+- `public/founder-premium.png`: carro principal exibido no pacote Bronze.
+- `public/founder-raro.png`: carro principal exibido no pacote Prata.
+- `public/founder-epico.png`: carro principal exibido no pacote Ouro.
+
+O componente `PackageCard` apresenta somente uma imagem principal por nível, acompanhada do nome e
+da raridade. A garagem cumulativa continua indicada em texto, sem repetir as imagens dos níveis
+anteriores. As imagens usam carregamento adiado (`loading="lazy"`) e texto alternativo.
+
+As raridades válidas exibidas nos cards são `Premium`, `Raro` e `Épico`; não existem classificações
+por cor.
+
+### Galeria "Um universo feito para corredores"
+
+- `public/universo-rio-de-janeiro.jpg`: cena principal de pistas e exploração.
+- `public/universo-pier-estacionamento.jpg`: mundo vivo e variedade de veículos.
+- `public/universo-mecanica.jpg`: oficina e preparação dos carros.
+- `public/universo-montando-carro.jpg`: montagem e personalização.
+- `public/universo-comemoracao.jpg`: comunidade e celebração no paddock.
+
+As cinco imagens são carregadas de forma adiada (`loading="lazy"`) em `src/App.jsx` e exibidas como
+miniaturas responsivas na seção `#universo`. A copy identifica as artes como possibilidades futuras,
+sem confirmar que seus cenários ou detalhes visuais já existem no jogo. Os originais PNG são
+exportados para JPEG otimizado antes de entrar no bundle.
+
 ## Assets na raiz do projeto
 
 Existem imagens na raiz:

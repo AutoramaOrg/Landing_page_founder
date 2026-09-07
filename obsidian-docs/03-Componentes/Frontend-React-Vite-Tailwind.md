@@ -76,6 +76,10 @@ Os dados de navegação e conteúdo ficam no topo de `src/App.jsx`:
 - `universe`
 - `reasons`
 
+Cada item de `packages` declara `featuredCar`, usado como único carro visual do card, e
+`includedCars`, usado para comunicar a garagem cumulativa em texto. Bronze destaca Premium; Prata
+destaca Raro; Ouro destaca Épico.
+
 ## Risco operacional
 
 `src/App.js` é gerado. Se alguém editar apenas `src/App.js`, a mudança pode ser perdida na próxima execução de `npm run compile:jsx`.
