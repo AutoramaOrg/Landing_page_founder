@@ -1,0 +1,60 @@
+(site) {
+  encode zstd gzip
+  root * /srv
+  try_files {path} /index.html
+  file_server
+}
+
+http://www.horsepower-studio.com {
+  redir https://horsepower-studio.com{uri} permanent
+}
+
+http://horsepower-studio.com {
+  redir https://horsepower-studio.com{uri} permanent
+}
+
+www.horsepower-studio.com {
+  redir https://horsepower-studio.com{uri} permanent
+}
+
+horsepower-studio.com {
+  import site
+}
+
+gepetto.horsepower-studio.com {
+  reverse_proxy gepetto-clube-web-1:80
+}
+
+dashboard-gepetto.horsepower-studio.com {
+  reverse_proxy gepetto-clube-admin-1:80
+}
+
+hpchat.horsepower-studio.com {
+  reverse_proxy horsepower_chatwoot_rails:3000
+}
+
+n8n.horsepower-studio.com {
+  reverse_proxy horsepower_n8n:5678
+}
+
+poker.horsepower-studio.com {
+  reverse_proxy poker_app:3000
+}
+
+dashboard.horsepower-studio.com {
+  reverse_proxy autorama-arcade-hub:80
+}
+
+admin.horsepower-studio.com {
+  reverse_proxy autorama-dashboard:80
+}
+
+hermes.horsepower-studio.com {
+  respond "Hermes gateway pending secure configuration." 503
+}
+
+autorama.horsepower-studio.com {
+  encode zstd gzip
+  header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  reverse_proxy autorama-founder:8080
+}

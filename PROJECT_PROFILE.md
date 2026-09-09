@@ -12,18 +12,22 @@
 
 ## Estado observado — 2026-09-09
 
-O site principal responde por Caddy. SSH verifica a chave de host conhecida, mas recusa a chave
-local de deploy para `yandias`; não houve alteração no VPS. DNS do subdomínio não existe; NS do
-domínio usa `dns-parking.com`. Arquivos de deploy antigos encontrados em outro repositório são
-referência histórica, não prova dos caminhos, containers ou redes ativos.
+SSH por chave para `yandias` está ativo. O Caddy existente responde pelo site principal e também
+pela landing, na rede Docker `horsepower-studio_default`; não houve reinício de VPS, Docker ou
+outros containers. O DNS A `autorama` aponta para `212.85.15.133` e foi observado em 1.1.1.1 e
+8.8.8.8. A configuração anterior do Caddy foi preservada no VPS como
+`Caddyfile.bak-20260909-050500-autorama`.
 
-Produção Supabase tem `handle-events`, mas não as três funções de fundador. As tabelas
-`founder_orders` e `founder_order_notifications` não existem. Metadados de secrets não incluem
-InfinitePay, retorno, CORS ou Resend. Não houve escrita em Produção nesta preparação.
+Produção Supabase tem as tabelas `founder_orders` e `founder_order_notifications`, ambas com RLS
+ativo, e a migration `20260909090000` registrada. As funções públicas exclusivas da landing estão
+ativas: `infinitepay-create-checkout`, `founder-payment-status` e `infinitepay-webhook`.
+`handle-events` não foi alterada. Foram configurados handle, origem e retorno; Resend permanece
+ausente, portanto alertas/recibos por e-mail não estão disponíveis.
 
-Código local preparado: Bronze 4900, Prata 8900 e Ouro 14900 centavos no backend. Desenvolvimento
-remoto ainda usa a versão anterior (Bronze de homologação a 100 centavos). A alteração de preço
-não foi publicada em nenhum ambiente.
+Landing implantada: release `65ea292d59974c7b18b745c312f9d7efb464ee60`, imagem
+`sha256:57e5eee98695be70bbf583abd8e49bccd5e42046df34cf0f3a417d3eee0bbe21` e container
+`autorama-founder-landing-1`. Bronze 4900, Prata 8900 e Ouro 14900 centavos. A UI pública está
+deliberadamente bloqueada até haver decisão operacional sobre os pedidos.
 
 ## Segurança e gates
 
@@ -32,9 +36,10 @@ Build público escolhe exclusivamente Supabase Produção e começa com compras 
 Só habilitá-lo após validação remota e definição do acompanhamento operacional dos pedidos.
 Valores `VITE_*` são públicos e nunca devem conter credenciais.
 
-Runtime planejado: Nginx sem root, imagem-base fixada por digest, filesystem somente leitura,
+Runtime ativo: Nginx sem root, imagem-base fixada por digest, filesystem somente leitura,
 sem capabilities, limites de recursos, porta 8080 apenas na rede Docker; HTTPS no Caddy existente.
-O Docker Engine local está indisponível; build da imagem e validação real dos headers ainda pendentes.
+O Docker Engine local está indisponível; build e validação real foram executados no VPS. A porta 8080
+não é acessível externamente; TLS e headers foram verificados pela borda pública.
 
 ## Runbook
 

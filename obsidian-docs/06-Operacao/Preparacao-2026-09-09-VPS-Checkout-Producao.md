@@ -3,29 +3,33 @@
 ## Escopo
 
 Usuário autorizou container separado no VPS existente com cautela e preços reais; confirmou
-recebimento na conta InfinitePay `$power-horse-p86`. Apenas alterações locais nesta etapa.
+recebimento na conta InfinitePay `$power-horse-p86`. Implantação concluída com UI de compra fechada.
 
 ## Evidências
 
-- Build da landing: aprovado; teste de configuração: 2/2.
-- Backend: 9/9 testes offline; checagem Deno das três Edge Functions aprovada.
-- Browser em `http://127.0.0.1:4175/#pacotes`: Bronze R$ 49, Prata R$ 89, Ouro R$ 149;
-  três botões "Disponível em breve" desativados; nenhum erro/warning capturado no console.
-- Não foi feito pedido ou pagamento externo nesta etapa. Backend novo foi exercitado com mocks;
-  o fluxo de compra pago, concorrência real e entrega ainda não foram homologados.
-- SSH com chave de host verificada continua recusando a chave de deploy para `yandias`.
-- Docker Engine local indisponível: imagem/runtime/CSP não foram testados em container.
+- Build da landing aprovado; teste de configuração 2/2. Backend: 9/9 testes offline e checagem
+  Deno das três funções aprovados.
+- DNS A `autorama` criado no painel Hostinger, apontando a `212.85.15.133`; propagação conferida
+  em 1.1.1.1 e 8.8.8.8.
+- Migration de Produção `20260909090000` aplicada e marcada; as duas tabelas possuem RLS. Somente
+  as três funções de fundador foram publicadas, com CORS autorizado e não autorizado testados.
+- Imagem imutável construída no VPS a partir da release `65ea292d`; container sem root/read-only
+  saudável, conectado apenas à rede Docker. O Caddy foi validado e recarregado; backup datado criado.
+- `https://autorama.horsepower-studio.com/#pacotes` respondeu 200/TLS válido, CSP/HSTS e demais
+  headers presentes, preços R$ 49/R$ 89/R$ 149 e zero erros no console. Porta 8080 externa recusada.
+- Não foi criado pedido válido nem executado pagamento. Fluxo pago, concorrência e entrega seguem
+  sem homologação. Resend não está configurado; a UI permanece bloqueada.
 
 ## Alterações
 
 Separação explícita de ambientes e gate público, URLs de checkout/recibo restritas, timeouts,
-runtime não-root com recursos limitados, configuração do proxy como fragmento aditivo, catálogo
-real no backend e confirmação de pagamento que rejeita valor ausente/divergente ou booleans
-inválidos. Plano de deploy/rollback: `deploy/RUNBOOK.md` na raiz.
+runtime não-root com recursos limitados, catálogo real no backend e confirmação de pagamento que
+rejeita valor ausente/divergente ou booleans inválidos. Plano de deploy/rollback:
+`deploy/RUNBOOK.md` na raiz.
 
 ## Estado final
 
-Não publicado, sem SHA de release, sem backup remoto executado e sem alterações em produção.
-As alterações locais não foram enviadas ao Git. Desenvolvimento remoto mantém a versão anterior.
-Próximo passo: usuário instalar a chave pública via sessão própria, sem fornecer senha ao agente;
-depois preencher inventário e completar todos os gates do runbook antes de ativar vendas.
+Publicação estática concluída com a release indicada; o site principal continuou disponível. As
+alterações foram enviadas às branches `codex/founder-production-release` dos dois repositórios.
+Próximo passo obrigatório antes de vendas: configurar e testar o Resend ou definir explicitamente
+uma rotina manual de monitoramento de `founder_orders`; só então gerar uma release com a UI ativada.
