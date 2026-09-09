@@ -1,0 +1,6 @@
+# Append only after backing up and inspecting the live Caddyfile.
+autorama.horsepower-studio.com {
+    encode zstd gzip
+    header Strict-Transport-Security "max-age=31536000"
+    reverse_proxy autorama-founder:8080
+}

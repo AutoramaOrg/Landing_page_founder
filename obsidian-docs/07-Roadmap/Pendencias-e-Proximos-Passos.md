@@ -6,15 +6,17 @@ Este documento lista lacunas reais identificadas por inspeção do projeto.
 
 ## Conversão e produto
 
-- [ ] Confirmar destino real dos botões de compra.
-- [ ] Definir se haverá checkout, formulário, WhatsApp ou página externa.
+- [x] Confirmar destino dos botões em Desenvolvimento: checkout InfinitePay.
+- [x] Implementar identificação por e-mail antes do checkout em Desenvolvimento.
+- [ ] Configurar e homologar o checkout no ambiente de Produção.
+- [ ] Configurar Resend para as notificações da compra.
 - [ ] Criar links reais para Discord/comunidade, suporte, termos e privacidade.
-- [ ] Confirmar se os preços atuais são definitivos.
+- [x] Preparar preços reais no catálogo local: R$ 49 / R$ 89 / R$ 149; falta publicar backend.
 - [ ] Confirmar se os benefícios dos pacotes são definitivos.
 
 ## Técnica
 
-- [ ] Definir estratégia de deploy externo.
+- [x] Preparar estratégia de container separado no VPS existente; execução bloqueada por SSH.
 - [ ] Documentar domínio final.
 - [ ] Documentar pipeline de publicação quando existir.
 - [ ] Avaliar se `src/App.js` gerado deve continuar versionado.
@@ -37,7 +39,7 @@ Este documento lista lacunas reais identificadas por inspeção do projeto.
 
 ## Operação
 
-- [ ] Criar runbook de deploy quando o destino for confirmado.
+- [x] Criar plano de deploy em `deploy/RUNBOOK.md`; preencher inventário real e validar antes de executar.
 - [ ] Criar checklist de QA antes de publicação.
 - [ ] Registrar cada atualização relevante em `obsidian-docs/06-Operacao/`.
 

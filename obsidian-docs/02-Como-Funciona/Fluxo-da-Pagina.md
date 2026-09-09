@@ -69,6 +69,15 @@ Cards renderizados a partir do array `packages`:
 
 O pacote Ouro está marcado como popular no código (`popular: true`).
 
+Com o checkout habilitado, cada botão de pacote abre um modal de identificação por e-mail. Após validação do campo, a
+landing envia `package_id` e `email` para a Edge Function do ambiente explícito, valida o host HTTPS
+retornado e navega para o checkout InfinitePay na mesma aba. O retorno de pagamento é confirmado pela
+Edge Function `founder-payment-status` antes de mostrar sucesso.
+
+Build público aponta exclusivamente para Produção e começa com os três botões desativados,
+exibindo "Disponível em breve". Ativação depende de `VITE_CHECKOUT_ENABLED=true` e homologação
+conforme `deploy/RUNBOOK.md`; Desenvolvimento local preserva seu endpoint de homologação.
+
 ## Universo
 
 Cards renderizados a partir do array `universe`:
@@ -104,8 +113,8 @@ Observação: os links do footer apontam para `#top` no estado atual. Se forem u
 
 ## Pontos a confirmar
 
-- destino real dos CTAs de compra;
+- configuração e publicação do checkout em Produção;
 - URLs reais de comunidade, Discord, suporte, termos e privacidade;
-- se haverá integração com pagamento ou formulário.
+- configuração do Resend para notificações por e-mail.
 
 #fluxo #ux #landing

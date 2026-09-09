@@ -13,15 +13,16 @@ A landing page do **Autorama Racing** apresenta os **Pacotes de Fundador** do jo
 - Conteúdo principal centralizado em `src/App.jsx`.
 - CSS principal em `src/index.css`.
 - Assets públicos em `public/`.
+- Checkout de homologação via InfinitePay e Edge Functions no Supabase de Desenvolvimento.
 
 ## Escopo não confirmado
 
-- Checkout real.
-- Integração com gateway de pagamento.
 - Captura de lead.
 - Analytics.
 - Deploy em produção.
 - Domínio final.
+
+O checkout em Produção e as notificações de e-mail continuam pendentes de configuração.
 
 Esses itens devem ser tratados como `A confirmar` até existirem artefatos reais no repositório ou no ambiente de produção.
 
@@ -40,6 +41,7 @@ A página vende uma experiência de entrada antecipada no universo Autorama Raci
 - `src/App.js`: arquivo gerado a partir de `src/App.jsx` pelo script de compilação.
 - `src/index.css`: sistema visual, responsividade, hero e componentes.
 - `src/main.js`: bootstrap React usando `ReactDOM` e `React` globais.
+- `src/checkout.js`: adaptador do checkout e confirmação de pagamento.
 - `index.html`: HTML base e carregamento dos vendors públicos.
 - `public/autorama_white.png`: logo branco atual.
 - `public/hero-celebration.png`: imagem full-bleed do topo.

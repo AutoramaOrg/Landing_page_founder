@@ -11,11 +11,12 @@ Esta documentacao registra como a landing funciona, onde ficam os arquivos centr
 - **Status:** ativo localmente.
 - **Tipo:** landing page React + Vite + Tailwind.
 - **Objetivo:** divulgar e vender a ideia dos Pacotes de Fundador do Autorama Racing.
-- **Backend:** inexistente neste repositório.
+- **Backend:** Edge Functions no repositório irmão `../autorama-supabase`.
 - **Banco de dados:** inexistente neste repositório.
-- **Checkout/pagamento:** a confirmar. Os CTAs atuais navegam para seções internas, não para checkout real.
-- **Build local validado:** `npm run build` em `2026-04-30`.
-- **Preview local usado:** `http://127.0.0.1:4173/`.
+- **Checkout/pagamento:** ativo em Desenvolvimento para homologação via InfinitePay; Produção pendente.
+- **Build local validado:** `npm run build` em `2026-09-09`.
+- **Preview do build público:** `http://127.0.0.1:4175/`, com compras bloqueadas até homologação de Produção.
+- **Preparação de VPS:** `PROJECT_PROFILE.md`, `CODEMAP.md` e `deploy/RUNBOOK.md` na raiz; ainda sem deploy.
 
 ---
 
@@ -43,6 +44,7 @@ Esta documentacao registra como a landing funciona, onde ficam os arquivos centr
 ### Integracoes
 
 - [[05-Integracoes/Sem-Integracoes-Confirmadas|Sem integrações confirmadas]]
+- [[05-Integracoes/Checkout-InfinitePay|Checkout InfinitePay]]
 
 ### Operacao
 
@@ -50,6 +52,8 @@ Esta documentacao registra como a landing funciona, onde ficam os arquivos centr
 - [[06-Operacao/Checklist-de-Validacao-Visual|Checklist de validação visual]]
 - [[06-Operacao/Codex-Leitura-e-Atualizacao-Obrigatoria-da-Documentacao|Codex - leitura e atualização obrigatória da documentação]]
 - [[06-Operacao/Atualizacao-2026-04-30-Assets-Logo-e-Hero-Full-Bleed|Atualização 2026-04-30 - assets, logo e hero full-bleed]]
+- [[06-Operacao/Atualizacao-2026-09-08-Correcao-Checkout-InfinitePay|Atualização 2026-09-08 - correção do checkout InfinitePay]]
+- [[06-Operacao/Preparacao-2026-09-09-VPS-Checkout-Producao|Preparação 2026-09-09 - VPS e checkout de Produção]]
 
 ### Roadmap
 

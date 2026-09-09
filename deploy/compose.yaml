@@ -1,0 +1,27 @@
+name: autorama-founder
+services:
+  landing:
+    image: ${FOUNDER_IMAGE:?Set the immutable release image}
+    restart: unless-stopped
+    user: "101:101"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 128m
+    cpus: 0.25
+    pids_limit: 64
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16777216,uid=101,gid=101,mode=1700
+    expose: ["8080"]
+    networks:
+      edge:
+        aliases: [autorama-founder]
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "3"
+networks:
+  edge:
+    external: true
+    name: ${CADDY_NETWORK:?Set the inspected Caddy Docker network}

@@ -1,6 +1,6 @@
 // Generated from App.jsx by scripts/compile-jsx.mjs.
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
-import { createCheckout, readPaymentResult } from './checkout.js';
+import { checkoutEnabled, createCheckout, getPaymentStatus, readPaymentResult } from './checkout.js';
 const navItems = [{
   label: 'O Jogo',
   href: '#universo'
@@ -267,19 +267,9 @@ function BenefitCard({
   }), React.createElement("div", null, React.createElement("h3", null, benefit.title), React.createElement("p", null, benefit.text)));
 }
 function PackageCard({
-  pack
+  pack,
+  onChoose
 }) {
-  const [status, setStatus] = React.useState('idle');
-  const handleBuy = async () => {
-    setStatus('loading');
-    try {
-      const url = await createCheckout(pack.id);
-      window.location.assign(url);
-    } catch (err) {
-      console.error('Falha ao iniciar o checkout', err);
-      setStatus('error');
-    }
-  };
   return React.createElement("article", {
     className: `founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`,
     "data-tone": pack.tone
@@ -310,29 +300,246 @@ function PackageCard({
     key: perk
   }, React.createElement("span", null, "\u2713"), perk))), React.createElement("button", {
     type: "button",
-    onClick: handleBuy,
-    disabled: status === 'loading',
+    onClick: () => onChoose(pack),
+    disabled: !checkoutEnabled,
     className: `package-button ${pack.tone}`
-  }, status === 'loading' ? 'Abrindo pagamento…' : pack.button), status === 'error' && React.createElement("p", {
-    className: "checkout-error"
-  }, "N\xE3o foi poss\xEDvel abrir o pagamento. Tente novamente em instantes."));
+  }, checkoutEnabled ? pack.button : 'Disponível em breve'));
 }
-function PaymentBanner() {
-  const [result] = React.useState(readPaymentResult);
+function PurchaseModal({
+  pack,
+  onClose
+}) {
+  const [email, setEmail] = React.useState('');
+  const [status, setStatus] = React.useState('idle');
+  const [error, setError] = React.useState('');
+  const emailRef = React.useRef(null);
+  const dialogRef = React.useRef(null);
+  const errorRef = React.useRef(null);
+  const statusRef = React.useRef(status);
+  statusRef.current = status;
   React.useEffect(() => {
-    if (result) {
-      window.history.replaceState({}, '', window.location.pathname);
+    const trigger = document.activeElement;
+    const body = document.body;
+    const previousOverflow = body.style.overflow;
+    const previousPadding = body.style.paddingRight;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    body.style.paddingRight = `${parseFloat(getComputedStyle(body).paddingRight) + scrollbarWidth}px`;
+    body.style.overflow = 'hidden';
+    emailRef.current?.focus({
+      preventScroll: true
+    });
+    const focusableElements = () => [...dialogRef.current.querySelectorAll('a[href], button:not(:disabled), input:not(:disabled)')].filter(element => element.getClientRects().length);
+    const onKeyDown = event => {
+      if (event.key === 'Escape' && statusRef.current !== 'loading') onClose();
+      if (event.key !== 'Tab') return;
+      const elements = focusableElements();
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      if (!first) {
+        event.preventDefault();
+        dialogRef.current.focus({
+          preventScroll: true
+        });
+      } else if (!elements.includes(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const containFocus = event => {
+      if (!dialogRef.current.contains(event.target)) {
+        ;
+        (focusableElements()[0] || dialogRef.current).focus({
+          preventScroll: true
+        });
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    document.addEventListener('focusin', containFocus);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('focusin', containFocus);
+      body.style.overflow = previousOverflow;
+      body.style.paddingRight = previousPadding;
+      if (trigger?.isConnected) trigger.focus({
+        preventScroll: true
+      });
+    };
+  }, [onClose]);
+  React.useEffect(() => {
+    if (status === 'loading') dialogRef.current?.focus({
+      preventScroll: true
+    });else if (error) errorRef.current?.focus();
+  }, [status, error]);
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setError('');
+    setStatus('loading');
+    try {
+      const url = await createCheckout(pack.id, {
+        email: email.trim()
+      });
+      onClose();
+      window.location.assign(url);
+    } catch (requestError) {
+      setStatus('idle');
+      setError(requestError.message || 'Não foi possível abrir o pagamento. Tente novamente.');
+    }
+  };
+  return React.createElement("div", {
+    className: "purchase-modal-backdrop",
+    role: "presentation",
+    onMouseDown: event => {
+      if (event.target === event.currentTarget && status !== 'loading') onClose();
+    }
+  }, React.createElement("section", {
+    ref: dialogRef,
+    tabIndex: -1,
+    className: "purchase-modal",
+    role: "dialog",
+    "aria-modal": "true",
+    "aria-labelledby": "purchase-modal-title",
+    "aria-describedby": "purchase-modal-description",
+    "aria-busy": status === 'loading'
+  }, React.createElement("div", {
+    className: "purchase-modal-header"
+  }, React.createElement("p", {
+    className: "purchase-modal-kicker"
+  }, "Pacote ", pack.name), React.createElement("button", {
+    type: "button",
+    className: "purchase-modal-close",
+    onClick: onClose,
+    disabled: status === 'loading',
+    "aria-label": "Fechar"
+  }, "\xD7")), React.createElement("div", {
+    className: "purchase-modal-content"
+  }, React.createElement("h2", {
+    id: "purchase-modal-title"
+  }, "Qual \xE9 o seu e-mail?"), React.createElement("p", {
+    id: "purchase-modal-description"
+  }, "Usaremos este e-mail para identificar sua compra e creditar os itens na sua conta. Voc\xEA pode comprar mesmo sem ter uma conta cadastrada."), React.createElement("form", {
+    onSubmit: handleSubmit
+  }, React.createElement("label", null, "Seu e-mail", React.createElement("input", {
+    ref: emailRef,
+    type: "email",
+    value: email,
+    onChange: event => setEmail(event.target.value),
+    autoComplete: "email",
+    maxLength: 254,
+    required: true,
+    disabled: status === 'loading'
+  })), error && React.createElement("p", {
+    ref: errorRef,
+    tabIndex: -1,
+    className: "purchase-modal-error",
+    role: "alert"
+  }, error), React.createElement("button", {
+    type: "submit",
+    className: "glow-button purchase-modal-submit",
+    disabled: status === 'loading'
+  }, status === 'loading' ? 'Preparando pagamento…' : 'Continuar para pagamento', React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A"))), React.createElement("small", null, "Guarde seu comprovante. Os itens ser\xE3o adicionados \xE0 sua conta em at\xE9 2 dias \xFAteis ap\xF3s a confirma\xE7\xE3o do pagamento."))));
+}
+function PaymentConfirmation({
+  result
+}) {
+  const [status, setStatus] = React.useState('checking');
+  const [details, setDetails] = React.useState(null);
+  const retryRef = React.useRef(0);
+  const timerRef = React.useRef(null);
+  const verifyPayment = React.useCallback(async () => {
+    setStatus('checking');
+    try {
+      const payment = await getPaymentStatus(result);
+      if (payment.status === 'paid') {
+        setDetails(payment);
+        setStatus('paid');
+        return;
+      }
+      if (payment.status === 'pending' && retryRef.current < 15) {
+        retryRef.current += 1;
+        timerRef.current = window.setTimeout(verifyPayment, 2000);
+        return;
+      }
+      setStatus(payment.status === 'pending' ? 'waiting' : 'error');
+    } catch {
+      setStatus('waiting');
     }
   }, [result]);
-  if (!result) return null;
-  return React.createElement("div", {
-    className: "payment-banner",
-    role: "status"
-  }, React.createElement("strong", null, "Pagamento confirmado!"), React.createElement("span", null, "Bem-vindo ao grid de fundadores do Autorama Racing."), result.receiptUrl && React.createElement("a", {
-    href: result.receiptUrl,
+  React.useEffect(() => {
+    verifyPayment();
+    return () => window.clearTimeout(timerRef.current);
+  }, [verifyPayment]);
+  const closeConfirmation = () => {
+    window.close();
+    window.setTimeout(() => {
+      if (!window.closed) window.location.assign(window.location.pathname);
+    }, 150);
+  };
+  const pack = details ? packages.find(item => item.id === details.package_id) : null;
+  const items = pack ? [...pack.includedCars.map(car => `Carro ${car}`), ...pack.perks] : [];
+  return React.createElement("main", {
+    className: "payment-confirmation-shell"
+  }, React.createElement("section", {
+    className: "payment-confirmation-panel",
+    "aria-live": "polite"
+  }, React.createElement("img", {
+    src: "/autorama_white.png",
+    alt: "Autorama Racing",
+    className: "payment-confirmation-logo"
+  }), status === 'checking' && React.createElement(React.Fragment, null, React.createElement("span", {
+    className: "confirmation-spinner",
+    "aria-hidden": "true"
+  }), React.createElement("p", {
+    className: "payment-confirmation-kicker"
+  }, "Confirmando pagamento"), React.createElement("h1", null, "Estamos validando sua compra."), React.createElement("p", null, "Isso pode levar alguns segundos. Mantenha esta janela aberta.")), status === 'paid' && React.createElement(React.Fragment, null, React.createElement("span", {
+    className: "confirmation-check",
+    "aria-hidden": "true"
+  }, "\u2713"), React.createElement("p", {
+    className: "payment-confirmation-kicker success"
+  }, "Compra confirmada"), React.createElement("h1", null, "Voc\xEA entrou para o grid de fundadores."), React.createElement("p", null, "O pacote ", React.createElement("strong", null, pack?.name), " foi confirmado para o e-mail", ' ', React.createElement("strong", null, details.email), ". Guarde seu comprovante."), React.createElement("ul", {
+    className: "payment-confirmation-items"
+  }, items.map(item => React.createElement("li", {
+    key: item
+  }, item))), React.createElement("p", {
+    className: "payment-confirmation-next"
+  }, "Os benef\xEDcios ser\xE3o adicionados \xE0 sua conta em at\xE9 ", React.createElement("strong", null, "2 dias \xFAteis"), "."), React.createElement("div", {
+    className: "payment-confirmation-actions"
+  }, details.receipt_url && React.createElement("a", {
+    href: details.receipt_url,
     target: "_blank",
-    rel: "noreferrer"
-  }, "Ver comprovante \u203A\u203A"));
+    rel: "noreferrer",
+    className: "confirmation-receipt"
+  }, "Ver comprovante"), React.createElement("button", {
+    type: "button",
+    onClick: closeConfirmation,
+    className: "glow-button confirmation-close"
+  }, "Fechar janela ", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A")))), status === 'waiting' && React.createElement(React.Fragment, null, React.createElement("p", {
+    className: "payment-confirmation-kicker"
+  }, "Pagamento em processamento"), React.createElement("h1", null, "Estamos concluindo a confirma\xE7\xE3o."), React.createElement("p", null, "Se o pagamento foi aprovado, aguarde alguns minutos e consulte seu e-mail."), React.createElement("button", {
+    type: "button",
+    onClick: () => {
+      retryRef.current = 0;
+      verifyPayment();
+    },
+    className: "ghost-button confirmation-retry"
+  }, "Verificar novamente ", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A"))), status === 'error' && React.createElement(React.Fragment, null, React.createElement("p", {
+    className: "payment-confirmation-kicker"
+  }, "N\xE3o confirmado"), React.createElement("h1", null, "N\xE3o conseguimos confirmar este pagamento."), React.createElement("p", null, "Se voc\xEA concluiu o pagamento, aguarde alguns minutos ou entre em contato com o suporte."), React.createElement("button", {
+    type: "button",
+    onClick: closeConfirmation,
+    className: "ghost-button confirmation-retry"
+  }, "Fechar janela"))));
 }
 function UniverseThumbnail({
   item
@@ -362,10 +569,19 @@ function ReasonCard({
   }), React.createElement("div", null, React.createElement("h3", null, reason.title), React.createElement("p", null, reason.text)));
 }
 function App() {
+  const [paymentResult] = React.useState(readPaymentResult);
+  const [selectedPackage, setSelectedPackage] = React.useState(null);
+  const closePurchase = React.useCallback(() => setSelectedPackage(null), []);
+  if (paymentResult) return React.createElement(PaymentConfirmation, {
+    result: paymentResult
+  });
   return React.createElement("div", {
     id: "top",
-    className: "min-h-screen overflow-hidden bg-asphalt text-white"
-  }, React.createElement(Header, null), React.createElement(PaymentBanner, null), React.createElement("main", null, React.createElement("section", {
+    className: "min-h-screen bg-asphalt text-white"
+  }, React.createElement("div", {
+    className: "overflow-hidden",
+    inert: selectedPackage ? '' : undefined
+  }, React.createElement(Header, null), React.createElement("main", null, React.createElement("section", {
     className: "hero-section"
   }, React.createElement("video", {
     className: "hero-video",
@@ -428,7 +644,8 @@ function App() {
     className: "mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8"
   }, packages.map(pack => React.createElement(PackageCard, {
     key: pack.name,
-    pack: pack
+    pack: pack,
+    onChoose: setSelectedPackage
   })))), React.createElement("section", {
     id: "universo",
     className: "section-shell pt-20"
@@ -499,7 +716,10 @@ function App() {
     links: ['FAQ', 'Contato', 'Privacidade', 'Termos de Uso']
   })), React.createElement("div", {
     className: "border-t border-white/10 px-4 py-5 text-center text-xs text-slate-500"
-  }, "\xA9 2026 Autorama Racing. Todos os direitos reservados.")));
+  }, "\xA9 2026 Autorama Racing. Todos os direitos reservados."))), selectedPackage && React.createElement(PurchaseModal, {
+    pack: selectedPackage,
+    onClose: closePurchase
+  }));
 }
 function FooterList({
   title,
