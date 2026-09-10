@@ -1,130 +1,121 @@
 // Generated from App.jsx by scripts/compile-jsx.mjs.
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { checkoutEnabled, createCheckout, getPaymentStatus, readPaymentResult } from './checkout.js';
+const GAME_SITE_URL = 'https://www.autoramaracing.com/';
 const navItems = [{
-  label: 'O Jogo',
-  href: '#universo'
-}, {
-  label: 'Benefícios',
-  href: '#beneficios'
+  label: 'O jogo',
+  href: GAME_SITE_URL,
+  external: true
 }, {
   label: 'Pacotes',
-  href: '#pacotes'
+  href: '#pacotes',
+  section: 'pacotes'
 }, {
-  label: 'Entrar Agora',
-  href: '#entrar'
+  label: 'Dúvidas',
+  href: '#duvidas',
+  section: 'duvidas'
 }];
-const benefits = [{
-  title: 'Acesso antecipado',
-  text: 'Jogue antes do lançamento oficial e sinta a pista na primeira largada.',
-  icon: 'clock'
+const highlights = [{
+  icon: 'car',
+  label: 'Carros colecionáveis'
 }, {
-  title: 'Itens únicos',
-  text: 'Garanta visuais, efeitos e bônus criados para fundadores.',
-  icon: 'star'
+  icon: 'star',
+  label: 'Itens de fundador'
 }, {
-  title: 'Conteúdo exclusivo',
-  text: 'Eventos, desafios e recompensas reservados para a comunidade inicial.',
-  icon: 'lock'
-}, {
-  title: 'Status fundador',
-  text: 'Mostre seu nome entre os pilotos que aceleraram desde o dia 1.',
-  icon: 'crown'
+  icon: 'bars',
+  label: 'Apoie o desenvolvimento'
 }];
 const packages = [{
   id: 'bronze',
   name: 'Bronze',
   tone: 'bronze',
   price: 'R$ 49',
-  tagline: 'Sua entrada oficial no grid fundador.',
-  featuredCar: {
-    name: 'Premium',
-    rarity: 'Premium',
-    image: '/founder-premium.png',
-    imageAlt: 'Carro Founder Premium com pintura vermelha, preta e branca'
-  },
   includedCars: ['Premium'],
-  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Badge fundador Bronze'],
+  cars: [{
+    image: '/founder-premium.png',
+    alt: 'Carro Premium com pintura vermelha, preta e branca',
+    slot: 'solo'
+  }],
+  features: [{
+    icon: 'car',
+    text: '1 carro: Premium'
+  }, {
+    icon: 'star',
+    text: 'Itens de fundador'
+  }, {
+    icon: 'badge',
+    text: 'Badge Bronze'
+  }],
   button: 'Escolher Bronze'
 }, {
   id: 'prata',
   name: 'Prata',
   tone: 'silver',
   price: 'R$ 89',
-  tagline: 'Mais exclusividade para ampliar sua coleção.',
-  featuredCar: {
-    name: 'Raro',
-    rarity: 'Raro',
-    image: '/founder-raro.png',
-    imageAlt: 'Carro raro preto com detalhes azuis e aerofólio'
-  },
   includedCars: ['Premium', 'Raro'],
-  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Skin neon exclusiva'],
+  cars: [{
+    image: '/founder-raro.png',
+    alt: 'Carro Raro preto com detalhes azuis e aerofólio',
+    slot: 'solo'
+  }],
+  features: [{
+    icon: 'car',
+    text: '2 carros: Premium + Raro'
+  }, {
+    icon: 'star',
+    text: 'Itens de fundador'
+  }, {
+    icon: 'brush',
+    text: 'Skin neon exclusiva'
+  }],
   button: 'Escolher Prata'
 }, {
   id: 'ouro',
   name: 'Ouro',
   tone: 'gold',
+  badge: 'Coleção completa',
   price: 'R$ 149',
-  tagline: 'A coleção completa dos carros de fundador.',
-  popular: true,
-  featuredCar: {
-    name: 'Épico',
-    rarity: 'Épico',
-    image: '/founder-epico.png',
-    imageAlt: 'Carro épico esportivo rosa com aerofólio'
-  },
   includedCars: ['Premium', 'Raro', 'Épico'],
-  perks: ['Acesso antecipado ao jogo', 'Itens únicos de fundador', 'Skin neon exclusiva', 'Nome no mural dos pioneiros'],
+  cars: [{
+    image: '/founder-raro.png',
+    alt: 'Carro Raro preto com detalhes azuis',
+    slot: 'left'
+  }, {
+    image: '/founder-premium.png',
+    alt: 'Carro Premium vermelho, preto e branco',
+    slot: 'right'
+  }, {
+    image: '/founder-epico.png',
+    alt: 'Carro Épico esportivo rosa com aerofólio',
+    slot: 'center'
+  }],
+  features: [{
+    icon: 'car',
+    text: '3 carros: Premium + Raro + Épico'
+  }, {
+    icon: 'star',
+    text: 'Itens de fundador'
+  }, {
+    icon: 'brush',
+    text: 'Skin neon exclusiva'
+  }, {
+    icon: 'people',
+    text: 'Nome no mural dos pioneiros'
+  }],
   button: 'Escolher Ouro'
 }];
-const universe = [{
-  title: 'Novos cenários',
-  text: 'Ambientes variados para explorar e competir.',
-  image: '/universo-rio-de-janeiro.jpg',
-  imageAlt: 'Carros esportivos em uma estrada no Rio de Janeiro ao pôr do sol',
-  position: 'center center'
+const faq = [{
+  question: 'Quando recebo os itens do pacote?',
+  answer: 'Os itens são creditados na sua conta em até 2 dias úteis após a confirmação do pagamento.'
 }, {
-  title: 'Mundo em movimento',
-  text: 'Veículos e ambientes com novas possibilidades.',
-  image: '/universo-pier-estacionamento.jpg',
-  imageAlt: 'Diversos carros e veículos reunidos em uma movimentada área portuária',
-  position: 'center 62%'
+  question: 'Preciso ter uma conta para comprar?',
+  answer: 'Não. A compra é identificada pelo e-mail informado no checkout, e os itens entram na conta criada com esse mesmo e-mail.'
 }, {
-  title: 'Evolução dos carros',
-  text: 'Recursos para cuidar e melhorar sua máquina.',
-  image: '/universo-mecanica.jpg',
-  imageAlt: 'Oficina completa com carros, motos, ferramentas e mecânicos',
-  position: 'center center'
+  question: 'Como funciona o pagamento?',
+  answer: 'O pagamento é processado pelo checkout seguro da InfinitePay. Nenhum dado de cartão passa por este site.'
 }, {
-  title: 'Mais personalização',
-  text: 'Peças e escolhas para criar carros únicos.',
-  image: '/universo-montando-carro.jpg',
-  imageAlt: 'Carro esportivo sendo montado e personalizado peça por peça',
-  position: 'center center'
-}, {
-  title: 'Eventos e comunidade',
-  text: 'Momentos para competir, encontrar e celebrar.',
-  image: '/universo-comemoracao.jpg',
-  imageAlt: 'Pilotos celebrando juntos no paddock após uma corrida',
-  position: 'center center'
-}];
-const reasons = [{
-  title: 'Você faz parte da história',
-  text: 'Fundadores moldam o futuro do jogo com feedback e presença.',
-  icon: 'crew'
-}, {
-  title: 'Vantagem desde o início',
-  text: 'Comece com itens exclusivos e progressão acelerada.',
-  icon: 'rocket'
-}, {
-  title: 'Recompensas duradouras',
-  text: 'Itens de fundador são limitados e não voltam para a loja comum.',
-  icon: 'trophy'
-}, {
-  title: 'Investimento que vale a pena',
-  text: 'Apoie o projeto e receba benefícios de alto valor no lançamento.',
-  icon: 'shield'
+  question: 'O jogo já está disponível?',
+  answer: 'O Autorama Racing está em desenvolvimento. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.'
 }];
 function Icon({
   name,
@@ -133,96 +124,69 @@ function Icon({
   const common = {
     fill: 'none',
     stroke: 'currentColor',
-    strokeWidth: 1.8,
+    strokeWidth: 1.6,
     strokeLinecap: 'round',
     strokeLinejoin: 'round'
   };
   const icons = {
-    clock: React.createElement(React.Fragment, null, React.createElement("circle", {
-      cx: "12",
-      cy: "12",
-      r: "8.5"
+    car: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M3.6 15.4v-2.1l1.7-4a2 2 0 0 1 1.9-1.2h9.6a2 2 0 0 1 1.9 1.2l1.7 4v2.1"
     }), React.createElement("path", {
-      d: "M12 7.5v5l3.4 2"
+      d: "M3.6 13.3h16.8"
+    }), React.createElement("circle", {
+      cx: "7.6",
+      cy: "16.4",
+      r: "1.8"
+    }), React.createElement("circle", {
+      cx: "16.4",
+      cy: "16.4",
+      r: "1.8"
     })),
     star: React.createElement("path", {
-      d: "m12 3 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.9-5.4 2.9 1-6-4.3-4.2 6-.9L12 3Z"
+      d: "m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8L12 3.6Z"
     }),
-    lock: React.createElement(React.Fragment, null, React.createElement("rect", {
-      x: "5.2",
-      y: "10",
-      width: "13.6",
-      height: "10",
-      rx: "1.8"
+    bars: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M5 19v-5.2"
     }), React.createElement("path", {
-      d: "M8.2 10V7.7a3.8 3.8 0 0 1 7.6 0V10"
+      d: "M12 19V9.4"
+    }), React.createElement("path", {
+      d: "M19 19V5.6"
     })),
-    crown: React.createElement("path", {
-      d: "M4 8.5 8.4 13 12 6l3.6 7L20 8.5V18H4V8.5Z"
-    }),
-    flag: React.createElement(React.Fragment, null, React.createElement("path", {
-      d: "M5 20V5"
+    badge: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M12 3.6 19 6v5.4c0 4.2-2.8 7.2-7 8.9-4.2-1.7-7-4.7-7-8.9V6l7-2.4Z"
     }), React.createElement("path", {
-      d: "M5 5c3-1.8 5.4 1.5 8.4-.3 1.6-1 3-.9 5.6.3v8.2c-2.6-1.2-4-1.3-5.6-.3-3 1.8-5.4-1.5-8.4.3"
+      d: "m9.2 11.8 2 2 3.6-3.7"
     })),
-    helmet: React.createElement(React.Fragment, null, React.createElement("path", {
-      d: "M4 13.2A8 8 0 0 1 19.5 10H12l-2 3.2H4Z"
+    brush: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M14.9 4.6 19.4 9.1 10.2 18.3H5.7v-4.5z"
     }), React.createElement("path", {
-      d: "M4.5 13.2c.7 4.1 3.8 6.1 7.6 6.1 2 0 4.1-.5 6.4-1.6"
+      d: "m12.9 6.6 4.5 4.5"
     }), React.createElement("path", {
-      d: "M12 10h8"
+      d: "M5.7 13.8 10.2 18.3"
     })),
-    gear: React.createElement(React.Fragment, null, React.createElement("circle", {
-      cx: "12",
-      cy: "12",
-      r: "3.2"
-    }), React.createElement("path", {
-      d: "M12 2.8v3M12 18.2v3M4 6.3l2.2 2M17.8 15.7l2.2 2M2.8 12h3M18.2 12h3M4 17.7l2.2-2M17.8 8.3l2.2-2"
-    })),
-    spark: React.createElement("path", {
-      d: "M12 2.7 14.2 9l6.1 3-6.1 3-2.2 6.3L9.8 15l-6.1-3 6.1-3L12 2.7Z"
-    }),
-    market: React.createElement(React.Fragment, null, React.createElement("path", {
-      d: "M4 17.5 9 12l3 3 7-8"
-    }), React.createElement("path", {
-      d: "M16 7h3v3"
-    }), React.createElement("path", {
-      d: "M4 20h16"
-    })),
-    crew: React.createElement(React.Fragment, null, React.createElement("circle", {
-      cx: "8",
-      cy: "8.3",
-      r: "2.7"
-    }), React.createElement("circle", {
-      cx: "16",
-      cy: "8.3",
+    people: React.createElement(React.Fragment, null, React.createElement("circle", {
+      cx: "9.2",
+      cy: "8.6",
       r: "2.7"
     }), React.createElement("path", {
-      d: "M3.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6"
+      d: "M3.9 18.4c.6-3.1 2.4-4.7 5.3-4.7s4.7 1.6 5.3 4.7"
     }), React.createElement("path", {
-      d: "M11.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6"
+      d: "M15.4 6.3a2.7 2.7 0 0 1 0 5.1"
+    }), React.createElement("path", {
+      d: "M16.6 13.9c2 .4 3.2 1.9 3.7 4.5"
     })),
-    rocket: React.createElement(React.Fragment, null, React.createElement("path", {
-      d: "M13.5 4.2c2.9-.9 5.2-.7 6.3.4 1.1 1.1 1.3 3.4.4 6.3l-5.9 5.9-4.9-4.9 4.1-7.7Z"
+    menu: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M4 7h16"
     }), React.createElement("path", {
-      d: "M9.4 11.9 5.3 13 7 17.7l4.2-4.2"
+      d: "M4 12h16"
     }), React.createElement("path", {
-      d: "M14.3 16.8 13.2 21l-4.7-1.7 3-3"
-    }), React.createElement("circle", {
-      cx: "16.7",
-      cy: "7.7",
-      r: "1.4"
+      d: "M4 17h16"
     })),
-    trophy: React.createElement(React.Fragment, null, React.createElement("path", {
-      d: "M8 4h8v4.5c0 3-1.7 5.3-4 5.3S8 11.5 8 8.5V4Z"
+    close: React.createElement(React.Fragment, null, React.createElement("path", {
+      d: "M6 6l12 12"
     }), React.createElement("path", {
-      d: "M8 6H4.8c0 3 .9 4.8 3.7 5.4M16 6h3.2c0 3-.9 4.8-3.7 5.4"
-    }), React.createElement("path", {
-      d: "M12 14v4M8.5 20h7"
-    })),
-    shield: React.createElement("path", {
-      d: "M12 3.5 19 6v5.5c0 4.3-2.8 7.4-7 9-4.2-1.6-7-4.7-7-9V6l7-2.5Z"
-    })
+      d: "M18 6 6 18"
+    }))
   };
   return React.createElement("svg", _extends({
     className: className,
@@ -230,80 +194,306 @@ function Icon({
     "aria-hidden": "true"
   }, common), icons[name]);
 }
-function Header() {
+function NavLink({
+  item,
+  active,
+  onNavigate
+}) {
+  const external = item.external;
+  return React.createElement("a", {
+    href: item.href,
+    className: `nav-link${active ? ' is-active' : ''}`,
+    target: external ? '_blank' : undefined,
+    rel: external ? 'noreferrer' : undefined,
+    onClick: () => onNavigate(item)
+  }, item.label);
+}
+function Header({
+  activeSection,
+  onNavigate
+}) {
+  const [open, setOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = event => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    const query = window.matchMedia('(min-width: 900px)');
+    const onDesktop = () => {
+      if (query.matches) setOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    query.addEventListener('change', onDesktop);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      query.removeEventListener('change', onDesktop);
+    };
+  }, [open]);
+  const handleNavigate = item => {
+    setOpen(false);
+    onNavigate(item);
+  };
   return React.createElement("header", {
-    className: "fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-asphalt/82 backdrop-blur-xl"
+    className: `site-header${open ? ' is-open' : ''}`
   }, React.createElement("div", {
-    className: "mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
+    className: "header-inner"
   }, React.createElement("a", {
     href: "#top",
-    className: "group flex shrink-0 items-center",
+    className: "brand",
     "aria-label": "Autorama Racing"
   }, React.createElement("img", {
     src: "/autorama_white.png",
-    alt: "",
-    className: "h-8 w-auto transition duration-300 group-hover:opacity-90 sm:h-10"
+    alt: ""
   })), React.createElement("nav", {
-    className: "hidden items-center gap-8 lg:flex"
-  }, navItems.map(item => React.createElement("a", {
-    key: item.href,
-    href: item.href,
-    className: "nav-link"
-  }, item.label))), React.createElement("a", {
+    className: "header-nav",
+    "aria-label": "Principal"
+  }, navItems.map(item => React.createElement(NavLink, {
+    key: item.label,
+    item: item,
+    active: item.section === activeSection,
+    onNavigate: handleNavigate
+  }))), React.createElement("a", {
     href: "#pacotes",
-    className: "glow-button small"
-  }, "Quero ser fundador", React.createElement("span", {
+    className: "btn btn-primary btn-sm header-cta"
+  }, "Ver pacotes", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A\u203A")), React.createElement("button", {
+    type: "button",
+    className: "menu-toggle",
+    "aria-expanded": open,
+    "aria-controls": "menu-mobile",
+    "aria-label": open ? 'Fechar menu' : 'Abrir menu',
+    onClick: () => setOpen(value => !value)
+  }, React.createElement(Icon, {
+    name: open ? 'close' : 'menu',
+    className: "menu-icon"
+  }))), React.createElement("div", {
+    id: "menu-mobile",
+    className: "mobile-menu",
+    hidden: !open
+  }, React.createElement("nav", {
+    "aria-label": "Menu"
+  }, navItems.map(item => React.createElement(NavLink, {
+    key: item.label,
+    item: item,
+    active: item.section === activeSection,
+    onNavigate: handleNavigate
+  }))), React.createElement("a", {
+    href: "#pacotes",
+    className: "btn btn-primary",
+    onClick: () => setOpen(false)
+  }, "Ver pacotes", React.createElement("span", {
     "aria-hidden": "true"
   }, "\u203A\u203A"))));
 }
-function BenefitCard({
-  benefit
-}) {
-  return React.createElement("article", {
-    className: "benefit-card group"
+function HeroStage() {
+  return React.createElement("div", {
+    className: "hero-stage",
+    "aria-hidden": "true"
+  }, React.createElement("span", {
+    className: "stage-car stage-car-raro"
+  }, React.createElement("img", {
+    src: "/founder-raro.png",
+    alt: ""
+  })), React.createElement("span", {
+    className: "stage-car stage-car-premium"
+  }, React.createElement("img", {
+    src: "/founder-premium.png",
+    alt: ""
+  })), React.createElement("span", {
+    className: "stage-car stage-car-epico"
+  }, React.createElement("img", {
+    src: "/founder-epico.png",
+    alt: ""
+  })));
+}
+function Hero() {
+  return React.createElement("section", {
+    className: "hero"
+  }, React.createElement("div", {
+    className: "hero-room",
+    "aria-hidden": "true"
+  }, React.createElement("span", {
+    className: "room-lamp"
+  }), React.createElement("span", {
+    className: "room-neon room-neon-a"
+  }), React.createElement("span", {
+    className: "room-neon room-neon-b"
+  }), React.createElement("span", {
+    className: "room-number"
+  }, "01"), React.createElement("span", {
+    className: "room-floor"
+  })), React.createElement("div", {
+    className: "hero-shell"
+  }, React.createElement("div", {
+    className: "hero-copy"
+  }, React.createElement("p", {
+    className: "kicker"
+  }, "Pacotes de fundador"), React.createElement("h1", {
+    className: "hero-title"
+  }, React.createElement("span", {
+    className: "line"
+  }, "Seu lugar"), React.createElement("span", {
+    className: "line"
+  }, "no primeiro"), React.createElement("span", {
+    className: "line accent"
+  }, "Grid.")), React.createElement(HeroStage, null), React.createElement("p", {
+    className: "hero-lead"
+  }, "Apoie o Autorama Racing e comece sua cole\xE7\xE3o com itens de fundador."), React.createElement("p", {
+    className: "hero-price"
+  }, "A partir de R$ 49"), React.createElement("div", {
+    className: "hero-actions"
+  }, React.createElement("a", {
+    href: "#pacotes",
+    className: "btn btn-primary btn-cta"
+  }, "Escolher meu pacote", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xBB")), React.createElement("a", {
+    href: GAME_SITE_URL,
+    target: "_blank",
+    rel: "noreferrer",
+    className: "text-link"
+  }, "Conhe\xE7a o jogo", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A")))), React.createElement("p", {
+    className: "hero-words",
+    "aria-hidden": "true"
+  }, React.createElement("span", null, "Drive"), React.createElement("span", null, "Colecione"), React.createElement("span", null, "Evolua")), React.createElement("p", {
+    className: "hero-collection",
+    "aria-hidden": "true"
+  }, "Cole\xE7\xE3o fundador")));
+}
+function Highlights() {
+  return React.createElement("section", {
+    className: "highlights"
+  }, React.createElement("ul", {
+    className: "highlights-inner"
+  }, highlights.map(item => React.createElement("li", {
+    key: item.label,
+    className: "highlight"
   }, React.createElement(Icon, {
-    name: benefit.icon,
-    className: "h-11 w-11 text-voltage transition duration-300 group-hover:text-white"
-  }), React.createElement("div", null, React.createElement("h3", null, benefit.title), React.createElement("p", null, benefit.text)));
+    name: item.icon,
+    className: "highlight-icon"
+  }), item.label))));
 }
 function PackageCard({
   pack,
   onChoose
 }) {
   return React.createElement("article", {
-    className: `founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`,
-    "data-tone": pack.tone
+    className: `pack pack-${pack.tone}`
   }, React.createElement("div", {
-    className: "package-top"
-  }, React.createElement("div", {
-    className: "package-tier"
-  }, React.createElement("span", {
-    className: `tier-mark ${pack.tone}`
-  }), React.createElement("h3", null, pack.name)), pack.popular && React.createElement("span", {
-    className: "popular-ribbon"
-  }, "Mais escolhido"), React.createElement("p", null, pack.tagline)), React.createElement("figure", {
-    className: "featured-car"
-  }, React.createElement("div", {
-    className: "featured-car-media"
-  }, React.createElement("img", {
-    src: pack.featuredCar.image,
-    alt: pack.featuredCar.imageAlt,
+    className: "pack-head"
+  }, React.createElement("h3", null, pack.name), pack.badge && React.createElement("span", {
+    className: "pack-badge"
+  }, pack.badge)), React.createElement("div", {
+    className: `pack-cars${pack.cars.length > 1 ? ' is-trio' : ''}`
+  }, pack.cars.map(car => React.createElement("img", {
+    key: `${pack.id}-${car.slot}`,
+    className: `pack-car slot-${car.slot}`,
+    src: car.image,
+    alt: car.alt,
     loading: "lazy",
     decoding: "async"
-  })), React.createElement("figcaption", null, React.createElement("span", null, "Carro em destaque"), React.createElement("strong", null, pack.featuredCar.name), React.createElement("small", null, pack.featuredCar.rarity))), React.createElement("div", {
-    className: "included-cars"
-  }, React.createElement("span", null, "Este pacote inclui"), React.createElement("strong", null, pack.includedCars.join(' · '))), React.createElement("div", {
-    className: "price-row"
-  }, React.createElement("span", null, pack.price), React.createElement("small", null, "pagamento \xFAnico")), React.createElement("ul", {
-    className: "perk-list"
-  }, pack.perks.map(perk => React.createElement("li", {
-    key: perk
-  }, React.createElement("span", null, "\u2713"), perk))), React.createElement("button", {
+  }))), React.createElement("p", {
+    className: "pack-price"
+  }, pack.price), React.createElement("ul", {
+    className: "pack-features"
+  }, pack.features.map(feature => React.createElement("li", {
+    key: feature.text
+  }, React.createElement(Icon, {
+    name: feature.icon,
+    className: "feature-icon"
+  }), React.createElement("span", null, feature.text)))), React.createElement("button", {
     type: "button",
     onClick: () => onChoose(pack),
     disabled: !checkoutEnabled,
-    className: `package-button ${pack.tone}`
-  }, checkoutEnabled ? pack.button : 'Disponível em breve'));
+    className: `btn pack-button ${pack.tone === 'gold' ? 'btn-primary' : 'btn-outline'}`
+  }, checkoutEnabled ? pack.button : 'Disponível em breve', React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\u203A")));
+}
+function Packages({
+  onChoose
+}) {
+  return React.createElement("section", {
+    id: "pacotes",
+    className: "section packages"
+  }, React.createElement("div", {
+    className: "section-inner"
+  }, React.createElement("div", {
+    className: "section-head"
+  }, React.createElement("p", {
+    className: "kicker"
+  }, "Monte sua garagem"), React.createElement("h2", {
+    className: "title"
+  }, "Escolha seu pacote."), React.createElement("p", {
+    className: "section-sub"
+  }, "Compare os carros e benef\xEDcios de cada op\xE7\xE3o.")), React.createElement("div", {
+    className: "packs"
+  }, packages.map(pack => React.createElement(PackageCard, {
+    key: pack.id,
+    pack: pack,
+    onChoose: onChoose
+  }))), React.createElement("p", {
+    className: "packs-note"
+  }, "Todos os pacotes incluem acesso antecipado e itens de fundador.")));
+}
+function Closing({
+  faqOpen,
+  onToggleFaq
+}) {
+  return React.createElement("section", {
+    id: "duvidas",
+    className: "closing"
+  }, React.createElement("div", {
+    className: "closing-flag left",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "closing-flag right",
+    "aria-hidden": "true"
+  }), React.createElement("div", {
+    className: "closing-inner"
+  }, React.createElement("div", {
+    className: "closing-copy"
+  }, React.createElement("h2", {
+    className: "title"
+  }, "Fa\xE7a parte dessa largada."), React.createElement("p", {
+    className: "section-sub"
+  }, "Conhe\xE7a o jogo e acompanhe o desenvolvimento.")), React.createElement("div", {
+    className: "faq"
+  }, React.createElement("button", {
+    type: "button",
+    className: "faq-toggle",
+    "aria-expanded": faqOpen,
+    "aria-controls": "faq-panel",
+    onClick: onToggleFaq
+  }, "D\xFAvidas frequentes", React.createElement("span", {
+    className: "faq-sign",
+    "aria-hidden": "true"
+  }, faqOpen ? '−' : '+')), React.createElement("div", {
+    id: "faq-panel",
+    className: "faq-panel",
+    hidden: !faqOpen
+  }, faq.map(item => React.createElement("div", {
+    key: item.question,
+    className: "faq-item"
+  }, React.createElement("h3", null, item.question), React.createElement("p", null, item.answer)))))));
+}
+function Footer() {
+  return React.createElement("footer", {
+    className: "site-footer"
+  }, React.createElement("div", {
+    className: "footer-inner"
+  }, React.createElement("a", {
+    href: "#top",
+    "aria-label": "Autorama Racing"
+  }, React.createElement("img", {
+    src: "/autorama_white.png",
+    alt: ""
+  })), React.createElement("p", {
+    className: "footer-note"
+  }, "Jogo em desenvolvimento.")));
 }
 function PurchaseModal({
   pack,
@@ -440,7 +630,7 @@ function PurchaseModal({
     role: "alert"
   }, error), React.createElement("button", {
     type: "submit",
-    className: "glow-button purchase-modal-submit",
+    className: "btn btn-primary purchase-modal-submit",
     disabled: status === 'loading'
   }, status === 'loading' ? 'Preparando pagamento…' : 'Continuar para pagamento', React.createElement("span", {
     "aria-hidden": "true"
@@ -483,7 +673,7 @@ function PaymentConfirmation({
     }, 150);
   };
   const pack = details ? packages.find(item => item.id === details.package_id) : null;
-  const items = pack ? [...pack.includedCars.map(car => `Carro ${car}`), ...pack.perks] : [];
+  const items = pack ? [...pack.includedCars.map(car => `Carro ${car}`), ...pack.features.filter(feature => feature.icon !== 'car').map(feature => feature.text)] : [];
   return React.createElement("main", {
     className: "payment-confirmation-shell"
   }, React.createElement("section", {
@@ -515,11 +705,11 @@ function PaymentConfirmation({
     href: details.receipt_url,
     target: "_blank",
     rel: "noreferrer",
-    className: "confirmation-receipt"
+    className: "btn btn-outline"
   }, "Ver comprovante"), React.createElement("button", {
     type: "button",
     onClick: closeConfirmation,
-    className: "glow-button confirmation-close"
+    className: "btn btn-primary"
   }, "Fechar janela ", React.createElement("span", {
     "aria-hidden": "true"
   }, "\u203A")))), status === 'waiting' && React.createElement(React.Fragment, null, React.createElement("p", {
@@ -530,7 +720,7 @@ function PaymentConfirmation({
       retryRef.current = 0;
       verifyPayment();
     },
-    className: "ghost-button confirmation-retry"
+    className: "btn btn-outline confirmation-retry"
   }, "Verificar novamente ", React.createElement("span", {
     "aria-hidden": "true"
   }, "\u203A"))), status === 'error' && React.createElement(React.Fragment, null, React.createElement("p", {
@@ -538,206 +728,47 @@ function PaymentConfirmation({
   }, "N\xE3o confirmado"), React.createElement("h1", null, "N\xE3o conseguimos confirmar este pagamento."), React.createElement("p", null, "Se voc\xEA concluiu o pagamento, aguarde alguns minutos ou entre em contato com o suporte."), React.createElement("button", {
     type: "button",
     onClick: closeConfirmation,
-    className: "ghost-button confirmation-retry"
+    className: "btn btn-outline confirmation-retry"
   }, "Fechar janela"))));
-}
-function UniverseThumbnail({
-  item
-}) {
-  return React.createElement("figure", {
-    className: "universe-thumbnail"
-  }, React.createElement("div", {
-    className: "universe-thumbnail-media"
-  }, React.createElement("img", {
-    src: item.image,
-    alt: item.imageAlt,
-    loading: "lazy",
-    decoding: "async",
-    style: {
-      objectPosition: item.position
-    }
-  })), React.createElement("figcaption", null, React.createElement("h3", null, item.title), React.createElement("p", null, item.text)));
-}
-function ReasonCard({
-  reason
-}) {
-  return React.createElement("article", {
-    className: "reason-card"
-  }, React.createElement(Icon, {
-    name: reason.icon,
-    className: "h-10 w-10 text-ember"
-  }), React.createElement("div", null, React.createElement("h3", null, reason.title), React.createElement("p", null, reason.text)));
 }
 function App() {
   const [paymentResult] = React.useState(readPaymentResult);
   const [selectedPackage, setSelectedPackage] = React.useState(null);
+  const [activeSection, setActiveSection] = React.useState('pacotes');
+  const [faqOpen, setFaqOpen] = React.useState(false);
   const closePurchase = React.useCallback(() => setSelectedPackage(null), []);
+  React.useEffect(() => {
+    if (paymentResult || typeof IntersectionObserver === 'undefined') return undefined;
+    const closing = document.getElementById('duvidas');
+    if (!closing) return undefined;
+    const observer = new IntersectionObserver(([entry]) => setActiveSection(entry.isIntersecting ? 'duvidas' : 'pacotes'), {
+      rootMargin: '-35% 0px -20% 0px'
+    });
+    observer.observe(closing);
+    return () => observer.disconnect();
+  }, [paymentResult]);
+  const handleNavigate = React.useCallback(item => {
+    if (item.section === 'duvidas') setFaqOpen(true);
+  }, []);
   if (paymentResult) return React.createElement(PaymentConfirmation, {
     result: paymentResult
   });
   return React.createElement("div", {
     id: "top",
-    className: "min-h-screen bg-asphalt text-white"
+    className: "page"
   }, React.createElement("div", {
-    className: "overflow-hidden",
     inert: selectedPackage ? '' : undefined
-  }, React.createElement(Header, null), React.createElement("main", null, React.createElement("section", {
-    className: "hero-section"
-  }, React.createElement("video", {
-    className: "hero-video",
-    autoPlay: true,
-    loop: true,
-    muted: true,
-    playsInline: true,
-    preload: "metadata",
-    poster: "/hero-celebration.png",
-    "aria-hidden": "true"
-  }, React.createElement("source", {
-    src: "/hero-carro.mp4",
-    type: "video/mp4"
-  })), React.createElement("div", {
-    className: "hero-backdrop"
-  }), React.createElement("div", {
-    className: "hero-content relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36"
-  }, React.createElement("div", {
-    className: "max-w-2xl"
-  }, React.createElement("div", {
-    className: "eyebrow"
-  }, React.createElement("span", null), "Acesse. Corra. Lidere."), React.createElement("h1", {
-    className: "hero-title"
-  }, React.createElement("span", {
-    className: "hero-title-lead"
-  }, "Pacotes de"), ' ', React.createElement("span", {
-    className: "hero-title-emphasis"
-  }, "Fundador")), React.createElement("p", {
-    className: "hero-copy mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl"
-  }, "Entre antes de todos, receba itens \xFAnicos e acelere sua hist\xF3ria no", ' ', React.createElement("strong", {
-    className: "text-voltage"
-  }, "Autorama Racing"), "."), React.createElement("div", {
-    className: "mt-9 flex flex-col gap-4 sm:flex-row"
-  }, React.createElement("a", {
-    href: "#pacotes",
-    className: "glow-button"
-  }, "Quero ser fundador", React.createElement("span", {
-    "aria-hidden": "true"
-  }, "\u203A\u203A")), React.createElement("a", {
-    href: "#beneficios",
-    className: "ghost-button"
-  }, "Ver pacotes", React.createElement("span", {
-    "aria-hidden": "true"
-  }, "\u203A"))))), React.createElement("div", {
-    id: "beneficios",
-    className: "relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
-  }, React.createElement("div", {
-    className: "benefits-grid"
-  }, benefits.map(benefit => React.createElement(BenefitCard, {
-    key: benefit.title,
-    benefit: benefit
-  }))))), React.createElement("section", {
-    id: "pacotes",
-    className: "section-shell pt-20"
-  }, React.createElement("div", {
-    className: "section-heading"
-  }, React.createElement("span", {
-    className: "signal-bars"
-  }), React.createElement("h2", null, "Escolha seu pacote de fundador"), React.createElement("span", {
-    className: "signal-bars right"
-  })), React.createElement("p", {
-    className: "packages-intro"
-  }, "Quanto maior o pacote, maior a garagem: Prata inclui Premium + Raro e Ouro re\xFAne os tr\xEAs carros."), React.createElement("div", {
-    className: "mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8"
-  }, packages.map(pack => React.createElement(PackageCard, {
-    key: pack.name,
-    pack: pack,
+  }, React.createElement(Header, {
+    activeSection: activeSection,
+    onNavigate: handleNavigate
+  }), React.createElement("main", null, React.createElement(Hero, null), React.createElement(Highlights, null), React.createElement(Packages, {
     onChoose: setSelectedPackage
-  })))), React.createElement("section", {
-    id: "universo",
-    className: "section-shell pt-20"
-  }, React.createElement("div", {
-    className: "section-heading"
-  }, React.createElement("span", {
-    className: "signal-bars"
-  }), React.createElement("h2", null, "Um universo feito para corredores"), React.createElement("span", {
-    className: "signal-bars right"
-  })), React.createElement("div", {
-    className: "universe-gallery"
-  }, universe.map(item => React.createElement(UniverseThumbnail, {
-    key: item.title,
-    item: item
-  })))), React.createElement("section", {
-    className: "section-shell py-20"
-  }, React.createElement("div", {
-    className: "section-heading"
-  }, React.createElement("span", {
-    className: "signal-bars"
-  }), React.createElement("h2", null, "Por que entrar agora?"), React.createElement("span", {
-    className: "signal-bars right"
-  })), React.createElement("div", {
-    className: "mx-auto mt-9 grid max-w-7xl gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8"
-  }, reasons.map(reason => React.createElement(ReasonCard, {
-    key: reason.title,
-    reason: reason
-  })))), React.createElement("section", {
-    id: "entrar",
-    className: "final-cta"
-  }, React.createElement("div", {
-    className: "race-blur"
-  }), React.createElement("div", {
-    className: "relative z-10 mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8"
-  }, React.createElement("div", null, React.createElement("p", {
-    className: "font-display text-sm font-bold uppercase tracking-[.35em] text-trophy"
-  }, "A largada est\xE1 aberta"), React.createElement("h2", {
-    className: "mt-3 max-w-3xl font-display text-4xl font-black uppercase leading-[.95] tracking-wide sm:text-5xl lg:text-6xl"
-  }, "Garanta seu lugar ", React.createElement("span", null, "entre os fundadores")), React.createElement("p", {
-    className: "mt-4 max-w-2xl text-base text-slate-300 sm:text-lg"
-  }, "Os melhores chegam antes. N\xE3o fique de fora da primeira temporada de Autorama Racing.")), React.createElement("a", {
-    href: "#pacotes",
-    className: "glow-button cta"
-  }, "Quero ser fundador", React.createElement("span", {
-    "aria-hidden": "true"
-  }, "\u203A\u203A"))))), React.createElement("footer", {
-    className: "footer"
-  }, React.createElement("div", {
-    className: "mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8"
-  }, React.createElement("div", null, React.createElement("a", {
-    href: "#top",
-    className: "inline-flex items-center",
-    "aria-label": "Autorama Racing"
-  }, React.createElement("img", {
-    src: "/autorama_white.png",
-    alt: "",
-    className: "h-9 w-auto sm:h-11"
-  })), React.createElement("p", {
-    className: "mt-5 max-w-sm text-sm leading-6 text-slate-400"
-  }, "Corrida, cole\xE7\xE3o e competi\xE7\xE3o em uma experi\xEAncia neon feita para quem gosta de largar na frente.")), React.createElement(FooterList, {
-    title: "Jogo",
-    links: ['Visão Geral', 'Recursos', 'Carros', 'Pistas']
-  }), React.createElement(FooterList, {
-    title: "Comunidade",
-    links: ['Notícias', 'Eventos', 'Mídia', 'Discord']
-  }), React.createElement(FooterList, {
-    title: "Suporte",
-    links: ['FAQ', 'Contato', 'Privacidade', 'Termos de Uso']
-  })), React.createElement("div", {
-    className: "border-t border-white/10 px-4 py-5 text-center text-xs text-slate-500"
-  }, "\xA9 2026 Autorama Racing. Todos os direitos reservados."))), selectedPackage && React.createElement(PurchaseModal, {
+  }), React.createElement(Closing, {
+    faqOpen: faqOpen,
+    onToggleFaq: () => setFaqOpen(value => !value)
+  })), React.createElement(Footer, null)), selectedPackage && React.createElement(PurchaseModal, {
     pack: selectedPackage,
     onClose: closePurchase
   }));
-}
-function FooterList({
-  title,
-  links
-}) {
-  return React.createElement("div", null, React.createElement("h3", {
-    className: "font-display text-sm font-black uppercase tracking-[.18em] text-white"
-  }, title), React.createElement("ul", {
-    className: "mt-4 space-y-2 text-sm text-slate-400"
-  }, links.map(link => React.createElement("li", {
-    key: link
-  }, React.createElement("a", {
-    href: "#top",
-    className: "transition hover:text-white"
-  }, link)))));
 }
 export default App;

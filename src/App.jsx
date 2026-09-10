@@ -5,34 +5,18 @@ import {
   readPaymentResult,
 } from './checkout.js'
 
+const GAME_SITE_URL = 'https://www.autoramaracing.com/'
+
 const navItems = [
-  { label: 'O Jogo', href: '#universo' },
-  { label: 'Benefícios', href: '#beneficios' },
-  { label: 'Pacotes', href: '#pacotes' },
-  { label: 'Entrar Agora', href: '#entrar' },
+  { label: 'O jogo', href: GAME_SITE_URL, external: true },
+  { label: 'Pacotes', href: '#pacotes', section: 'pacotes' },
+  { label: 'Dúvidas', href: '#duvidas', section: 'duvidas' },
 ]
 
-const benefits = [
-  {
-    title: 'Acesso antecipado',
-    text: 'Jogue antes do lançamento oficial e sinta a pista na primeira largada.',
-    icon: 'clock',
-  },
-  {
-    title: 'Itens únicos',
-    text: 'Garanta visuais, efeitos e bônus criados para fundadores.',
-    icon: 'star',
-  },
-  {
-    title: 'Conteúdo exclusivo',
-    text: 'Eventos, desafios e recompensas reservados para a comunidade inicial.',
-    icon: 'lock',
-  },
-  {
-    title: 'Status fundador',
-    text: 'Mostre seu nome entre os pilotos que aceleraram desde o dia 1.',
-    icon: 'crown',
-  },
+const highlights = [
+  { icon: 'car', label: 'Carros colecionáveis' },
+  { icon: 'star', label: 'Itens de fundador' },
+  { icon: 'bars', label: 'Apoie o desenvolvimento' },
 ]
 
 const packages = [
@@ -41,18 +25,18 @@ const packages = [
     name: 'Bronze',
     tone: 'bronze',
     price: 'R$ 49',
-    tagline: 'Sua entrada oficial no grid fundador.',
-    featuredCar: {
-      name: 'Premium',
-      rarity: 'Premium',
-      image: '/founder-premium.png',
-      imageAlt: 'Carro Founder Premium com pintura vermelha, preta e branca',
-    },
     includedCars: ['Premium'],
-    perks: [
-      'Acesso antecipado ao jogo',
-      'Itens únicos de fundador',
-      'Badge fundador Bronze',
+    cars: [
+      {
+        image: '/founder-premium.png',
+        alt: 'Carro Premium com pintura vermelha, preta e branca',
+        slot: 'solo',
+      },
+    ],
+    features: [
+      { icon: 'car', text: '1 carro: Premium' },
+      { icon: 'star', text: 'Itens de fundador' },
+      { icon: 'badge', text: 'Badge Bronze' },
     ],
     button: 'Escolher Bronze',
   },
@@ -61,18 +45,18 @@ const packages = [
     name: 'Prata',
     tone: 'silver',
     price: 'R$ 89',
-    tagline: 'Mais exclusividade para ampliar sua coleção.',
-    featuredCar: {
-      name: 'Raro',
-      rarity: 'Raro',
-      image: '/founder-raro.png',
-      imageAlt: 'Carro raro preto com detalhes azuis e aerofólio',
-    },
     includedCars: ['Premium', 'Raro'],
-    perks: [
-      'Acesso antecipado ao jogo',
-      'Itens únicos de fundador',
-      'Skin neon exclusiva',
+    cars: [
+      {
+        image: '/founder-raro.png',
+        alt: 'Carro Raro preto com detalhes azuis e aerofólio',
+        slot: 'solo',
+      },
+    ],
+    features: [
+      { icon: 'car', text: '2 carros: Premium + Raro' },
+      { icon: 'star', text: 'Itens de fundador' },
+      { icon: 'brush', text: 'Skin neon exclusiva' },
     ],
     button: 'Escolher Prata',
   },
@@ -80,84 +64,56 @@ const packages = [
     id: 'ouro',
     name: 'Ouro',
     tone: 'gold',
+    badge: 'Coleção completa',
     price: 'R$ 149',
-    tagline: 'A coleção completa dos carros de fundador.',
-    popular: true,
-    featuredCar: {
-      name: 'Épico',
-      rarity: 'Épico',
-      image: '/founder-epico.png',
-      imageAlt: 'Carro épico esportivo rosa com aerofólio',
-    },
     includedCars: ['Premium', 'Raro', 'Épico'],
-    perks: [
-      'Acesso antecipado ao jogo',
-      'Itens únicos de fundador',
-      'Skin neon exclusiva',
-      'Nome no mural dos pioneiros',
+    cars: [
+      {
+        image: '/founder-raro.png',
+        alt: 'Carro Raro preto com detalhes azuis',
+        slot: 'left',
+      },
+      {
+        image: '/founder-premium.png',
+        alt: 'Carro Premium vermelho, preto e branco',
+        slot: 'right',
+      },
+      {
+        image: '/founder-epico.png',
+        alt: 'Carro Épico esportivo rosa com aerofólio',
+        slot: 'center',
+      },
+    ],
+    features: [
+      { icon: 'car', text: '3 carros: Premium + Raro + Épico' },
+      { icon: 'star', text: 'Itens de fundador' },
+      { icon: 'brush', text: 'Skin neon exclusiva' },
+      { icon: 'people', text: 'Nome no mural dos pioneiros' },
     ],
     button: 'Escolher Ouro',
   },
 ]
 
-const universe = [
+const faq = [
   {
-    title: 'Novos cenários',
-    text: 'Ambientes variados para explorar e competir.',
-    image: '/universo-rio-de-janeiro.jpg',
-    imageAlt: 'Carros esportivos em uma estrada no Rio de Janeiro ao pôr do sol',
-    position: 'center center',
+    question: 'Quando recebo os itens do pacote?',
+    answer:
+      'Os itens são creditados na sua conta em até 2 dias úteis após a confirmação do pagamento.',
   },
   {
-    title: 'Mundo em movimento',
-    text: 'Veículos e ambientes com novas possibilidades.',
-    image: '/universo-pier-estacionamento.jpg',
-    imageAlt: 'Diversos carros e veículos reunidos em uma movimentada área portuária',
-    position: 'center 62%',
+    question: 'Preciso ter uma conta para comprar?',
+    answer:
+      'Não. A compra é identificada pelo e-mail informado no checkout, e os itens entram na conta criada com esse mesmo e-mail.',
   },
   {
-    title: 'Evolução dos carros',
-    text: 'Recursos para cuidar e melhorar sua máquina.',
-    image: '/universo-mecanica.jpg',
-    imageAlt: 'Oficina completa com carros, motos, ferramentas e mecânicos',
-    position: 'center center',
+    question: 'Como funciona o pagamento?',
+    answer:
+      'O pagamento é processado pelo checkout seguro da InfinitePay. Nenhum dado de cartão passa por este site.',
   },
   {
-    title: 'Mais personalização',
-    text: 'Peças e escolhas para criar carros únicos.',
-    image: '/universo-montando-carro.jpg',
-    imageAlt: 'Carro esportivo sendo montado e personalizado peça por peça',
-    position: 'center center',
-  },
-  {
-    title: 'Eventos e comunidade',
-    text: 'Momentos para competir, encontrar e celebrar.',
-    image: '/universo-comemoracao.jpg',
-    imageAlt: 'Pilotos celebrando juntos no paddock após uma corrida',
-    position: 'center center',
-  },
-]
-
-const reasons = [
-  {
-    title: 'Você faz parte da história',
-    text: 'Fundadores moldam o futuro do jogo com feedback e presença.',
-    icon: 'crew',
-  },
-  {
-    title: 'Vantagem desde o início',
-    text: 'Comece com itens exclusivos e progressão acelerada.',
-    icon: 'rocket',
-  },
-  {
-    title: 'Recompensas duradouras',
-    text: 'Itens de fundador são limitados e não voltam para a loja comum.',
-    icon: 'trophy',
-  },
-  {
-    title: 'Investimento que vale a pena',
-    text: 'Apoie o projeto e receba benefícios de alto valor no lançamento.',
-    icon: 'shield',
+    question: 'O jogo já está disponível?',
+    answer:
+      'O Autorama Racing está em desenvolvimento. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.',
   },
 ]
 
@@ -165,77 +121,62 @@ function Icon({ name, className = '' }) {
   const common = {
     fill: 'none',
     stroke: 'currentColor',
-    strokeWidth: 1.8,
+    strokeWidth: 1.6,
     strokeLinecap: 'round',
     strokeLinejoin: 'round',
   }
 
   const icons = {
-    clock: (
+    car: (
       <>
-        <circle cx="12" cy="12" r="8.5" />
-        <path d="M12 7.5v5l3.4 2" />
+        <path d="M3.6 15.4v-2.1l1.7-4a2 2 0 0 1 1.9-1.2h9.6a2 2 0 0 1 1.9 1.2l1.7 4v2.1" />
+        <path d="M3.6 13.3h16.8" />
+        <circle cx="7.6" cy="16.4" r="1.8" />
+        <circle cx="16.4" cy="16.4" r="1.8" />
       </>
     ),
-    star: <path d="m12 3 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.9-5.4 2.9 1-6-4.3-4.2 6-.9L12 3Z" />,
-    lock: (
+    star: <path d="m12 3.6 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9L3.5 9.8l5.9-.8L12 3.6Z" />,
+    bars: (
       <>
-        <rect x="5.2" y="10" width="13.6" height="10" rx="1.8" />
-        <path d="M8.2 10V7.7a3.8 3.8 0 0 1 7.6 0V10" />
+        <path d="M5 19v-5.2" />
+        <path d="M12 19V9.4" />
+        <path d="M19 19V5.6" />
       </>
     ),
-    crown: <path d="M4 8.5 8.4 13 12 6l3.6 7L20 8.5V18H4V8.5Z" />,
-    flag: (
+    badge: (
       <>
-        <path d="M5 20V5" />
-        <path d="M5 5c3-1.8 5.4 1.5 8.4-.3 1.6-1 3-.9 5.6.3v8.2c-2.6-1.2-4-1.3-5.6-.3-3 1.8-5.4-1.5-8.4.3" />
+        <path d="M12 3.6 19 6v5.4c0 4.2-2.8 7.2-7 8.9-4.2-1.7-7-4.7-7-8.9V6l7-2.4Z" />
+        <path d="m9.2 11.8 2 2 3.6-3.7" />
       </>
     ),
-    helmet: (
+    brush: (
       <>
-        <path d="M4 13.2A8 8 0 0 1 19.5 10H12l-2 3.2H4Z" />
-        <path d="M4.5 13.2c.7 4.1 3.8 6.1 7.6 6.1 2 0 4.1-.5 6.4-1.6" />
-        <path d="M12 10h8" />
+        <path d="M14.9 4.6 19.4 9.1 10.2 18.3H5.7v-4.5z" />
+        <path d="m12.9 6.6 4.5 4.5" />
+        <path d="M5.7 13.8 10.2 18.3" />
       </>
     ),
-    gear: (
+    people: (
       <>
-        <circle cx="12" cy="12" r="3.2" />
-        <path d="M12 2.8v3M12 18.2v3M4 6.3l2.2 2M17.8 15.7l2.2 2M2.8 12h3M18.2 12h3M4 17.7l2.2-2M17.8 8.3l2.2-2" />
+        <circle cx="9.2" cy="8.6" r="2.7" />
+        <path d="M3.9 18.4c.6-3.1 2.4-4.7 5.3-4.7s4.7 1.6 5.3 4.7" />
+        <path d="M15.4 6.3a2.7 2.7 0 0 1 0 5.1" />
+        <path d="M16.6 13.9c2 .4 3.2 1.9 3.7 4.5" />
       </>
     ),
-    spark: <path d="M12 2.7 14.2 9l6.1 3-6.1 3-2.2 6.3L9.8 15l-6.1-3 6.1-3L12 2.7Z" />,
-    market: (
+    menu: (
       <>
-        <path d="M4 17.5 9 12l3 3 7-8" />
-        <path d="M16 7h3v3" />
-        <path d="M4 20h16" />
+        <path d="M4 7h16" />
+        <path d="M4 12h16" />
+        <path d="M4 17h16" />
       </>
     ),
-    crew: (
+    close: (
       <>
-        <circle cx="8" cy="8.3" r="2.7" />
-        <circle cx="16" cy="8.3" r="2.7" />
-        <path d="M3.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6" />
-        <path d="M11.5 18.5c.6-3 2.2-4.6 4.5-4.6s3.9 1.6 4.5 4.6" />
+        <path d="M6 6l12 12" />
+        <path d="M18 6 6 18" />
       </>
     ),
-    rocket: (
-      <>
-        <path d="M13.5 4.2c2.9-.9 5.2-.7 6.3.4 1.1 1.1 1.3 3.4.4 6.3l-5.9 5.9-4.9-4.9 4.1-7.7Z" />
-        <path d="M9.4 11.9 5.3 13 7 17.7l4.2-4.2" />
-        <path d="M14.3 16.8 13.2 21l-4.7-1.7 3-3" />
-        <circle cx="16.7" cy="7.7" r="1.4" />
-      </>
-    ),
-    trophy: (
-      <>
-        <path d="M8 4h8v4.5c0 3-1.7 5.3-4 5.3S8 11.5 8 8.5V4Z" />
-        <path d="M8 6H4.8c0 3 .9 4.8 3.7 5.4M16 6h3.2c0 3-.9 4.8-3.7 5.4" />
-        <path d="M12 14v4M8.5 20h7" />
-      </>
-    ),
-    shield: <path d="M12 3.5 19 6v5.5c0 4.3-2.8 7.4-7 9-4.2-1.6-7-4.7-7-9V6l7-2.5Z" />,
   }
 
   return (
@@ -245,28 +186,94 @@ function Icon({ name, className = '' }) {
   )
 }
 
-function Header() {
+function NavLink({ item, active, onNavigate }) {
+  const external = item.external
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-asphalt/82 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#top" className="group flex shrink-0 items-center" aria-label="Autorama Racing">
-          <img
-            src="/autorama_white.png"
-            alt=""
-            className="h-8 w-auto transition duration-300 group-hover:opacity-90 sm:h-10"
-          />
+    <a
+      href={item.href}
+      className={`nav-link${active ? ' is-active' : ''}`}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noreferrer' : undefined}
+      onClick={() => onNavigate(item)}
+    >
+      {item.label}
+    </a>
+  )
+}
+
+function Header({ activeSection, onNavigate }) {
+  const [open, setOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    if (!open) return undefined
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false)
+    }
+    const query = window.matchMedia('(min-width: 900px)')
+    const onDesktop = () => {
+      if (query.matches) setOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    query.addEventListener('change', onDesktop)
+    return () => {
+      window.removeEventListener('keydown', onKeyDown)
+      query.removeEventListener('change', onDesktop)
+    }
+  }, [open])
+
+  const handleNavigate = (item) => {
+    setOpen(false)
+    onNavigate(item)
+  }
+
+  return (
+    <header className={`site-header${open ? ' is-open' : ''}`}>
+      <div className="header-inner">
+        <a href="#top" className="brand" aria-label="Autorama Racing">
+          <img src="/autorama_white.png" alt="" />
         </a>
 
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="header-nav" aria-label="Principal">
           {navItems.map((item) => (
-            <a key={item.href} href={item.href} className="nav-link">
-              {item.label}
-            </a>
+            <NavLink
+              key={item.label}
+              item={item}
+              active={item.section === activeSection}
+              onNavigate={handleNavigate}
+            />
           ))}
         </nav>
 
-        <a href="#pacotes" className="glow-button small">
-          Quero ser fundador
+        <a href="#pacotes" className="btn btn-primary btn-sm header-cta">
+          Ver pacotes
+          <span aria-hidden="true">››</span>
+        </a>
+
+        <button
+          type="button"
+          className="menu-toggle"
+          aria-expanded={open}
+          aria-controls="menu-mobile"
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <Icon name={open ? 'close' : 'menu'} className="menu-icon" />
+        </button>
+      </div>
+
+      <div id="menu-mobile" className="mobile-menu" hidden={!open}>
+        <nav aria-label="Menu">
+          {navItems.map((item) => (
+            <NavLink
+              key={item.label}
+              item={item}
+              active={item.section === activeSection}
+              onNavigate={handleNavigate}
+            />
+          ))}
+        </nav>
+        <a href="#pacotes" className="btn btn-primary" onClick={() => setOpen(false)}>
+          Ver pacotes
           <span aria-hidden="true">››</span>
         </a>
       </div>
@@ -274,64 +281,120 @@ function Header() {
   )
 }
 
-function BenefitCard({ benefit }) {
+function HeroStage() {
   return (
-    <article className="benefit-card group">
-      <Icon name={benefit.icon} className="h-11 w-11 text-voltage transition duration-300 group-hover:text-white" />
-      <div>
-        <h3>{benefit.title}</h3>
-        <p>{benefit.text}</p>
+    <div className="hero-stage" aria-hidden="true">
+      <span className="stage-car stage-car-raro">
+        <img src="/founder-raro.png" alt="" />
+      </span>
+      <span className="stage-car stage-car-premium">
+        <img src="/founder-premium.png" alt="" />
+      </span>
+      <span className="stage-car stage-car-epico">
+        <img src="/founder-epico.png" alt="" />
+      </span>
+    </div>
+  )
+}
+
+function Hero() {
+  return (
+    <section className="hero">
+      <div className="hero-room" aria-hidden="true">
+        <span className="room-lamp" />
+        <span className="room-neon room-neon-a" />
+        <span className="room-neon room-neon-b" />
+        <span className="room-number">01</span>
+        <span className="room-floor" />
       </div>
-    </article>
+
+      <div className="hero-shell">
+        <div className="hero-copy">
+          <p className="kicker">Pacotes de fundador</p>
+
+          <h1 className="hero-title">
+            <span className="line">Seu lugar</span>
+            <span className="line">no primeiro</span>
+            <span className="line accent">Grid.</span>
+          </h1>
+
+          <HeroStage />
+
+          <p className="hero-lead">
+            Apoie o Autorama Racing e comece sua coleção com itens de fundador.
+          </p>
+
+          <p className="hero-price">A partir de R$ 49</p>
+
+          <div className="hero-actions">
+            <a href="#pacotes" className="btn btn-primary btn-cta">
+              Escolher meu pacote
+              <span aria-hidden="true">»</span>
+            </a>
+            <a href={GAME_SITE_URL} target="_blank" rel="noreferrer" className="text-link">
+              Conheça o jogo
+              <span aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <p className="hero-words" aria-hidden="true">
+          <span>Drive</span>
+          <span>Colecione</span>
+          <span>Evolua</span>
+        </p>
+
+        <p className="hero-collection" aria-hidden="true">
+          Coleção fundador
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function Highlights() {
+  return (
+    <section className="highlights">
+      <ul className="highlights-inner">
+        {highlights.map((item) => (
+          <li key={item.label} className="highlight">
+            <Icon name={item.icon} className="highlight-icon" />
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }
 
 function PackageCard({ pack, onChoose }) {
   return (
-    <article
-      className={`founder-card ${pack.tone === 'gold' ? 'gold-card' : ''}`}
-      data-tone={pack.tone}
-    >
-      <div className="package-top">
-        <div className="package-tier">
-          <span className={`tier-mark ${pack.tone}`} />
-          <h3>{pack.name}</h3>
-        </div>
-        {pack.popular && <span className="popular-ribbon">Mais escolhido</span>}
-        <p>{pack.tagline}</p>
+    <article className={`pack pack-${pack.tone}`}>
+      <div className="pack-head">
+        <h3>{pack.name}</h3>
+        {pack.badge && <span className="pack-badge">{pack.badge}</span>}
       </div>
 
-      <figure className="featured-car">
-        <div className="featured-car-media">
+      <div className={`pack-cars${pack.cars.length > 1 ? ' is-trio' : ''}`}>
+        {pack.cars.map((car) => (
           <img
-            src={pack.featuredCar.image}
-            alt={pack.featuredCar.imageAlt}
+            key={`${pack.id}-${car.slot}`}
+            className={`pack-car slot-${car.slot}`}
+            src={car.image}
+            alt={car.alt}
             loading="lazy"
             decoding="async"
           />
-        </div>
-        <figcaption>
-          <span>Carro em destaque</span>
-          <strong>{pack.featuredCar.name}</strong>
-          <small>{pack.featuredCar.rarity}</small>
-        </figcaption>
-      </figure>
-
-      <div className="included-cars">
-        <span>Este pacote inclui</span>
-        <strong>{pack.includedCars.join(' · ')}</strong>
+        ))}
       </div>
 
-      <div className="price-row">
-        <span>{pack.price}</span>
-        <small>pagamento único</small>
-      </div>
+      <p className="pack-price">{pack.price}</p>
 
-      <ul className="perk-list">
-        {pack.perks.map((perk) => (
-          <li key={perk}>
-            <span>✓</span>
-            {perk}
+      <ul className="pack-features">
+        {pack.features.map((feature) => (
+          <li key={feature.text}>
+            <Icon name={feature.icon} className="feature-icon" />
+            <span>{feature.text}</span>
           </li>
         ))}
       </ul>
@@ -340,11 +403,89 @@ function PackageCard({ pack, onChoose }) {
         type="button"
         onClick={() => onChoose(pack)}
         disabled={!checkoutEnabled}
-        className={`package-button ${pack.tone}`}
+        className={`btn pack-button ${pack.tone === 'gold' ? 'btn-primary' : 'btn-outline'}`}
       >
         {checkoutEnabled ? pack.button : 'Disponível em breve'}
+        <span aria-hidden="true">›</span>
       </button>
     </article>
+  )
+}
+
+function Packages({ onChoose }) {
+  return (
+    <section id="pacotes" className="section packages">
+      <div className="section-inner">
+        <div className="section-head">
+          <p className="kicker">Monte sua garagem</p>
+          <h2 className="title">Escolha seu pacote.</h2>
+          <p className="section-sub">Compare os carros e benefícios de cada opção.</p>
+        </div>
+
+        <div className="packs">
+          {packages.map((pack) => (
+            <PackageCard key={pack.id} pack={pack} onChoose={onChoose} />
+          ))}
+        </div>
+
+        <p className="packs-note">
+          Todos os pacotes incluem acesso antecipado e itens de fundador.
+        </p>
+      </div>
+    </section>
+  )
+}
+
+function Closing({ faqOpen, onToggleFaq }) {
+  return (
+    <section id="duvidas" className="closing">
+      <div className="closing-flag left" aria-hidden="true" />
+      <div className="closing-flag right" aria-hidden="true" />
+
+      <div className="closing-inner">
+        <div className="closing-copy">
+          <h2 className="title">Faça parte dessa largada.</h2>
+          <p className="section-sub">Conheça o jogo e acompanhe o desenvolvimento.</p>
+        </div>
+
+        <div className="faq">
+          <button
+            type="button"
+            className="faq-toggle"
+            aria-expanded={faqOpen}
+            aria-controls="faq-panel"
+            onClick={onToggleFaq}
+          >
+            Dúvidas frequentes
+            <span className="faq-sign" aria-hidden="true">
+              {faqOpen ? '−' : '+'}
+            </span>
+          </button>
+
+          <div id="faq-panel" className="faq-panel" hidden={!faqOpen}>
+            {faq.map((item) => (
+              <div key={item.question} className="faq-item">
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <div className="footer-inner">
+        <a href="#top" aria-label="Autorama Racing">
+          <img src="/autorama_white.png" alt="" />
+        </a>
+        <p className="footer-note">Jogo em desenvolvimento.</p>
+      </div>
+    </footer>
   )
 }
 
@@ -485,7 +626,7 @@ function PurchaseModal({ pack, onClose }) {
             )}
             <button
               type="submit"
-              className="glow-button purchase-modal-submit"
+              className="btn btn-primary purchase-modal-submit"
               disabled={status === 'loading'}
             >
               {status === 'loading' ? 'Preparando pagamento…' : 'Continuar para pagamento'}
@@ -541,7 +682,12 @@ function PaymentConfirmation({ result }) {
   }
 
   const pack = details ? packages.find((item) => item.id === details.package_id) : null
-  const items = pack ? [...pack.includedCars.map((car) => `Carro ${car}`), ...pack.perks] : []
+  const items = pack
+    ? [
+        ...pack.includedCars.map((car) => `Carro ${car}`),
+        ...pack.features.filter((feature) => feature.icon !== 'car').map((feature) => feature.text),
+      ]
+    : []
 
   return (
     <main className="payment-confirmation-shell">
@@ -572,11 +718,11 @@ function PaymentConfirmation({ result }) {
             </p>
             <div className="payment-confirmation-actions">
               {details.receipt_url && (
-                <a href={details.receipt_url} target="_blank" rel="noreferrer" className="confirmation-receipt">
+                <a href={details.receipt_url} target="_blank" rel="noreferrer" className="btn btn-outline">
                   Ver comprovante
                 </a>
               )}
-              <button type="button" onClick={closeConfirmation} className="glow-button confirmation-close">
+              <button type="button" onClick={closeConfirmation} className="btn btn-primary">
                 Fechar janela <span aria-hidden="true">›</span>
               </button>
             </div>
@@ -590,7 +736,7 @@ function PaymentConfirmation({ result }) {
             <button
               type="button"
               onClick={() => { retryRef.current = 0; verifyPayment() }}
-              className="ghost-button confirmation-retry"
+              className="btn btn-outline confirmation-retry"
             >
               Verificar novamente <span aria-hidden="true">›</span>
             </button>
@@ -601,7 +747,7 @@ function PaymentConfirmation({ result }) {
             <p className="payment-confirmation-kicker">Não confirmado</p>
             <h1>Não conseguimos confirmar este pagamento.</h1>
             <p>Se você concluiu o pagamento, aguarde alguns minutos ou entre em contato com o suporte.</p>
-            <button type="button" onClick={closeConfirmation} className="ghost-button confirmation-retry">
+            <button type="button" onClick={closeConfirmation} className="btn btn-outline confirmation-retry">
               Fechar janela
             </button>
           </>
@@ -611,214 +757,46 @@ function PaymentConfirmation({ result }) {
   )
 }
 
-function UniverseThumbnail({ item }) {
-  return (
-    <figure className="universe-thumbnail">
-      <div className="universe-thumbnail-media">
-        <img
-          src={item.image}
-          alt={item.imageAlt}
-          loading="lazy"
-          decoding="async"
-          style={{ objectPosition: item.position }}
-        />
-      </div>
-      <figcaption>
-        <h3>{item.title}</h3>
-        <p>{item.text}</p>
-      </figcaption>
-    </figure>
-  )
-}
-
-function ReasonCard({ reason }) {
-  return (
-    <article className="reason-card">
-      <Icon name={reason.icon} className="h-10 w-10 text-ember" />
-      <div>
-        <h3>{reason.title}</h3>
-        <p>{reason.text}</p>
-      </div>
-    </article>
-  )
-}
-
 function App() {
   const [paymentResult] = React.useState(readPaymentResult)
   const [selectedPackage, setSelectedPackage] = React.useState(null)
+  const [activeSection, setActiveSection] = React.useState('pacotes')
+  const [faqOpen, setFaqOpen] = React.useState(false)
   const closePurchase = React.useCallback(() => setSelectedPackage(null), [])
+
+  React.useEffect(() => {
+    if (paymentResult || typeof IntersectionObserver === 'undefined') return undefined
+    const closing = document.getElementById('duvidas')
+    if (!closing) return undefined
+    const observer = new IntersectionObserver(
+      ([entry]) => setActiveSection(entry.isIntersecting ? 'duvidas' : 'pacotes'),
+      { rootMargin: '-35% 0px -20% 0px' },
+    )
+    observer.observe(closing)
+    return () => observer.disconnect()
+  }, [paymentResult])
+
+  const handleNavigate = React.useCallback((item) => {
+    if (item.section === 'duvidas') setFaqOpen(true)
+  }, [])
 
   if (paymentResult) return <PaymentConfirmation result={paymentResult} />
 
   return (
-    <div id="top" className="min-h-screen bg-asphalt text-white">
-      <div className="overflow-hidden" inert={selectedPackage ? '' : undefined}>
-        <Header />
+    <div id="top" className="page">
+      <div inert={selectedPackage ? '' : undefined}>
+        <Header activeSection={activeSection} onNavigate={handleNavigate} />
 
         <main>
-        <section className="hero-section">
-          <video
-            className="hero-video"
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            poster="/hero-celebration.png"
-            aria-hidden="true"
-          >
-            <source src="/hero-carro.mp4" type="video/mp4" />
-          </video>
-          <div className="hero-backdrop" />
-          <div className="hero-content relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
-            <div className="max-w-2xl">
-              <div className="eyebrow">
-                <span />
-                Acesse. Corra. Lidere.
-              </div>
-              <h1 className="hero-title">
-                <span className="hero-title-lead">Pacotes de</span>{' '}
-                <span className="hero-title-emphasis">Fundador</span>
-              </h1>
-              <p className="hero-copy mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
-                Entre antes de todos, receba itens únicos e acelere sua história no{' '}
-                <strong className="text-voltage">Autorama Racing</strong>.
-              </p>
-
-              <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                <a href="#pacotes" className="glow-button">
-                  Quero ser fundador
-                  <span aria-hidden="true">››</span>
-                </a>
-                <a href="#beneficios" className="ghost-button">
-                  Ver pacotes
-                  <span aria-hidden="true">›</span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div id="beneficios" className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="benefits-grid">
-              {benefits.map((benefit) => (
-                <BenefitCard key={benefit.title} benefit={benefit} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="pacotes" className="section-shell pt-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Escolha seu pacote de fundador</h2>
-            <span className="signal-bars right" />
-          </div>
-
-          <p className="packages-intro">
-            Quanto maior o pacote, maior a garagem: Prata inclui Premium + Raro e Ouro reúne os três carros.
-          </p>
-
-          <div className="mx-auto mt-10 grid max-w-6xl gap-6 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-3 lg:px-8">
-            {packages.map((pack) => (
-              <PackageCard key={pack.name} pack={pack} onChoose={setSelectedPackage} />
-            ))}
-          </div>
-        </section>
-
-        <section id="universo" className="section-shell pt-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Um universo feito para corredores</h2>
-            <span className="signal-bars right" />
-          </div>
-
-          <div className="universe-gallery">
-            {universe.map((item) => (
-              <UniverseThumbnail key={item.title} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section className="section-shell py-20">
-          <div className="section-heading">
-            <span className="signal-bars" />
-            <h2>Por que entrar agora?</h2>
-            <span className="signal-bars right" />
-          </div>
-
-          <div className="mx-auto mt-9 grid max-w-7xl gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
-            {reasons.map((reason) => (
-              <ReasonCard key={reason.title} reason={reason} />
-            ))}
-          </div>
-        </section>
-
-        <section id="entrar" className="final-cta">
-          <div className="race-blur" />
-          <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:px-8">
-            <div>
-              <p className="font-display text-sm font-bold uppercase tracking-[.35em] text-trophy">
-                A largada está aberta
-              </p>
-              <h2 className="mt-3 max-w-3xl font-display text-4xl font-black uppercase leading-[.95] tracking-wide sm:text-5xl lg:text-6xl">
-                Garanta seu lugar <span>entre os fundadores</span>
-              </h2>
-              <p className="mt-4 max-w-2xl text-base text-slate-300 sm:text-lg">
-                Os melhores chegam antes. Não fique de fora da primeira temporada de Autorama Racing.
-              </p>
-            </div>
-
-            <a href="#pacotes" className="glow-button cta">
-              Quero ser fundador
-              <span aria-hidden="true">››</span>
-            </a>
-          </div>
-        </section>
+          <Hero />
+          <Highlights />
+          <Packages onChoose={setSelectedPackage} />
+          <Closing faqOpen={faqOpen} onToggleFaq={() => setFaqOpen((value) => !value)} />
         </main>
 
-        <footer className="footer">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
-          <div>
-            <a href="#top" className="inline-flex items-center" aria-label="Autorama Racing">
-              <img
-                src="/autorama_white.png"
-                alt=""
-                className="h-9 w-auto sm:h-11"
-              />
-            </a>
-            <p className="mt-5 max-w-sm text-sm leading-6 text-slate-400">
-              Corrida, coleção e competição em uma experiência neon feita para quem gosta de largar na frente.
-            </p>
-          </div>
-
-          <FooterList title="Jogo" links={['Visão Geral', 'Recursos', 'Carros', 'Pistas']} />
-          <FooterList title="Comunidade" links={['Notícias', 'Eventos', 'Mídia', 'Discord']} />
-          <FooterList title="Suporte" links={['FAQ', 'Contato', 'Privacidade', 'Termos de Uso']} />
-        </div>
-
-        <div className="border-t border-white/10 px-4 py-5 text-center text-xs text-slate-500">
-          © 2026 Autorama Racing. Todos os direitos reservados.
-        </div>
-        </footer>
+        <Footer />
       </div>
       {selectedPackage && <PurchaseModal pack={selectedPackage} onClose={closePurchase} />}
-    </div>
-  )
-}
-
-function FooterList({ title, links }) {
-  return (
-    <div>
-      <h3 className="font-display text-sm font-black uppercase tracking-[.18em] text-white">{title}</h3>
-      <ul className="mt-4 space-y-2 text-sm text-slate-400">
-        {links.map((link) => (
-          <li key={link}>
-            <a href="#top" className="transition hover:text-white">
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }

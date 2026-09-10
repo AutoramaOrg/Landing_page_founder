@@ -92,3 +92,15 @@ e desabilitar botões; preservar confirmação de pedidos já emitidos. Não apa
 pedidos, pagamentos ou outbox. Reverter código apenas para release compatível; não derrubar tabelas.
 
 Após cada etapa, registrar horário, SHA/digest, alvo, checks reais e drift, sem dados sensíveis.
+
+### Rollback do design (redesign de 2026-09-10)
+
+O visual anterior está preservado na tag `design/pre-redesign-20260910` (commit `de1a527`, mesma
+árvore da release `f825197` em produção). O redesign vive em `feat/landing-redesign-mockup`.
+
+- Reverter só o código: `git checkout design/pre-redesign-20260910 -- src index.html public/fonts`
+  e reconstruir, ou gerar a release a partir da própria tag em checkout limpo.
+- Reverter a release publicada: reimplantar a imagem anterior registrada em
+  [PROJECT_PROFILE.md](../PROJECT_PROFILE.md), sem tocar em Caddy, volumes ou backend.
+- Ids de pacote (`bronze`, `prata`, `ouro`), valores em centavos e o contrato de checkout não
+  mudaram no redesign: rollback de design não exige nenhuma ação no Supabase.
