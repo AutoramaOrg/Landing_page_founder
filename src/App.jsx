@@ -670,14 +670,17 @@ function App() {
             <source src="/hero-carro.mp4" type="video/mp4" />
           </video>
           <div className="hero-backdrop" />
-          <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
+          <div className="hero-content relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
             <div className="max-w-2xl">
               <div className="eyebrow">
                 <span />
                 Acesse. Corra. Lidere.
               </div>
-              <h1 className="hero-title">Pacotes de Fundador</h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
+              <h1 className="hero-title">
+                <span className="hero-title-lead">Pacotes de</span>{' '}
+                <span className="hero-title-emphasis">Fundador</span>
+              </h1>
+              <p className="hero-copy mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl">
                 Entre antes de todos, receba itens únicos e acelere sua história no{' '}
                 <strong className="text-voltage">Autorama Racing</strong>.
               </p>

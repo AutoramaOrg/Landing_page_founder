@@ -8,7 +8,7 @@
 ## Sequência atual
 
 1. Header fixo
-2. Hero com imagem full-bleed
+2. Hero responsivo com mídia full-bleed
 3. Grade de benefícios
 4. Pacotes de fundador
 5. Universo do jogo
@@ -43,12 +43,12 @@ Conteúdo atual:
 - CTA primário para `#pacotes`;
 - CTA secundário para `#beneficios`.
 
-Imagem:
+Mídia:
 
-- arquivo: `public/hero-celebration.png`;
-- aplicada como background em `.hero-backdrop`;
-- ocupa o banner inteiro de ponta a ponta;
-- fica atrás dos textos.
+- desktop: vídeo `public/hero-carro.mp4`, com `public/hero-celebration.png` como fallback;
+- mobile até 640 px: imagem estática `public/universo-rio-de-janeiro.jpg`, com enquadramento vertical e contraste reforçado;
+- o H1 usa quebra controlada em duas linhas no mobile para evitar cortes laterais;
+- com preferência de movimento reduzido, o vídeo também é ocultado.
 
 ## Benefícios
 

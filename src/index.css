@@ -131,7 +131,7 @@ body::before {
     min-height: 100vh;
     overflow: hidden;
     isolation: isolate;
-    background: #05070d;
+    background: #05070d url("/hero-celebration.png") center / cover no-repeat;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -965,7 +965,60 @@ body::before {
   }
 
   .hero-title {
-    font-size: clamp(3.4rem, 18vw, 5.4rem);
+    width: 100%;
+    max-width: 22rem;
+    font-size: clamp(3rem, 14vw, 3.45rem);
+    line-height: .88;
+    letter-spacing: .025em;
+  }
+
+  .hero-title-lead,
+  .hero-title-emphasis {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .hero-title-emphasis {
+    margin-top: .08em;
+  }
+
+  .hero-section {
+    min-height: 100svh;
+    background-image: url("/universo-rio-de-janeiro.jpg");
+    background-position: 61% center;
+  }
+
+  .hero-content {
+    min-height: 100svh;
+    align-items: center;
+    padding-top: 7.25rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .hero-video {
+    display: none;
+  }
+
+  .hero-backdrop {
+    background:
+      linear-gradient(180deg, rgba(5, 7, 13, .48) 0%, rgba(5, 7, 13, .68) 54%, rgba(5, 7, 13, .96) 100%),
+      linear-gradient(90deg, rgba(5, 7, 13, .86) 0%, rgba(5, 7, 13, .32) 100%);
+  }
+
+  .hero-backdrop::before {
+    background:
+      radial-gradient(circle at 82% 24%, rgba(255, 159, 67, .16), transparent 17rem),
+      radial-gradient(circle at 12% 74%, rgba(255, 38, 61, .18), transparent 20rem);
+  }
+
+  .hero-backdrop::after {
+    background: linear-gradient(180deg, transparent 45%, rgba(5, 7, 13, .88) 100%);
+  }
+
+  .hero-copy {
+    max-width: 21rem;
+    font-size: 1rem;
+    line-height: 1.65;
   }
 
   .hero-visual {
@@ -1072,6 +1125,12 @@ body::before {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
   }
 }
 

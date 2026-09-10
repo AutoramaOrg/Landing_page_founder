@@ -598,15 +598,19 @@ function App() {
   })), React.createElement("div", {
     className: "hero-backdrop"
   }), React.createElement("div", {
-    className: "relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36"
+    className: "hero-content relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-24 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36"
   }, React.createElement("div", {
     className: "max-w-2xl"
   }, React.createElement("div", {
     className: "eyebrow"
   }, React.createElement("span", null), "Acesse. Corra. Lidere."), React.createElement("h1", {
     className: "hero-title"
-  }, "Pacotes de Fundador"), React.createElement("p", {
-    className: "mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl"
+  }, React.createElement("span", {
+    className: "hero-title-lead"
+  }, "Pacotes de"), ' ', React.createElement("span", {
+    className: "hero-title-emphasis"
+  }, "Fundador")), React.createElement("p", {
+    className: "hero-copy mt-5 max-w-xl text-lg leading-8 text-slate-300 sm:text-xl"
   }, "Entre antes de todos, receba itens \xFAnicos e acelere sua hist\xF3ria no", ' ', React.createElement("strong", {
     className: "text-voltage"
   }, "Autorama Racing"), "."), React.createElement("div", {
