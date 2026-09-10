@@ -28,11 +28,14 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `50875763a9d0a07331c4166e8e3d02f8fc96233c`, imagem
-`sha256:99ac84a2edb57fb45fb60bd271acb78924ab84dea54cda21f1881cb39494003a` e container
-`autorama-founder-landing-1`. Bronze 4900, Prata 8900 e Ouro 14900 centavos. A UI pública está
-habilitada desde 2026-09-10. A imagem anterior `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras
-desativadas, foi preservada para rollback.
+Landing ativa: release `f8251973772f8ca2826860a8005452bfd4f5257f`, imagem
+`sha256:1fce2b711bb1b7928237f4d5606cfe7628d045e30a1df20742a6776ad4a70483` e container
+`autorama-founder-landing-1`. O artefato publicado teve SHA-256
+`4dbff1f13dd367939470df0b5d2fa4443de6998b1687cbb2dc778f364559e91f`. Bronze 4900, Prata 8900
+e Ouro 14900 centavos. A UI pública está habilitada desde 2026-09-10. A release anterior
+`50875763a9d0a07331c4166e8e3d02f8fc96233c` foi preservada como rollback imediato; a imagem
+`65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras desativadas, também permanece como
+fallback operacional.
 
 ## Segurança e gates
 
