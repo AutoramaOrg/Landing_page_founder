@@ -1,6 +1,6 @@
 # Publicação no VPS Horsepower Studio
 
-Status: preparado, bloqueado por autenticação SSH. Nenhuma etapa remota executada.
+Status: primeira implantação concluída em 2026-09-09; ativação comercial em validação em 2026-09-10.
 Alvos e autorização: [PROJECT_PROFILE.md](../PROJECT_PROFILE.md).
 
 ## 1. Acesso e inventário (somente leitura)
@@ -48,14 +48,15 @@ assinatura de webhook nesse contrato. Por isso o payload do webhook não comprov
 exigir resposta autoritativa com `success === true`, `paid === true` e `amount` inteiro igual ao
 pedido. Conferir pedido e transação, transição condicional e unicidade da outbox.
 
-Pendências antes de vendas: proteção de abuso/rate limit do endpoint público (CORS não autentica),
-limites de corpo, homologação remota de falha parcial/concorrência e acompanhamento da entrega.
-Resend ausente significa que não há alerta por e-mail confiável. Configurar e testar notificações
-ou obter definição de responsável e rotina manual antes de abrir vendas. Não prometer e-mails.
+Pendências antes de vendas: acompanhar abuso/rate limit do endpoint público (CORS não autentica),
+limites de corpo, falha parcial/concorrência e entrega. O Resend de Produção foi configurado em
+2026-09-10 com domínio verificado, chave de envio limitada e smoke `delivered` para o contato
+operacional; manter idempotência e observar a outbox após a abertura.
 
 ## 4. Container e borda
 
-Primeira release com `VITE_CHECKOUT_ENABLED=false`. Testar a imagem em Docker antes de publicar:
+Primeira release com `VITE_CHECKOUT_ENABLED=false`; a release de ativação usa `true` somente após
+os gates documentados. Testar cada imagem em Docker antes de publicar:
 Nginx inicia como UID 101 com read-only/tmpfs, health responde, página e assets carregam, arquivos
 ocultos retornam erro, POST é negado, headers de segurança aparecem inclusive nos assets.
 

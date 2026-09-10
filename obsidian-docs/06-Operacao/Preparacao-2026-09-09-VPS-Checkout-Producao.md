@@ -17,8 +17,11 @@ recebimento na conta InfinitePay `$power-horse-p86`. Implantação concluída co
   saudável, conectado apenas à rede Docker. O Caddy foi validado e recarregado; backup datado criado.
 - `https://autorama.horsepower-studio.com/#pacotes` respondeu 200/TLS válido, CSP/HSTS e demais
   headers presentes, preços R$ 49/R$ 89/R$ 149 e zero erros no console. Porta 8080 externa recusada.
-- Não foi criado pedido válido nem executado pagamento. Fluxo pago, concorrência e entrega seguem
-  sem homologação. Resend não está configurado; a UI permanece bloqueada.
+- Não foi executado pagamento. Fluxo pago completo depende de ação do titular. Em 2026-09-10 o
+  domínio `send.autorama.horsepower-studio.com` foi verificado no Resend; a chave permanente ficou
+  restrita a envio e ao domínio, e os segredos foram gravados no Supabase de Produção. Um e-mail
+  real para `contact@autoramaracing.com` foi observado como `delivered`. As duas chaves efêmeras
+  do smoke foram revogadas; nenhuma permanece ativa.
 
 ## Alterações
 
@@ -31,5 +34,5 @@ rejeita valor ausente/divergente ou booleans inválidos. Plano de deploy/rollbac
 
 Publicação estática concluída com a release indicada; o site principal continuou disponível. As
 alterações foram enviadas às branches `codex/founder-production-release` dos dois repositórios.
-Próximo passo obrigatório antes de vendas: configurar e testar o Resend ou definir explicitamente
-uma rotina manual de monitoramento de `founder_orders`; só então gerar uma release com a UI ativada.
+Próximo passo: validar a criação de links reais sem efetuar pagamento, gerar uma release imutável
+com `VITE_CHECKOUT_ENABLED=true`, implantar pelo compose existente e repetir o smoke público.

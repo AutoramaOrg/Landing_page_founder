@@ -8,7 +8,8 @@
 - Supabase Produção: `nmenoqjgjtrpvowguvlg` (Autorama Producao).
 - VPS autorizado pelo usuário: `212.85.15.133`, atualmente atende Horsepower Studio.
 - Conta InfinitePay confirmada pelo usuário: `$power-horse-p86` (handle da API sem `$`).
-- Subdomínio proposto: `autorama.horsepower-studio.com`; ainda não publicado.
+- Landing pública: `https://autorama.horsepower-studio.com/`.
+- Domínio de envio verificado: `send.autorama.horsepower-studio.com`.
 
 ## Estado observado — 2026-09-09
 
@@ -21,8 +22,11 @@ outros containers. O DNS A `autorama` aponta para `212.85.15.133` e foi observad
 Produção Supabase tem as tabelas `founder_orders` e `founder_order_notifications`, ambas com RLS
 ativo, e a migration `20260909090000` registrada. As funções públicas exclusivas da landing estão
 ativas: `infinitepay-create-checkout`, `founder-payment-status` e `infinitepay-webhook`.
-`handle-events` não foi alterada. Foram configurados handle, origem e retorno; Resend permanece
-ausente, portanto alertas/recibos por e-mail não estão disponíveis.
+`handle-events` não foi alterada. Foram configurados handle, origem e retorno. Em 2026-09-10 o
+Resend foi configurado com chave limitada a envio e ao domínio verificado; os segredos
+`RESEND_API_KEY` e `RESEND_FROM` estão no projeto de Produção. Um envio real de
+`compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
+como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
 Landing implantada: release `65ea292d59974c7b18b745c312f9d7efb464ee60`, imagem
 `sha256:57e5eee98695be70bbf583abd8e49bccd5e42046df34cf0f3a417d3eee0bbe21` e container
@@ -31,7 +35,7 @@ deliberadamente bloqueada até haver decisão operacional sobre os pedidos.
 
 ## Segurança e gates
 
-Build público escolhe exclusivamente Supabase Produção e começa com compras desativadas.
+Build público escolhe exclusivamente Supabase Produção. A primeira release começou com compras desativadas.
 `VITE_CHECKOUT_ENABLED=true` é um gate de interface, não autenticação nem bloqueio do endpoint.
 Só habilitá-lo após validação remota e definição do acompanhamento operacional dos pedidos.
 Valores `VITE_*` são públicos e nunca devem conter credenciais.
