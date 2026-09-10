@@ -1,6 +1,6 @@
 # Publicação no VPS Horsepower Studio
 
-Status: primeira implantação concluída em 2026-09-09; ativação comercial em validação em 2026-09-10.
+Status: implantação concluída em 2026-09-09; compras habilitadas e validadas em 2026-09-10.
 Alvos e autorização: [PROJECT_PROFILE.md](../PROJECT_PROFILE.md).
 
 ## 1. Acesso e inventário (somente leitura)

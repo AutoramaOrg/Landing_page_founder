@@ -28,10 +28,11 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing implantada: release `65ea292d59974c7b18b745c312f9d7efb464ee60`, imagem
-`sha256:57e5eee98695be70bbf583abd8e49bccd5e42046df34cf0f3a417d3eee0bbe21` e container
+Landing ativa: release `50875763a9d0a07331c4166e8e3d02f8fc96233c`, imagem
+`sha256:99ac84a2edb57fb45fb60bd271acb78924ab84dea54cda21f1881cb39494003a` e container
 `autorama-founder-landing-1`. Bronze 4900, Prata 8900 e Ouro 14900 centavos. A UI pública está
-deliberadamente bloqueada até haver decisão operacional sobre os pedidos.
+habilitada desde 2026-09-10. A imagem anterior `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras
+desativadas, foi preservada para rollback.
 
 ## Segurança e gates
 
