@@ -77,9 +77,10 @@ Os dados de navegação e conteúdo ficam no topo de `src/App.jsx`:
 - `reasons`
 
 Cada item de `packages` declara `cars`, com o asset composto do card, e `includedCars`, usado no
-resultado da compra. Bronze inclui um carro Premium; Prata inclui Premium + Raro; Ouro inclui
-Premium + Raro + Épico. Para cada carro, o card comunica um bodykit e uma pintura especial. Ouro
-não é descrito como coleção completa, pois existem outros modelos e bodykits no jogo.
+resultado da compra. Bronze inclui um Sedan Premium; Prata acrescenta um Muscle Raro; Ouro
+acrescenta um Esportivo Épico. Cada carro aparece em uma linha própria. Bodykits têm uma linha
+separada e a pintura especial recebe o nome do pacote: Fundador Bronze, Fundador Prata ou Fundador
+Ouro. Ouro não é descrito como coleção completa, pois existem outros modelos e bodykits no jogo.
 
 ## Risco operacional
 

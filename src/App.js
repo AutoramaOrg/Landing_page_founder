@@ -30,21 +30,21 @@ const packages = [{
   name: 'Bronze',
   tone: 'bronze',
   price: 'R$ 49',
-  includedCars: ['Premium'],
+  includedCars: ['Sedan Premium'],
   cars: [{
     image: '/assets/packages/package-bronze-car.webp',
-    alt: 'Carro Premium com pintura vermelha, preta e branca',
+    alt: 'Carro Sedan Premium com pintura vermelha, preta e branca',
     slot: 'bronze'
   }],
   features: [{
     icon: 'car',
-    text: '1 carro: Premium'
+    text: '1 Carro Sedan Premium'
   }, {
     icon: 'brush',
-    text: '1 bodykit + 1 pintura especial'
+    text: '1 Bodykit de customização'
   }, {
     icon: 'star',
-    text: 'Itens de fundador'
+    text: 'Pintura Especial Fundador Bronze'
   }],
   button: 'Escolher Bronze'
 }, {
@@ -52,21 +52,24 @@ const packages = [{
   name: 'Prata',
   tone: 'silver',
   price: 'R$ 89',
-  includedCars: ['Premium', 'Raro'],
+  includedCars: ['Sedan Premium', 'Muscle Raro'],
   cars: [{
     image: '/assets/packages/package-silver-car.webp',
-    alt: 'Carro Raro preto com detalhes azuis e aerofólio',
+    alt: 'Carro Muscle Raro preto com detalhes azuis e aerofólio',
     slot: 'silver'
   }],
   features: [{
     icon: 'car',
-    text: '2 carros: Premium + Raro'
+    text: '1 Carro Sedan Premium'
+  }, {
+    icon: 'car',
+    text: '1 Carro Muscle Raro'
   }, {
     icon: 'brush',
-    text: '2 bodykits + 2 pinturas especiais'
+    text: '2 Bodykits de customização'
   }, {
     icon: 'star',
-    text: 'Itens de fundador'
+    text: 'Pintura Especial Fundador Prata'
   }],
   button: 'Escolher Prata'
 }, {
@@ -74,21 +77,27 @@ const packages = [{
   name: 'Ouro',
   tone: 'gold',
   price: 'R$ 149',
-  includedCars: ['Premium', 'Raro', 'Épico'],
+  includedCars: ['Sedan Premium', 'Muscle Raro', 'Esportivo Épico'],
   cars: [{
     image: '/assets/packages/package-gold-cars.webp',
-    alt: 'Três carros dos níveis Raro, Premium e Épico',
+    alt: 'Três carros: Sedan Premium, Muscle Raro e Esportivo Épico',
     slot: 'gold'
   }],
   features: [{
     icon: 'car',
-    text: '3 carros: Premium + Raro + Épico'
+    text: '1 Carro Sedan Premium'
+  }, {
+    icon: 'car',
+    text: '1 Carro Muscle Raro'
+  }, {
+    icon: 'car',
+    text: '1 Carro Esportivo Épico'
   }, {
     icon: 'brush',
-    text: '3 bodykits + 3 pinturas especiais'
+    text: '3 Bodykits de customização'
   }, {
     icon: 'star',
-    text: 'Itens de fundador'
+    text: 'Pintura Especial Fundador Ouro'
   }, {
     icon: 'people',
     text: 'Nome no mural dos pioneiros'
@@ -434,7 +443,7 @@ function Packages({
     onChoose: onChoose
   }))), React.createElement("p", {
     className: "packs-note"
-  }, "Todos os pacotes incluem acesso antecipado e itens de fundador.")));
+  }, "Todos os pacotes incluem acesso antecipado ao jogo.")));
 }
 function Closing({
   faqOpen,

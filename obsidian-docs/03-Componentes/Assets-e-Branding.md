@@ -38,8 +38,9 @@ As camadas são posicionadas de forma responsiva em `src/index.css`; não depend
 - `public/assets/packages/package-gold-cars.webp`: composição de três carros do Ouro.
 
 O componente `PackageCard` sobrepõe título e preço ao visual e dilui a base da imagem no corpo do
-card. As imagens usam carregamento adiado (`loading="lazy"`) e texto alternativo. Os cards informam
-um bodykit e uma pintura especial por carro; não existe selo de “Coleção completa”.
+card. As imagens usam carregamento adiado (`loading="lazy"`) e texto alternativo. Os carros são
+identificados como Sedan Premium, Muscle Raro e Esportivo Épico; os cards separam carros e bodykits
+por linha e nomeiam a pintura especial conforme o pacote. Não existe selo de “Coleção completa”.
 
 As raridades válidas exibidas nos cards são `Premium`, `Raro` e `Épico`; não existem classificações
 por cor.
