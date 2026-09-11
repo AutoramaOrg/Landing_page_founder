@@ -33,19 +33,20 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `9839991ba4c601c8f232b7685531eddb22911b30`, imagem
-`sha256:e7335b47792f1d791f4c464b8568975728fe3a4115f6edfc0cd8d30e79720af3` e container
+Landing ativa: release `bcd6fe4f807aef07e297117ed2e6c8a6713247f4`, imagem
+`sha256:903f29305ebfda791b282ba293914c436595871f4544cfb535a3b6c495d15c41` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
-`527c39b125b599447a61483f12925b979ea4ffc855046dccbc0c9c5b62325638`. Bronze 4900, Prata 8900
+`88dbb2ec907c60a62982a45491cc4490c393bdad0d2c51b462c2a0fe376ab712`. Bronze 4900, Prata 8900
 e Ouro 14900 centavos; a UI pública continua habilitada. O favicon oficial está em
-`/favicon.ico`. Os cards informam carro, um bodykit e uma pintura especial por carro; o selo e a
-afirmação “Coleção completa” foram removidos.
+`/favicon.ico`. Os cards listam separadamente Sedan Premium, Muscle Raro e Esportivo Épico conforme
+o pacote, informam um bodykit por carro e nomeiam a pintura como Fundador Bronze, Prata ou Ouro. O
+selo e a afirmação “Coleção completa” foram removidos.
 
-As releases `590c083669f9884d25f93438bed1194eeedb34b7` e
-`586511f43bba102fd4be85f010757a9fb91daa33` permanecem no host como rollback imediato. O fallback
+As releases `9839991ba4c601c8f232b7685531eddb22911b30` e
+`590c083669f9884d25f93438bed1194eeedb34b7` permanecem no host como rollback imediato. O fallback
 `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras desativadas, também permanece disponível.
 O backup pré-deploy final está em
-`/home/yandias/autorama-founder/backups/20260911T165611Z-pre-9839991ba4c601c8f232b7685531eddb22911b30`.
+`/home/yandias/autorama-founder/backups/20260911T172543Z-pre-bcd6fe4f807aef07e297117ed2e6c8a6713247f4`.
 
 ## Segurança e gates
 

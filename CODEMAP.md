@@ -13,7 +13,9 @@
 - [deploy/2026-09-11-founder-visual-release.md](deploy/2026-09-11-founder-visual-release.md): registro
   da primeira release visual e seu rollback.
 - [deploy/2026-09-11-founder-packages-favicon-release.md](deploy/2026-09-11-founder-packages-favicon-release.md):
-  release ativa com conteúdo corrigido dos pacotes, favicon e pendência do alias `www`.
+  release que removeu o selo, publicou o favicon e registrou a pendência do alias `www`.
+- [deploy/2026-09-11-founder-package-copy-release.md](deploy/2026-09-11-founder-package-copy-release.md):
+  release ativa com carros separados por linha e pinturas Fundador por pacote.
 - [obsidian-docs/05-Integracoes/Checkout-InfinitePay.md](obsidian-docs/05-Integracoes/Checkout-InfinitePay.md): contrato de checkout.
 - Backend irmão `../autorama-supabase/supabase/functions/`: `infinitepay-create-checkout`,
   `founder-payment-status`, `infinitepay-webhook` e `_shared/founder-purchases.ts`.
