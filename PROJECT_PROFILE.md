@@ -19,6 +19,11 @@ outros containers. O DNS A `autorama` aponta para `212.85.15.133` e foi observad
 8.8.8.8. A configuração anterior do Caddy foi preservada no VPS como
 `Caddyfile.bak-20260909-050500-autorama`.
 
+O alias `www.autorama.horsepower-studio.com` permanece pendente: em 2026-09-11 ele ainda retornava
+NXDOMAIN e o painel DNS da Hostinger não estava acessível na sessão de deploy. O Caddy não foi
+alterado para esse hostname antes da criação do registro, evitando emissão de certificado contra
+um nome inexistente. Registro planejado: A `www.autorama` → `212.85.15.133`.
+
 Produção Supabase tem as tabelas `founder_orders` e `founder_order_notifications`, ambas com RLS
 ativo, e a migration `20260909090000` registrada. As funções públicas exclusivas da landing estão
 ativas: `infinitepay-create-checkout`, `founder-payment-status` e `infinitepay-webhook`.
@@ -28,16 +33,19 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `586511f43bba102fd4be85f010757a9fb91daa33`, imagem
-`sha256:f8ff2282c5ae5248721c8576f36d0630d7c44923848b03edabe57b156338338d` e container
+Landing ativa: release `9839991ba4c601c8f232b7685531eddb22911b30`, imagem
+`sha256:e7335b47792f1d791f4c464b8568975728fe3a4115f6edfc0cd8d30e79720af3` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
-`e945d298d1b1ce209e21030869a2e9089140084338be119690097d2916e511f1`. Bronze 4900, Prata 8900
-e Ouro 14900 centavos; a UI pública continua habilitada. A release anterior
-`f8251973772f8ca2826860a8005452bfd4f5257f` e sua imagem
-`sha256:1fce2b711bb1b7928237f4d5606cfe7628d045e30a1df20742a6776ad4a70483` foram preservadas como
-rollback imediato. O fallback `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras
-desativadas, também permanece disponível. O backup pré-deploy está em
-`/home/yandias/autorama-founder/backups/20260911T130533Z-pre-586511f43bba102fd4be85f010757a9fb91daa33`.
+`527c39b125b599447a61483f12925b979ea4ffc855046dccbc0c9c5b62325638`. Bronze 4900, Prata 8900
+e Ouro 14900 centavos; a UI pública continua habilitada. O favicon oficial está em
+`/favicon.ico`. Os cards informam carro, um bodykit e uma pintura especial por carro; o selo e a
+afirmação “Coleção completa” foram removidos.
+
+As releases `590c083669f9884d25f93438bed1194eeedb34b7` e
+`586511f43bba102fd4be85f010757a9fb91daa33` permanecem no host como rollback imediato. O fallback
+`65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras desativadas, também permanece disponível.
+O backup pré-deploy final está em
+`/home/yandias/autorama-founder/backups/20260911T165611Z-pre-9839991ba4c601c8f232b7685531eddb22911b30`.
 
 ## Segurança e gates
 

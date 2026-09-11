@@ -76,9 +76,10 @@ Os dados de navegação e conteúdo ficam no topo de `src/App.jsx`:
 - `universe`
 - `reasons`
 
-Cada item de `packages` declara `featuredCar`, usado como único carro visual do card, e
-`includedCars`, usado para comunicar a garagem cumulativa em texto. Bronze destaca Premium; Prata
-destaca Raro; Ouro destaca Épico.
+Cada item de `packages` declara `cars`, com o asset composto do card, e `includedCars`, usado no
+resultado da compra. Bronze inclui um carro Premium; Prata inclui Premium + Raro; Ouro inclui
+Premium + Raro + Épico. Para cada carro, o card comunica um bodykit e uma pintura especial. Ouro
+não é descrito como coleção completa, pois existem outros modelos e bodykits no jogo.
 
 ## Risco operacional
 

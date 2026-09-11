@@ -97,7 +97,7 @@ Após cada etapa, registrar horário, SHA/digest, alvo, checks reais e drift, se
 
 O visual anterior está preservado na tag `design/pre-redesign-20260910` (commit `de1a527`, mesma
 árvore da release `f825197`). O redesign ativo em produção está na release
-`586511f43bba102fd4be85f010757a9fb91daa33`, originada de `feat/landing-redesign-mockup`.
+`9839991ba4c601c8f232b7685531eddb22911b30`, originada de `feat/landing-redesign-mockup`.
 
 - Reverter só o código: `git checkout design/pre-redesign-20260910 -- src index.html public/fonts`
   e reconstruir, ou gerar a release a partir da própria tag em checkout limpo.

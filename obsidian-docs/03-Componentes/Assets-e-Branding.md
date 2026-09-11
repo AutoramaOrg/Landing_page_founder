@@ -9,50 +9,47 @@
 
 ### Logo
 
-- Arquivo: `public/autorama_white.png`
+- Arquivo ativo: `public/assets/logos/autorama-racing-logo.svg`
 - Uso confirmado:
   - Header
   - Footer
 - URL pública esperada:
-  - `/autorama_white.png`
+  - `/assets/logos/autorama-racing-logo.svg`
 
-### Vídeo do hero
+### Favicon
 
-- Arquivo: `public/hero-carro.mp4`
-- Uso confirmado:
-  - plano de fundo do hero em `src/App.jsx`.
-  - reprodução automática, muda, contínua e sem controles.
-- URL pública esperada:
-  - `/hero-carro.mp4`
+- Arquivo: `public/favicon.ico`
+- Referência: `<link rel="icon" href="/favicon.ico" sizes="any">` em `index.html`.
+- URL pública confirmada: `/favicon.ico`.
 
-`public/hero-celebration.png` é o pôster exibido enquanto o vídeo ainda está carregando. A camada
-`.hero-backdrop` preserva o contraste do texto e dos botões sobre o vídeo.
+### Hero
+
+- `public/assets/hero/hero-environment.webp`: ambiente de garagem.
+- `public/assets/hero/hero-car-blue.webp`: carro azul.
+- `public/assets/hero/hero-car-pink.webp`: carro rosa com reflexo integrado.
+- `public/assets/hero/hero-car-red.webp`: carro vermelho.
+
+As camadas são posicionadas de forma responsiva em `src/index.css`; não dependem do vídeo legado.
 
 ### Carros dos pacotes de fundador
 
-- `public/founder-premium.png`: carro principal exibido no pacote Bronze.
-- `public/founder-raro.png`: carro principal exibido no pacote Prata.
-- `public/founder-epico.png`: carro principal exibido no pacote Ouro.
+- `public/assets/packages/package-bronze-car.webp`: composição do Bronze.
+- `public/assets/packages/package-silver-car.webp`: composição do Prata.
+- `public/assets/packages/package-gold-cars.webp`: composição de três carros do Ouro.
 
-O componente `PackageCard` apresenta somente uma imagem principal por nível, acompanhada do nome e
-da raridade. A garagem cumulativa continua indicada em texto, sem repetir as imagens dos níveis
-anteriores. As imagens usam carregamento adiado (`loading="lazy"`) e texto alternativo.
+O componente `PackageCard` sobrepõe título e preço ao visual e dilui a base da imagem no corpo do
+card. As imagens usam carregamento adiado (`loading="lazy"`) e texto alternativo. Os cards informam
+um bodykit e uma pintura especial por carro; não existe selo de “Coleção completa”.
 
 As raridades válidas exibidas nos cards são `Premium`, `Raro` e `Épico`; não existem classificações
 por cor.
 
-### Galeria "Um universo feito para corredores"
+### Assets legados preservados
 
-- `public/universo-rio-de-janeiro.jpg`: cena principal de pistas e exploração.
-- `public/universo-pier-estacionamento.jpg`: mundo vivo e variedade de veículos.
-- `public/universo-mecanica.jpg`: oficina e preparação dos carros.
-- `public/universo-montando-carro.jpg`: montagem e personalização.
-- `public/universo-comemoracao.jpg`: comunidade e celebração no paddock.
-
-As cinco imagens são carregadas de forma adiada (`loading="lazy"`) em `src/App.jsx` e exibidas como
-miniaturas responsivas na seção `#universo`. A copy identifica as artes como possibilidades futuras,
-sem confirmar que seus cenários ou detalhes visuais já existem no jogo. Os originais PNG são
-exportados para JPEG otimizado antes de entrar no bundle.
+Os arquivos antigos `public/autorama_white.png`, `public/hero-carro.mp4`,
+`public/hero-celebration.png`, `public/founder-premium.png`, `public/founder-raro.png`,
+`public/founder-epico.png` e `public/universo-*.jpg` continuam versionados, mas não são importados
+pela composição ativa da landing. Não removê-los sem uma etapa específica de limpeza e revisão.
 
 ## Assets na raiz do projeto
 

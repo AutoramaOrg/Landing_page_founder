@@ -8,10 +8,12 @@
 - [src/checkout-config.js](src/checkout-config.js): seleção explícita do ambiente e gate público.
 - [src/checkout.js](src/checkout.js): adaptador HTTP, validação dos destinos e consulta de pagamento.
 - [scripts/checkout-config.test.mjs](scripts/checkout-config.test.mjs): isolamento dos ambientes.
-- [Dockerfile](Dockerfile), [deploy/compose.yaml](deploy/compose.yaml), [deploy/nginx.conf](deploy/nginx.conf): runtime estático preparado, ainda não implantado.
+- [Dockerfile](Dockerfile), [deploy/compose.yaml](deploy/compose.yaml), [deploy/nginx.conf](deploy/nginx.conf): runtime estático ativo no VPS, sem porta publicada no host.
 - [deploy/RUNBOOK.md](deploy/RUNBOOK.md): publicação gradual e rollback (inclui rollback do design).
 - [deploy/2026-09-11-founder-visual-release.md](deploy/2026-09-11-founder-visual-release.md): registro
-  da release visual ativa, validações e rollback imediato.
+  da primeira release visual e seu rollback.
+- [deploy/2026-09-11-founder-packages-favicon-release.md](deploy/2026-09-11-founder-packages-favicon-release.md):
+  release ativa com conteúdo corrigido dos pacotes, favicon e pendência do alias `www`.
 - [obsidian-docs/05-Integracoes/Checkout-InfinitePay.md](obsidian-docs/05-Integracoes/Checkout-InfinitePay.md): contrato de checkout.
 - Backend irmão `../autorama-supabase/supabase/functions/`: `infinitepay-create-checkout`,
   `founder-payment-status`, `infinitepay-webhook` e `_shared/founder-purchases.ts`.

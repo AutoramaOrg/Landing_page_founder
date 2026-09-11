@@ -18,6 +18,7 @@ Este documento lista lacunas reais identificadas por inspeção do projeto.
 
 - [x] Preparar estratégia de container separado no VPS existente; execução bloqueada por SSH.
 - [ ] Documentar domínio final.
+- [ ] Criar DNS A `www.autorama` → `212.85.15.133` e, após propagação, adicionar o alias ao Caddy e validar TLS.
 - [ ] Documentar pipeline de publicação quando existir.
 - [ ] Avaliar se `src/App.js` gerado deve continuar versionado.
 - [ ] Remover CSS legado não usado, se for confirmado que não há retorno ao hero antigo.
@@ -34,7 +35,7 @@ Este documento lista lacunas reais identificadas por inspeção do projeto.
 
 - [ ] Revisar title e meta description finais.
 - [ ] Adicionar Open Graph/Twitter Cards se houver publicação pública.
-- [ ] Definir favicon.
+- [x] Definir e publicar favicon.
 - [ ] Definir analytics/eventos de CTA, se necessário.
 
 ## Operação
