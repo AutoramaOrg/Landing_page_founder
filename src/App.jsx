@@ -28,9 +28,9 @@ const packages = [
     includedCars: ['Premium'],
     cars: [
       {
-        image: '/founder-premium.png',
+        image: '/assets/packages/package-bronze-car.webp',
         alt: 'Carro Premium com pintura vermelha, preta e branca',
-        slot: 'solo',
+        slot: 'bronze',
       },
     ],
     features: [
@@ -48,9 +48,9 @@ const packages = [
     includedCars: ['Premium', 'Raro'],
     cars: [
       {
-        image: '/founder-raro.png',
+        image: '/assets/packages/package-silver-car.webp',
         alt: 'Carro Raro preto com detalhes azuis e aerofólio',
-        slot: 'solo',
+        slot: 'silver',
       },
     ],
     features: [
@@ -69,19 +69,9 @@ const packages = [
     includedCars: ['Premium', 'Raro', 'Épico'],
     cars: [
       {
-        image: '/founder-raro.png',
-        alt: 'Carro Raro preto com detalhes azuis',
-        slot: 'left',
-      },
-      {
-        image: '/founder-premium.png',
-        alt: 'Carro Premium vermelho, preto e branco',
-        slot: 'right',
-      },
-      {
-        image: '/founder-epico.png',
-        alt: 'Carro Épico esportivo rosa com aerofólio',
-        slot: 'center',
+        image: '/assets/packages/package-gold-cars.webp',
+        alt: 'Coleção completa com os carros Raro, Premium e Épico',
+        slot: 'gold',
       },
     ],
     features: [
@@ -230,7 +220,7 @@ function Header({ activeSection, onNavigate }) {
     <header className={`site-header${open ? ' is-open' : ''}`}>
       <div className="header-inner">
         <a href="#top" className="brand" aria-label="Autorama Racing">
-          <img src="/autorama_white.png" alt="" />
+          <img src="/assets/logos/autorama-racing-logo.svg" alt="" />
         </a>
 
         <nav className="header-nav" aria-label="Principal">
@@ -284,14 +274,17 @@ function Header({ activeSection, onNavigate }) {
 function HeroStage() {
   return (
     <div className="hero-stage" aria-hidden="true">
-      <span className="stage-car stage-car-raro">
-        <img src="/founder-raro.png" alt="" />
+      <span className="stage-car stage-car-blue">
+        <span className="car-floor-glow" />
+        <img src="/assets/hero/hero-car-blue.webp" alt="" decoding="async" />
       </span>
-      <span className="stage-car stage-car-premium">
-        <img src="/founder-premium.png" alt="" />
+      <span className="stage-car stage-car-red">
+        <span className="car-floor-glow" />
+        <img src="/assets/hero/hero-car-red.webp" alt="" decoding="async" />
       </span>
-      <span className="stage-car stage-car-epico">
-        <img src="/founder-epico.png" alt="" />
+      <span className="stage-car stage-car-pink">
+        <span className="car-floor-glow" />
+        <img src="/assets/hero/hero-car-pink.webp" alt="" decoding="async" fetchPriority="high" />
       </span>
     </div>
   )
@@ -301,11 +294,9 @@ function Hero() {
   return (
     <section className="hero">
       <div className="hero-room" aria-hidden="true">
-        <span className="room-lamp" />
-        <span className="room-neon room-neon-a" />
-        <span className="room-neon room-neon-b" />
+        <span className="hero-environment" />
+        <span className="hero-environment-overlay" />
         <span className="room-number">01</span>
-        <span className="room-floor" />
       </div>
 
       <div className="hero-shell">
@@ -370,25 +361,27 @@ function Highlights() {
 function PackageCard({ pack, onChoose }) {
   return (
     <article className={`pack pack-${pack.tone}`}>
-      <div className="pack-head">
-        <h3>{pack.name}</h3>
-        {pack.badge && <span className="pack-badge">{pack.badge}</span>}
-      </div>
+      <div className="pack-visual">
+        <div className={`pack-cars pack-cars-${pack.tone}`}>
+          {pack.cars.map((car) => (
+            <img
+              key={`${pack.id}-${car.slot}`}
+              className={`pack-car slot-${car.slot}`}
+              src={car.image}
+              alt={car.alt}
+              loading="lazy"
+              decoding="async"
+            />
+          ))}
+        </div>
 
-      <div className={`pack-cars${pack.cars.length > 1 ? ' is-trio' : ''}`}>
-        {pack.cars.map((car) => (
-          <img
-            key={`${pack.id}-${car.slot}`}
-            className={`pack-car slot-${car.slot}`}
-            src={car.image}
-            alt={car.alt}
-            loading="lazy"
-            decoding="async"
-          />
-        ))}
-      </div>
+        <div className="pack-head">
+          <h3>{pack.name}</h3>
+          {pack.badge && <span className="pack-badge">{pack.badge}</span>}
+        </div>
 
-      <p className="pack-price">{pack.price}</p>
+        <p className="pack-price">{pack.price}</p>
+      </div>
 
       <ul className="pack-features">
         {pack.features.map((feature) => (

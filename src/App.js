@@ -32,9 +32,9 @@ const packages = [{
   price: 'R$ 49',
   includedCars: ['Premium'],
   cars: [{
-    image: '/founder-premium.png',
+    image: '/assets/packages/package-bronze-car.webp',
     alt: 'Carro Premium com pintura vermelha, preta e branca',
-    slot: 'solo'
+    slot: 'bronze'
   }],
   features: [{
     icon: 'car',
@@ -54,9 +54,9 @@ const packages = [{
   price: 'R$ 89',
   includedCars: ['Premium', 'Raro'],
   cars: [{
-    image: '/founder-raro.png',
+    image: '/assets/packages/package-silver-car.webp',
     alt: 'Carro Raro preto com detalhes azuis e aerofólio',
-    slot: 'solo'
+    slot: 'silver'
   }],
   features: [{
     icon: 'car',
@@ -77,17 +77,9 @@ const packages = [{
   price: 'R$ 149',
   includedCars: ['Premium', 'Raro', 'Épico'],
   cars: [{
-    image: '/founder-raro.png',
-    alt: 'Carro Raro preto com detalhes azuis',
-    slot: 'left'
-  }, {
-    image: '/founder-premium.png',
-    alt: 'Carro Premium vermelho, preto e branco',
-    slot: 'right'
-  }, {
-    image: '/founder-epico.png',
-    alt: 'Carro Épico esportivo rosa com aerofólio',
-    slot: 'center'
+    image: '/assets/packages/package-gold-cars.webp',
+    alt: 'Coleção completa com os carros Raro, Premium e Épico',
+    slot: 'gold'
   }],
   features: [{
     icon: 'car',
@@ -242,7 +234,7 @@ function Header({
     className: "brand",
     "aria-label": "Autorama Racing"
   }, React.createElement("img", {
-    src: "/autorama_white.png",
+    src: "/assets/logos/autorama-racing-logo.svg",
     alt: ""
   })), React.createElement("nav", {
     className: "header-nav",
@@ -291,20 +283,30 @@ function HeroStage() {
     className: "hero-stage",
     "aria-hidden": "true"
   }, React.createElement("span", {
-    className: "stage-car stage-car-raro"
-  }, React.createElement("img", {
-    src: "/founder-raro.png",
-    alt: ""
+    className: "stage-car stage-car-blue"
+  }, React.createElement("span", {
+    className: "car-floor-glow"
+  }), React.createElement("img", {
+    src: "/assets/hero/hero-car-blue.webp",
+    alt: "",
+    decoding: "async"
   })), React.createElement("span", {
-    className: "stage-car stage-car-premium"
-  }, React.createElement("img", {
-    src: "/founder-premium.png",
-    alt: ""
+    className: "stage-car stage-car-red"
+  }, React.createElement("span", {
+    className: "car-floor-glow"
+  }), React.createElement("img", {
+    src: "/assets/hero/hero-car-red.webp",
+    alt: "",
+    decoding: "async"
   })), React.createElement("span", {
-    className: "stage-car stage-car-epico"
-  }, React.createElement("img", {
-    src: "/founder-epico.png",
-    alt: ""
+    className: "stage-car stage-car-pink"
+  }, React.createElement("span", {
+    className: "car-floor-glow"
+  }), React.createElement("img", {
+    src: "/assets/hero/hero-car-pink.webp",
+    alt: "",
+    decoding: "async",
+    fetchPriority: "high"
   })));
 }
 function Hero() {
@@ -314,16 +316,12 @@ function Hero() {
     className: "hero-room",
     "aria-hidden": "true"
   }, React.createElement("span", {
-    className: "room-lamp"
+    className: "hero-environment"
   }), React.createElement("span", {
-    className: "room-neon room-neon-a"
-  }), React.createElement("span", {
-    className: "room-neon room-neon-b"
+    className: "hero-environment-overlay"
   }), React.createElement("span", {
     className: "room-number"
-  }, "01"), React.createElement("span", {
-    className: "room-floor"
-  })), React.createElement("div", {
+  }, "01")), React.createElement("div", {
     className: "hero-shell"
   }, React.createElement("div", {
     className: "hero-copy"
@@ -383,11 +381,9 @@ function PackageCard({
   return React.createElement("article", {
     className: `pack pack-${pack.tone}`
   }, React.createElement("div", {
-    className: "pack-head"
-  }, React.createElement("h3", null, pack.name), pack.badge && React.createElement("span", {
-    className: "pack-badge"
-  }, pack.badge)), React.createElement("div", {
-    className: `pack-cars${pack.cars.length > 1 ? ' is-trio' : ''}`
+    className: "pack-visual"
+  }, React.createElement("div", {
+    className: `pack-cars pack-cars-${pack.tone}`
   }, pack.cars.map(car => React.createElement("img", {
     key: `${pack.id}-${car.slot}`,
     className: `pack-car slot-${car.slot}`,
@@ -395,9 +391,13 @@ function PackageCard({
     alt: car.alt,
     loading: "lazy",
     decoding: "async"
-  }))), React.createElement("p", {
+  }))), React.createElement("div", {
+    className: "pack-head"
+  }, React.createElement("h3", null, pack.name), pack.badge && React.createElement("span", {
+    className: "pack-badge"
+  }, pack.badge)), React.createElement("p", {
     className: "pack-price"
-  }, pack.price), React.createElement("ul", {
+  }, pack.price)), React.createElement("ul", {
     className: "pack-features"
   }, pack.features.map(feature => React.createElement("li", {
     key: feature.text
