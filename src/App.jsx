@@ -69,7 +69,7 @@ const packages = [
     cars: [
       {
         image: '/assets/packages/package-gold-cars.webp',
-        alt: 'Coleção completa com os carros Raro, Premium e Épico',
+        alt: 'Três carros dos níveis Raro, Premium e Épico',
         slot: 'gold',
       },
     ],
