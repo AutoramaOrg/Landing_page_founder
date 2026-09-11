@@ -716,20 +716,6 @@ body {
   text-shadow: 0 2px 14px #020305, 0 0 16px rgba(var(--pack-rgb), 0.22);
 }
 
-.pack-badge {
-  padding: 0.38rem 0.55rem;
-  border: 1px solid rgba(var(--pack-rgb), 0.68);
-  border-radius: 5px;
-  background: rgba(5, 7, 10, 0.64);
-  box-shadow: inset 0 0 12px rgba(var(--pack-rgb), 0.06), 0 4px 18px rgba(0, 0, 0, 0.35);
-  color: var(--gold);
-  font-size: 0.58rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 .pack-cars {
   position: absolute;
   inset: 0 calc(var(--pack-pad-x) * -1);

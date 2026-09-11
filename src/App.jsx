@@ -35,8 +35,8 @@ const packages = [
     ],
     features: [
       { icon: 'car', text: '1 carro: Premium' },
+      { icon: 'brush', text: '1 bodykit + 1 pintura especial' },
       { icon: 'star', text: 'Itens de fundador' },
-      { icon: 'badge', text: 'Badge Bronze' },
     ],
     button: 'Escolher Bronze',
   },
@@ -55,8 +55,8 @@ const packages = [
     ],
     features: [
       { icon: 'car', text: '2 carros: Premium + Raro' },
+      { icon: 'brush', text: '2 bodykits + 2 pinturas especiais' },
       { icon: 'star', text: 'Itens de fundador' },
-      { icon: 'brush', text: 'Skin neon exclusiva' },
     ],
     button: 'Escolher Prata',
   },
@@ -64,7 +64,6 @@ const packages = [
     id: 'ouro',
     name: 'Ouro',
     tone: 'gold',
-    badge: 'Coleção completa',
     price: 'R$ 149',
     includedCars: ['Premium', 'Raro', 'Épico'],
     cars: [
@@ -76,8 +75,8 @@ const packages = [
     ],
     features: [
       { icon: 'car', text: '3 carros: Premium + Raro + Épico' },
+      { icon: 'brush', text: '3 bodykits + 3 pinturas especiais' },
       { icon: 'star', text: 'Itens de fundador' },
-      { icon: 'brush', text: 'Skin neon exclusiva' },
       { icon: 'people', text: 'Nome no mural dos pioneiros' },
     ],
     button: 'Escolher Ouro',
@@ -377,7 +376,6 @@ function PackageCard({ pack, onChoose }) {
 
         <div className="pack-head">
           <h3>{pack.name}</h3>
-          {pack.badge && <span className="pack-badge">{pack.badge}</span>}
         </div>
 
         <p className="pack-price">{pack.price}</p>
