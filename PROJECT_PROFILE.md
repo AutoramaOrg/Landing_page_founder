@@ -11,7 +11,7 @@
 - Landing pública: `https://autorama.horsepower-studio.com/`.
 - Domínio de envio verificado: `send.autorama.horsepower-studio.com`.
 
-## Estado observado — 2026-09-09
+## Estado observado — 2026-09-11
 
 SSH por chave para `yandias` está ativo. O Caddy existente responde pelo site principal e também
 pela landing, na rede Docker `horsepower-studio_default`; não houve reinício de VPS, Docker ou
@@ -28,14 +28,16 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `f8251973772f8ca2826860a8005452bfd4f5257f`, imagem
-`sha256:1fce2b711bb1b7928237f4d5606cfe7628d045e30a1df20742a6776ad4a70483` e container
+Landing ativa: release `586511f43bba102fd4be85f010757a9fb91daa33`, imagem
+`sha256:f8ff2282c5ae5248721c8576f36d0630d7c44923848b03edabe57b156338338d` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
-`4dbff1f13dd367939470df0b5d2fa4443de6998b1687cbb2dc778f364559e91f`. Bronze 4900, Prata 8900
-e Ouro 14900 centavos. A UI pública está habilitada desde 2026-09-10. A release anterior
-`50875763a9d0a07331c4166e8e3d02f8fc96233c` foi preservada como rollback imediato; a imagem
-`65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras desativadas, também permanece como
-fallback operacional.
+`e945d298d1b1ce209e21030869a2e9089140084338be119690097d2916e511f1`. Bronze 4900, Prata 8900
+e Ouro 14900 centavos; a UI pública continua habilitada. A release anterior
+`f8251973772f8ca2826860a8005452bfd4f5257f` e sua imagem
+`sha256:1fce2b711bb1b7928237f4d5606cfe7628d045e30a1df20742a6776ad4a70483` foram preservadas como
+rollback imediato. O fallback `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras
+desativadas, também permanece disponível. O backup pré-deploy está em
+`/home/yandias/autorama-founder/backups/20260911T130533Z-pre-586511f43bba102fd4be85f010757a9fb91daa33`.
 
 ## Segurança e gates
 

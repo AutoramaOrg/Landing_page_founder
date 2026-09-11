@@ -10,6 +10,8 @@
 - [scripts/checkout-config.test.mjs](scripts/checkout-config.test.mjs): isolamento dos ambientes.
 - [Dockerfile](Dockerfile), [deploy/compose.yaml](deploy/compose.yaml), [deploy/nginx.conf](deploy/nginx.conf): runtime estático preparado, ainda não implantado.
 - [deploy/RUNBOOK.md](deploy/RUNBOOK.md): publicação gradual e rollback (inclui rollback do design).
+- [deploy/2026-09-11-founder-visual-release.md](deploy/2026-09-11-founder-visual-release.md): registro
+  da release visual ativa, validações e rollback imediato.
 - [obsidian-docs/05-Integracoes/Checkout-InfinitePay.md](obsidian-docs/05-Integracoes/Checkout-InfinitePay.md): contrato de checkout.
 - Backend irmão `../autorama-supabase/supabase/functions/`: `infinitepay-create-checkout`,
   `founder-payment-status`, `infinitepay-webhook` e `_shared/founder-purchases.ts`.
