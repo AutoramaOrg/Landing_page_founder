@@ -11,7 +11,9 @@
 - Landing pública: `https://autorama.horsepower-studio.com/`.
 - Domínio de envio verificado: `send.autorama.horsepower-studio.com`.
 
-## Estado observado — 2026-09-11
+## Estado observado — frontend em 2026-09-17
+
+Publicação atual: [gameplay real](deploy/2026-09-17-founder-gameplay-release.md). As observações de backend, DNS e e-mail abaixo mantêm suas datas históricas; esta entrega alterou apenas a landing.
 
 SSH por chave para `yandias` está ativo. O Caddy existente responde pelo site principal e também
 pela landing, na rede Docker `horsepower-studio_default`; não houve reinício de VPS, Docker ou
@@ -33,20 +35,23 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `bcd6fe4f807aef07e297117ed2e6c8a6713247f4`, imagem
-`sha256:903f29305ebfda791b282ba293914c436595871f4544cfb535a3b6c495d15c41` e container
+Landing ativa: release `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
+`sha256:42aac57266e25039860f0640fbbf972ffcbab5f688d810299e1db88fc3841e63` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
-`88dbb2ec907c60a62982a45491cc4490c393bdad0d2c51b462c2a0fe376ab712`. Bronze 4900, Prata 8900
+`b731e3bc551e2a18500c2baa4c569b49483a43fd2cc6c6be42bd8a94709b86a5`. Bronze 4900, Prata 8900
 e Ouro 14900 centavos; a UI pública continua habilitada. O favicon oficial está em
 `/favicon.ico`. Os cards listam separadamente Sedan Premium, Muscle Raro e Esportivo Épico conforme
 o pacote, informam um bodykit por carro e nomeiam a pintura como Fundador Bronze, Prata ou Ouro. O
 selo e a afirmação “Coleção completa” foram removidos.
 
+A seção Gameplay está ativa, com montagem de 32 segundos carregada sob demanda antes dos pacotes.
+A release imediatamente anterior `bcd6fe4f807aef07e297117ed2e6c8a6713247f4` está preservada para rollback.
+
 As releases `9839991ba4c601c8f232b7685531eddb22911b30` e
 `590c083669f9884d25f93438bed1194eeedb34b7` permanecem no host como rollback imediato. O fallback
 `65ea292d59974c7b18b745c312f9d7efb464ee60`, com compras desativadas, também permanece disponível.
 O backup pré-deploy final está em
-`/home/yandias/autorama-founder/backups/20260911T172543Z-pre-bcd6fe4f807aef07e297117ed2e6c8a6713247f4`.
+`/home/yandias/autorama-founder/backups/20260917-gameplay-pre-32f821229ecb80834bbbe299b3111dd56609769b`.
 
 ## Segurança e gates
 

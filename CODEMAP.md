@@ -15,7 +15,7 @@
 - [deploy/2026-09-11-founder-packages-favicon-release.md](deploy/2026-09-11-founder-packages-favicon-release.md):
   release que removeu o selo, publicou o favicon e registrou a pendência do alias `www`.
 - [deploy/2026-09-11-founder-package-copy-release.md](deploy/2026-09-11-founder-package-copy-release.md):
-  release ativa com carros separados por linha e pinturas Fundador por pacote.
+  release de conteúdo dos pacotes, anterior à inclusão do gameplay.
 - [obsidian-docs/05-Integracoes/Checkout-InfinitePay.md](obsidian-docs/05-Integracoes/Checkout-InfinitePay.md): contrato de checkout.
 - Backend irmão `../autorama-supabase/supabase/functions/`: `infinitepay-create-checkout`,
   `founder-payment-status`, `infinitepay-webhook` e `_shared/founder-purchases.ts`.
@@ -27,3 +27,5 @@ Estrutura da página após o redesign de 2026-09-10: header → hero → faixa d
 faixa final com FAQ → rodapé enxuto. O visual anterior fica na tag `design/pre-redesign-20260910`.
 
 - [Gameplay real](obsidian-docs/03-Componentes/Gameplay-Real.md): origem, cortes, assets e player sob demanda em `#gameplay`.
+
+- [Release de gameplay](deploy/2026-09-17-founder-gameplay-release.md): publicação ativa, evidências e rollback.

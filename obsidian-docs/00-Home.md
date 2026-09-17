@@ -8,15 +8,12 @@ Esta documentacao registra como a landing funciona, onde ficam os arquivos centr
 
 ## Estado atual
 
-- **Status:** ativo localmente.
-- **Tipo:** landing page React + Vite + Tailwind.
-- **Objetivo:** divulgar e vender a ideia dos Pacotes de Fundador do Autorama Racing.
-- **Backend:** Edge Functions no repositório irmão `../autorama-supabase`.
-- **Banco de dados:** inexistente neste repositório.
-- **Checkout/pagamento:** ativo em Desenvolvimento para homologação via InfinitePay; Produção pendente.
-- **Build local validado:** `npm run build` em `2026-09-09`.
-- **Preview do build público:** `http://127.0.0.1:4175/`, com compras bloqueadas até homologação de Produção.
-- **Preparação de VPS:** `PROJECT_PROFILE.md`, `CODEMAP.md` e `deploy/RUNBOOK.md` na raiz; ainda sem deploy.
+- Landing React + Vite publicada em https://autorama.horsepower-studio.com/.
+- Gameplay real carregado sob demanda, antes dos pacotes de fundador.
+- Checkout da UI habilitado; backend no repositório irmão `../autorama-supabase`.
+- Ambiente, SHA e histórico de validações: `../PROJECT_PROFILE.md`.
+- Evidências desta publicação: `../deploy/2026-09-17-founder-gameplay-release.md`.
+
 
 ---
 

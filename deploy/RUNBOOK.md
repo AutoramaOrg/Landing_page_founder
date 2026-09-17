@@ -96,8 +96,9 @@ Após cada etapa, registrar horário, SHA/digest, alvo, checks reais e drift, se
 ### Rollback do design (redesign de 2026-09-10)
 
 O visual anterior está preservado na tag `design/pre-redesign-20260910` (commit `de1a527`, mesma
-árvore da release `f825197`). O redesign ativo em produção está na release
-`bcd6fe4f807aef07e297117ed2e6c8a6713247f4`, originada de `feat/landing-redesign-mockup`.
+árvore da release `f825197`). O redesign evoluiu para a release ativa
+`32f821229ecb80834bbbe299b3111dd56609769b`, branch `codex/founder-gameplay`; a publicação e o rollback
+imediato estão em [gameplay real](2026-09-17-founder-gameplay-release.md).
 
 - Reverter só o código: `git checkout design/pre-redesign-20260910 -- src index.html public/fonts`
   e reconstruir, ou gerar a release a partir da própria tag em checkout limpo.

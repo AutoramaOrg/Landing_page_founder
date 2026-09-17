@@ -1,6 +1,6 @@
 # Fluxo da página
 
-Fonte: `src/App.jsx` e `src/index.css`. Estado da versão em desenvolvimento em 17/09/2026; publicação registrada separadamente em `deploy/`.
+Fonte: `src/App.jsx` e `src/index.css`. Estado ativo em 17/09/2026; evidências da publicação em `deploy/2026-09-17-founder-gameplay-release.md`.
 
 ## Sequência
 
