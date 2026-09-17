@@ -7,6 +7,10 @@ const navItems = [{
   href: GAME_SITE_URL,
   external: true
 }, {
+  label: 'Gameplay',
+  href: '#gameplay',
+  section: 'gameplay'
+}, {
   label: 'Pacotes',
   href: '#pacotes',
   section: 'pacotes'
@@ -355,11 +359,9 @@ function Hero() {
   }, "Escolher meu pacote", React.createElement("span", {
     "aria-hidden": "true"
   }, "\xBB")), React.createElement("a", {
-    href: GAME_SITE_URL,
-    target: "_blank",
-    rel: "noreferrer",
+    href: "#gameplay",
     className: "text-link"
-  }, "Conhe\xE7a o jogo", React.createElement("span", {
+  }, "Assista ao gameplay", React.createElement("span", {
     "aria-hidden": "true"
   }, "\u203A")))), React.createElement("p", {
     className: "hero-words",
@@ -381,6 +383,83 @@ function Highlights() {
     name: item.icon,
     className: "highlight-icon"
   }), item.label))));
+}
+function Gameplay() {
+  const [started, setStarted] = React.useState(false);
+  const [failed, setFailed] = React.useState(false);
+  const videoRef = React.useRef(null);
+  React.useEffect(() => {
+    if (started) videoRef.current?.focus({
+      preventScroll: true
+    });
+  }, [started]);
+  return React.createElement("section", {
+    id: "gameplay",
+    className: "section gameplay",
+    "aria-labelledby": "gameplay-title"
+  }, React.createElement("div", {
+    className: "section-inner"
+  }, React.createElement("div", {
+    className: "gameplay-heading"
+  }, React.createElement("div", null, React.createElement("p", {
+    className: "kicker"
+  }, "Direto da pista"), React.createElement("h2", {
+    id: "gameplay-title",
+    className: "title"
+  }, "Veja o Autorama em a\xE7\xE3o.")), React.createElement("p", {
+    className: "section-sub"
+  }, "Curvas, velocidade e a busca pela melhor volta. Conhe\xE7a o jogo em cenas reais de gameplay.")), React.createElement("figure", {
+    className: "gameplay-figure"
+  }, React.createElement("div", {
+    className: "gameplay-screen"
+  }, started ? React.createElement("video", {
+    ref: videoRef,
+    tabIndex: 0,
+    className: "gameplay-video",
+    controls: true,
+    autoPlay: true,
+    playsInline: true,
+    preload: "none",
+    poster: "/assets/gameplay/autorama-gameplay-20260917.webp",
+    src: "/assets/gameplay/autorama-gameplay-20260917.mp4",
+    "aria-label": "Gameplay do Autorama Racing: quatro carros em um circuito urbano. V\xEDdeo sem \xE1udio, 32 segundos.",
+    "aria-describedby": "gameplay-caption",
+    onError: () => setFailed(true)
+  }, "Seu navegador n\xE3o suporta este v\xEDdeo.") : React.createElement("button", {
+    type: "button",
+    className: "gameplay-preview",
+    "aria-label": "Reproduzir gameplay do Autorama Racing, 32 segundos",
+    onClick: () => setStarted(true)
+  }, React.createElement("img", {
+    src: "/assets/gameplay/autorama-gameplay-20260917.webp",
+    alt: "Carro vermelho contornando uma curva no circuito urbano do Autorama Racing",
+    width: "1280",
+    height: "720",
+    loading: "lazy",
+    decoding: "async"
+  }), React.createElement("span", {
+    className: "gameplay-play",
+    "aria-hidden": "true"
+  }, React.createElement("svg", {
+    viewBox: "0 0 24 24"
+  }, React.createElement("path", {
+    d: "m9 5 11 7-11 7z",
+    fill: "currentColor"
+  }))), React.createElement("span", {
+    className: "gameplay-watch",
+    "aria-hidden": "true"
+  }, "Assistir ao gameplay ", React.createElement("span", null, "00:32")))), React.createElement("figcaption", {
+    id: "gameplay-caption",
+    className: "gameplay-caption"
+  }, React.createElement("span", null, "Capturado no jogo ", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xB7"), " PC Windows"), React.createElement("span", null, "Jogo em desenvolvimento. Imagens sujeitas a altera\xE7\xF5es."))), failed && React.createElement("p", {
+    className: "gameplay-error",
+    role: "status"
+  }, "N\xE3o foi poss\xEDvel carregar o v\xEDdeo.", ' ', React.createElement("a", {
+    href: "/assets/gameplay/autorama-gameplay-20260917.mp4",
+    className: "text-link"
+  }, "Abrir gameplay diretamente"))));
 }
 function PackageCard({
   pack,
@@ -745,12 +824,17 @@ function App() {
   const closePurchase = React.useCallback(() => setSelectedPackage(null), []);
   React.useEffect(() => {
     if (paymentResult || typeof IntersectionObserver === 'undefined') return undefined;
-    const closing = document.getElementById('duvidas');
-    if (!closing) return undefined;
-    const observer = new IntersectionObserver(([entry]) => setActiveSection(entry.isIntersecting ? 'duvidas' : 'pacotes'), {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) setActiveSection(entry.target.id);
+      }
+    }, {
       rootMargin: '-35% 0px -20% 0px'
     });
-    observer.observe(closing);
+    for (const id of ['gameplay', 'pacotes', 'duvidas']) {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    }
     return () => observer.disconnect();
   }, [paymentResult]);
   const handleNavigate = React.useCallback(item => {
@@ -767,7 +851,7 @@ function App() {
   }, React.createElement(Header, {
     activeSection: activeSection,
     onNavigate: handleNavigate
-  }), React.createElement("main", null, React.createElement(Hero, null), React.createElement(Highlights, null), React.createElement(Packages, {
+  }), React.createElement("main", null, React.createElement(Hero, null), React.createElement(Highlights, null), React.createElement(Gameplay, null), React.createElement(Packages, {
     onChoose: setSelectedPackage
   }), React.createElement(Closing, {
     faqOpen: faqOpen,

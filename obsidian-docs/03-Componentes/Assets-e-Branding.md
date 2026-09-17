@@ -120,3 +120,7 @@ Regra operacional:
 - [[06-Operacao/Checklist-de-Validacao-Visual|Checklist de validação visual]]
 
 #assets #branding #logo #hero
+
+## Gameplay da versão de 17/09/2026
+
+O player da seção `#gameplay` usa `public/assets/gameplay/autorama-gameplay-20260917.mp4` e capa WebP de mesmo nome. Origem e cortes: [[Gameplay-Real|Gameplay real]]. O hero atual usa os assets em `public/assets/hero/`; os arquivos antigos `hero-carro.mp4` e `hero-celebration.png` são legados e não compõem o hero desta versão.

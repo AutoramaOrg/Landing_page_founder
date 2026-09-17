@@ -36,6 +36,7 @@ Esta documentacao registra como a landing funciona, onde ficam os arquivos centr
 
 - [[03-Componentes/Frontend-React-Vite-Tailwind|Frontend React, Vite e Tailwind]]
 - [[03-Componentes/Assets-e-Branding|Assets e branding]]
+- [[03-Componentes/Gameplay-Real|Gameplay real na landing]]
 
 ### Banco de dados
 

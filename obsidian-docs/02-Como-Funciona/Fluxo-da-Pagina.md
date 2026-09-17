@@ -1,120 +1,27 @@
 # Fluxo da página
 
-## Estado
+Fonte: `src/App.jsx` e `src/index.css`. Estado da versão em desenvolvimento em 17/09/2026; publicação registrada separadamente em `deploy/`.
 
-- **Status:** ativo.
-- **Fonte confirmada:** `src/App.jsx`.
+## Sequência
 
-## Sequência atual
+Header fixo → hero → faixa de destaques → gameplay real → pacotes → encerramento com FAQ → rodapé.
 
-1. Header fixo
-2. Hero responsivo com mídia full-bleed
-3. Grade de benefícios
-4. Pacotes de fundador
-5. Universo do jogo
-6. Razões para entrar agora
-7. CTA final
-8. Footer
+## Navegação
 
-## Header
+O header usa o logo SVG oficial, link externo O jogo, âncoras Gameplay (`#gameplay`), Pacotes (`#pacotes`) e Dúvidas (`#duvidas`) e CTA Ver pacotes. No celular, as âncoras ficam no menu expansível; Escape fecha o menu. O item ativo acompanha a seção visível.
 
-O header fica fixo no topo e contém:
+## Hero e gameplay
 
-- logo `public/autorama_white.png`;
-- links de navegação internos;
-- CTA "Quero ser fundador".
+A composição do hero mantém cenário e três carros, tipografia Archivo/Inter, preto e vermelho, título Seu lugar no primeiro grid e CTA Escolher meu pacote. O link secundário Assista ao gameplay aponta para a nova seção; mantém a visibilidade original do link secundário a partir de 640 px.
 
-Links atuais:
+Gameplay mostra quatro trechos reais fornecidos pelo usuário, em uma edição de 32 segundos sem áudio. Antes do clique há somente um pôster WebP e um botão acessível. O elemento de vídeo e sua URL são montados após a interação; os controles nativos permitem pausa, busca e tela cheia. O foco é transferido para o player. A moldura preserva 16:9 no desktop e no celular. Se a mídia falhar, há mensagem e link direto para o arquivo.
 
-- `#universo`
-- `#beneficios`
-- `#pacotes`
-- `#entrar`
+A legenda identifica PC Windows e informa que o jogo está em desenvolvimento. Fontes, cortes, formato e hashes estão em [[03-Componentes/Gameplay-Real|Gameplay real]].
 
-## Hero
+## Pacotes e pagamento
 
-Objetivo: estabelecer contexto e conduzir para os pacotes.
+Bronze R$ 49, Prata R$ 89 e Ouro R$ 149. A seleção abre o modal de e-mail. O checkout usa o catálogo do servidor e valida o destino InfinitePay; a confirmação de pagamento continua autoritativa no backend. A inclusão do gameplay não muda preços, benefícios, entrega, funções de pagamento ou textos comerciais existentes.
 
-Conteúdo atual:
+## Encerramento
 
-- eyebrow: "Acesse. Corra. Lidere."
-- H1: "Pacotes de Fundador"
-- texto de apoio com destaque para Autorama Racing;
-- CTA primário para `#pacotes`;
-- CTA secundário para `#beneficios`.
-
-Mídia:
-
-- desktop: vídeo `public/hero-carro.mp4`, com `public/hero-celebration.png` como fallback;
-- mobile até 640 px: imagem estática `public/universo-rio-de-janeiro.jpg`, com enquadramento vertical e contraste reforçado;
-- o H1 usa quebra controlada em duas linhas no mobile para evitar cortes laterais;
-- com preferência de movimento reduzido, o vídeo também é ocultado.
-
-## Benefícios
-
-Cards renderizados a partir do array `benefits`:
-
-- Acesso antecipado
-- Itens únicos
-- Conteúdo exclusivo
-- Status fundador
-
-## Pacotes
-
-Cards renderizados a partir do array `packages`:
-
-- Bronze: `R$ 49`
-- Prata: `R$ 89`
-- Ouro: `R$ 149`
-
-O pacote Ouro está marcado como popular no código (`popular: true`).
-
-Com o checkout habilitado, cada botão de pacote abre um modal de identificação por e-mail. Após validação do campo, a
-landing envia `package_id` e `email` para a Edge Function do ambiente explícito, valida o host HTTPS
-retornado e navega para o checkout InfinitePay na mesma aba. O retorno de pagamento é confirmado pela
-Edge Function `founder-payment-status` antes de mostrar sucesso.
-
-Build público aponta exclusivamente para Produção e começa com os três botões desativados,
-exibindo "Disponível em breve". Ativação depende de `VITE_CHECKOUT_ENABLED=true` e homologação
-conforme `deploy/RUNBOOK.md`; Desenvolvimento local preserva seu endpoint de homologação.
-
-## Universo
-
-Cards renderizados a partir do array `universe`:
-
-- Corridas
-- Bastidores
-- Mecânica
-- Eventos
-- Economia viva
-
-## Razões
-
-Cards renderizados a partir do array `reasons`:
-
-- Você faz parte da história
-- Vantagem desde o início
-- Recompensas duradouras
-- Investimento que vale a pena
-
-## CTA final
-
-Reforça a entrada nos pacotes e aponta novamente para `#pacotes`.
-
-## Footer
-
-Contém:
-
-- logo;
-- descrição curta;
-- colunas Jogo, Comunidade e Suporte.
-
-Observação: os links do footer apontam para `#top` no estado atual. Se forem usados como navegação real, precisam receber destinos específicos.
-
-## Pontos a confirmar
-
-- configuração e publicação do checkout em Produção;
-- URLs reais de comunidade, Discord, suporte, termos e privacidade;
-- configuração do Resend para notificações por e-mail.
-
-#fluxo #ux #landing
+Faixa Faça parte dessa largada, FAQ expansível e rodapé. Clicar em Dúvidas abre o FAQ. A seção não é uma promessa de data de lançamento.

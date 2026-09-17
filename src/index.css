@@ -1208,6 +1208,150 @@ body {
   }
 }
 
+/* ---------- gameplay real ---------- */
+
+.gameplay {
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.gameplay-heading {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.gameplay-heading .section-sub {
+  max-width: 42ch;
+  margin: 0;
+}
+
+.gameplay-figure {
+  margin: 0;
+}
+
+.gameplay-screen {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #000;
+}
+
+.gameplay-preview,
+.gameplay-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gameplay-preview {
+  position: relative;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+}
+
+.gameplay-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gameplay-preview::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.7));
+  pointer-events: none;
+}
+
+.gameplay-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(54px, 6vw, 76px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: var(--red);
+  transform: translate(-50%, -50%);
+  transition: background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.gameplay-play svg {
+  width: 30px;
+  height: 30px;
+}
+
+.gameplay-preview:hover .gameplay-play {
+  background: var(--red-strong);
+  box-shadow: 0 0 0 8px rgba(255, 36, 56, 0.16);
+}
+
+.gameplay-preview:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+}
+
+.gameplay-watch {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.85rem;
+  left: 1rem;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 600;
+}
+
+.gameplay-watch > span {
+  font-variant-numeric: tabular-nums;
+}
+
+.gameplay-caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+  padding-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.73rem;
+  line-height: 1.6;
+}
+
+.gameplay-caption > span:first-child {
+  color: var(--text);
+}
+
+.gameplay-error {
+  margin-top: 1rem;
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .gameplay-heading {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .gameplay-watch {
+    right: 1.5rem;
+    bottom: 1.25rem;
+    left: 1.5rem;
+  }
+}
+
 /* ---------- breakpoints ---------- */
 
 @media (min-width: 640px) {
@@ -1518,6 +1662,10 @@ body {
   .nav-link,
   .text-link,
   .faq-toggle {
+    transition: none;
+  }
+
+  .gameplay-play {
     transition: none;
   }
 

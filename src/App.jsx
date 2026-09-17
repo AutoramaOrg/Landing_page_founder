@@ -9,6 +9,7 @@ const GAME_SITE_URL = 'https://www.autoramaracing.com/'
 
 const navItems = [
   { label: 'O jogo', href: GAME_SITE_URL, external: true },
+  { label: 'Gameplay', href: '#gameplay', section: 'gameplay' },
   { label: 'Pacotes', href: '#pacotes', section: 'pacotes' },
   { label: 'Dúvidas', href: '#duvidas', section: 'duvidas' },
 ]
@@ -324,8 +325,8 @@ function Hero() {
               Escolher meu pacote
               <span aria-hidden="true">»</span>
             </a>
-            <a href={GAME_SITE_URL} target="_blank" rel="noreferrer" className="text-link">
-              Conheça o jogo
+            <a href="#gameplay" className="text-link">
+              Assista ao gameplay
               <span aria-hidden="true">›</span>
             </a>
           </div>
@@ -356,6 +357,87 @@ function Highlights() {
           </li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+function Gameplay() {
+  const [started, setStarted] = React.useState(false)
+  const [failed, setFailed] = React.useState(false)
+  const videoRef = React.useRef(null)
+
+  React.useEffect(() => {
+    if (started) videoRef.current?.focus({ preventScroll: true })
+  }, [started])
+
+  return (
+    <section id="gameplay" className="section gameplay" aria-labelledby="gameplay-title">
+      <div className="section-inner">
+        <div className="gameplay-heading">
+          <div>
+            <p className="kicker">Direto da pista</p>
+            <h2 id="gameplay-title" className="title">Veja o Autorama em ação.</h2>
+          </div>
+          <p className="section-sub">
+            Curvas, velocidade e a busca pela melhor volta. Conheça o jogo em cenas reais de gameplay.
+          </p>
+        </div>
+
+        <figure className="gameplay-figure">
+          <div className="gameplay-screen">
+            {started ? (
+              <video
+                ref={videoRef}
+                tabIndex={0}
+                className="gameplay-video"
+                controls
+                autoPlay
+                playsInline
+                preload="none"
+                poster="/assets/gameplay/autorama-gameplay-20260917.webp"
+                src="/assets/gameplay/autorama-gameplay-20260917.mp4"
+                aria-label="Gameplay do Autorama Racing: quatro carros em um circuito urbano. Vídeo sem áudio, 32 segundos."
+                aria-describedby="gameplay-caption"
+                onError={() => setFailed(true)}
+              >
+                Seu navegador não suporta este vídeo.
+              </video>
+            ) : (
+              <button
+                type="button"
+                className="gameplay-preview"
+                aria-label="Reproduzir gameplay do Autorama Racing, 32 segundos"
+                onClick={() => setStarted(true)}
+              >
+                <img
+                  src="/assets/gameplay/autorama-gameplay-20260917.webp"
+                  alt="Carro vermelho contornando uma curva no circuito urbano do Autorama Racing"
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="gameplay-play" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z" fill="currentColor" /></svg>
+                </span>
+                <span className="gameplay-watch" aria-hidden="true">Assistir ao gameplay <span>00:32</span></span>
+              </button>
+            )}
+          </div>
+          <figcaption id="gameplay-caption" className="gameplay-caption">
+            <span>Capturado no jogo <span aria-hidden="true">·</span> PC Windows</span>
+            <span>Jogo em desenvolvimento. Imagens sujeitas a alterações.</span>
+          </figcaption>
+        </figure>
+        {failed && (
+          <p className="gameplay-error" role="status">
+            Não foi possível carregar o vídeo.{' '}
+            <a href="/assets/gameplay/autorama-gameplay-20260917.mp4" className="text-link">
+              Abrir gameplay diretamente
+            </a>
+          </p>
+        )}
+      </div>
     </section>
   )
 }
@@ -760,13 +842,18 @@ function App() {
 
   React.useEffect(() => {
     if (paymentResult || typeof IntersectionObserver === 'undefined') return undefined
-    const closing = document.getElementById('duvidas')
-    if (!closing) return undefined
     const observer = new IntersectionObserver(
-      ([entry]) => setActiveSection(entry.isIntersecting ? 'duvidas' : 'pacotes'),
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        }
+      },
       { rootMargin: '-35% 0px -20% 0px' },
     )
-    observer.observe(closing)
+    for (const id of ['gameplay', 'pacotes', 'duvidas']) {
+      const section = document.getElementById(id)
+      if (section) observer.observe(section)
+    }
     return () => observer.disconnect()
   }, [paymentResult])
 
@@ -784,6 +871,7 @@ function App() {
         <main>
           <Hero />
           <Highlights />
+          <Gameplay />
           <Packages onChoose={setSelectedPackage} />
           <Closing faqOpen={faqOpen} onToggleFaq={() => setFaqOpen((value) => !value)} />
         </main>
