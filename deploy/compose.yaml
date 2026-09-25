@@ -12,6 +12,8 @@ services:
     pids_limit: 64
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=16777216,uid=101,gid=101,mode=1700
+    volumes:
+      - ${DOWNLOADS_DIR:?Set the host directory with game builds}:/usr/share/nginx/downloads:ro
     expose: ["8080"]
     networks:
       edge:

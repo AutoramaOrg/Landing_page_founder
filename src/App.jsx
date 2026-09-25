@@ -4,22 +4,16 @@ import {
   getPaymentStatus,
   readPaymentResult,
 } from './checkout.js'
+import { fetchAndroidRelease } from './android-release.js'
 
 const GAME_SITE_URL = 'https://www.autoramaracing.com/'
 
-// APK hospedado no GitHub Releases do repositório público da landing, fora do container.
-const androidBuild = {
-  version: '1.0.8 preview 1',
-  size: '338 MB',
-  minAndroid: 'Android 7.1',
-  url: 'https://github.com/AutoramaOrg/Landing_page_founder/releases/download/android-v1.0.8-preview.1/AutoramaRacing-1.0.8-preview1.apk',
-  sha256: '3ddecad018ef5be71c6f8d4983df8692bfe7d00f871c5fe9c7ecb1067e15dbfa',
-}
+const STEAM_URL = 'https://store.steampowered.com/app/4176520/Autorama_Racing/'
 
 const navItems = [
   { label: 'O jogo', href: GAME_SITE_URL, external: true },
   { label: 'Gameplay', href: '#gameplay', section: 'gameplay' },
-  { label: 'Android', href: '#android', section: 'android' },
+  { label: 'Download', href: '#download', section: 'download' },
   { label: 'Pacotes', href: '#pacotes', section: 'pacotes' },
   { label: 'Dúvidas', href: '#duvidas', section: 'duvidas' },
 ]
@@ -116,7 +110,7 @@ const faq = [
   {
     question: 'O jogo já está disponível?',
     answer:
-      'O Autorama Racing está em desenvolvimento. Uma versão de teste para Android já pode ser baixada nesta página. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.',
+      'O Autorama Racing está em desenvolvimento. Ele já pode ser jogado no PC pela Steam, em acesso antecipado, e uma versão de teste para Android pode ser baixada nesta página. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.',
   },
 ]
 
@@ -452,50 +446,98 @@ function Gameplay() {
   )
 }
 
-function AndroidDownload() {
+function Download() {
+  // undefined = carregando, null = indisponível.
+  const [android, setAndroid] = React.useState(undefined)
+
+  React.useEffect(() => {
+    let active = true
+    fetchAndroidRelease()
+      .then((release) => active && setAndroid(release))
+      .catch(() => active && setAndroid(null))
+    return () => {
+      active = false
+    }
+  }, [])
+
   return (
-    <section id="android" className="section android" aria-labelledby="android-title">
-      <div className="section-inner android-inner">
-        <div className="android-copy">
-          <p className="kicker">Versão de teste</p>
-          <h2 id="android-title" className="title">Jogue no Android.</h2>
+    <section id="download" className="section download" aria-labelledby="download-title">
+      <div className="section-inner">
+        <div className="section-head">
+          <p className="kicker">Baixe e jogue</p>
+          <h2 id="download-title" className="title">Download.</h2>
           <p className="section-sub">
-            Baixe a versão de teste do Autorama Racing para celulares Android. O jogo está em
-            desenvolvimento e esta versão pode apresentar falhas.
+            Jogue no PC pela Steam ou teste a versão para celulares Android.
           </p>
-
-          <div className="android-actions">
-            <a href={androidBuild.url} className="btn btn-primary btn-cta" rel="noreferrer">
-              Baixar APK
-              <span aria-hidden="true">»</span>
-            </a>
-            <span className="android-size">{androidBuild.size}</span>
-          </div>
-
-          <dl className="android-meta">
-            <div>
-              <dt>Versão</dt>
-              <dd>{androidBuild.version}</dd>
-            </div>
-            <div>
-              <dt>Requer</dt>
-              <dd>{androidBuild.minAndroid} ou superior, 64 bits</dd>
-            </div>
-          </dl>
         </div>
 
-        <div className="android-steps">
-          <h3>Como instalar</h3>
-          <ol>
-            <li>Toque em <strong>Baixar APK</strong> no celular e aguarde o download terminar.</li>
-            <li>
-              Abra o arquivo baixado. Se o Android pedir, permita instalar apps desta origem.
-            </li>
-            <li>Abra o Autorama Racing e entre com sua conta.</li>
-          </ol>
-          <p className="android-hash">
-            SHA-256 <code>{androidBuild.sha256}</code>
-          </p>
+        <div className="download-grid">
+          <article className="platform" aria-labelledby="download-pc">
+            <p className="platform-tag">PC · Windows</p>
+            <h3 id="download-pc">Steam</h3>
+            <p className="platform-text">
+              Em acesso antecipado e gratuito para jogar. Instale e receba as atualizações pela
+              Steam.
+            </p>
+            <div className="platform-actions">
+              <a href={STEAM_URL} className="btn btn-primary btn-cta" target="_blank" rel="noreferrer">
+                Ver na Steam
+                <span aria-hidden="true">»</span>
+              </a>
+            </div>
+            <dl className="platform-meta">
+              <div>
+                <dt>Plataforma</dt>
+                <dd>Steam</dd>
+              </div>
+              <div>
+                <dt>Requer</dt>
+                <dd>Windows 64 bits</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article className="platform" aria-labelledby="download-android">
+            <p className="platform-tag">Android · Versão de teste</p>
+            <h3 id="download-android">APK</h3>
+            <p className="platform-text">
+              Baixe no celular e abra o arquivo. Se o Android pedir, permita instalar apps desta
+              origem. Esta versão pode apresentar falhas.
+            </p>
+            {android ? (
+              <>
+                <div className="platform-actions">
+                  <a href={android.url} download={android.file} className="btn btn-outline btn-cta">
+                    Baixar APK
+                    <span aria-hidden="true">»</span>
+                  </a>
+                  <span className="platform-size">{android.size}</span>
+                </div>
+                <dl className="platform-meta">
+                  <div>
+                    <dt>Versão</dt>
+                    <dd>{android.version}</dd>
+                  </div>
+                  <div>
+                    <dt>Requer</dt>
+                    <dd>{android.minAndroid} ou superior, 64 bits</dd>
+                  </div>
+                </dl>
+                <p className="platform-hash">
+                  SHA-256 <code>{android.sha256}</code>
+                </p>
+              </>
+            ) : (
+              <div className="platform-actions">
+                <button type="button" className="btn btn-outline btn-cta" disabled>
+                  Baixar APK
+                </button>
+                <span className="platform-size" role="status">
+                  {android === null ? 'Download indisponível no momento.' : 'Carregando versão…'}
+                </span>
+              </div>
+            )}
+          </article>
         </div>
       </div>
     </section>
@@ -910,7 +952,7 @@ function App() {
       },
       { rootMargin: '-35% 0px -20% 0px' },
     )
-    for (const id of ['gameplay', 'android', 'pacotes', 'duvidas']) {
+    for (const id of ['gameplay', 'download', 'pacotes', 'duvidas']) {
       const section = document.getElementById(id)
       if (section) observer.observe(section)
     }
@@ -932,7 +974,7 @@ function App() {
           <Hero />
           <Highlights />
           <Gameplay />
-          <AndroidDownload />
+          <Download />
           <Packages onChoose={setSelectedPackage} />
           <Closing faqOpen={faqOpen} onToggleFaq={() => setFaqOpen((value) => !value)} />
         </main>

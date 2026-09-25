@@ -1352,44 +1352,28 @@ body {
   }
 }
 
-/* ---------- download android ---------- */
+/* ---------- download ---------- */
 
-.android {
+.download {
   border-bottom: 1px solid var(--line);
 }
 
-.android-inner {
+.download-grid {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
-.android-copy .section-sub {
-  max-width: 46ch;
-}
-
-.android-actions {
+.platform {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.9rem 1.2rem;
-  margin-top: 1.6rem;
+  flex-direction: column;
+  padding: 1.4rem var(--pad);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-card);
 }
 
-.android-size {
-  color: var(--muted);
-  font-size: 0.85rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.android-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 2rem;
-  margin-top: 1.5rem;
-  font-size: 0.82rem;
-}
-
-.android-meta dt {
+.platform-tag {
   color: var(--dim);
   font-size: 0.68rem;
   font-weight: 700;
@@ -1397,66 +1381,60 @@ body {
   text-transform: uppercase;
 }
 
-.android-meta dd {
+.platform h3 {
+  margin-top: 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
+.platform-text {
+  max-width: 46ch;
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.platform-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem 1.2rem;
+  margin-top: 1.4rem;
+}
+
+.platform-size {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.platform-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  margin: 1.4rem 0 0;
+  font-size: 0.82rem;
+}
+
+.platform-meta dt {
+  color: var(--dim);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.platform-meta dd {
   margin: 0.3rem 0 0;
   color: var(--text);
 }
 
-.android-steps {
-  padding: 1.4rem var(--pad);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--bg-card);
-}
-
-.android-steps h3 {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 800;
-  font-size: 1.05rem;
-  text-transform: uppercase;
-}
-
-.android-steps ol {
-  display: grid;
-  gap: 0.9rem;
-  margin: 1.1rem 0 0;
-  padding: 0;
-  list-style: none;
-  counter-reset: android-step;
-}
-
-.android-steps li {
-  position: relative;
-  padding-left: 2.2rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-  line-height: 1.55;
-  counter-increment: android-step;
-}
-
-.android-steps li::before {
-  content: counter(android-step);
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  place-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 1px solid rgba(255, 36, 56, 0.55);
-  border-radius: 50%;
-  color: var(--text);
-  font-size: 0.72rem;
-  font-weight: 700;
-}
-
-.android-steps strong {
-  color: var(--text);
-}
-
-.android-hash {
-  margin-top: 1.3rem;
+.platform-hash {
+  margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--line-soft);
   color: var(--dim);
@@ -1464,7 +1442,11 @@ body {
   line-height: 1.6;
 }
 
-.android-hash code {
+.platform-meta + .platform-hash {
+  margin-top: 1.3rem;
+}
+
+.platform-hash code {
   display: block;
   overflow-wrap: anywhere;
   color: var(--muted);
@@ -1472,13 +1454,12 @@ body {
 }
 
 @media (min-width: 900px) {
-  .android-inner {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 3rem;
+  .download-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem;
   }
 
-  .android-steps {
+  .platform {
     padding: 1.8rem 2rem;
   }
 }

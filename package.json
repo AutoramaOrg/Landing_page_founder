@@ -9,7 +9,8 @@
     "dev": "vite --host 127.0.0.1 --configLoader native",
     "prebuild": "npm run compile:jsx",
     "build": "vite build --configLoader native",
-    "preview": "vite preview --host 127.0.0.1 --configLoader native"
+    "preview": "vite preview --host 127.0.0.1 --configLoader native",
+    "publish:android": "node scripts/publish-android.mjs"
   },
   "dependencies": {
     "react": "^18.2.0",
