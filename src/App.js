@@ -2,6 +2,13 @@
 function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import { checkoutEnabled, createCheckout, getPaymentStatus, readPaymentResult } from './checkout.js';
 const GAME_SITE_URL = 'https://www.autoramaracing.com/';
+const androidBuild = {
+  version: '1.0.8 preview 1',
+  size: '338 MB',
+  minAndroid: 'Android 7.1',
+  url: 'https://github.com/AutoramaOrg/Landing_page_founder/releases/download/android-v1.0.8-preview.1/AutoramaRacing-1.0.8-preview1.apk',
+  sha256: '3ddecad018ef5be71c6f8d4983df8692bfe7d00f871c5fe9c7ecb1067e15dbfa'
+};
 const navItems = [{
   label: 'O jogo',
   href: GAME_SITE_URL,
@@ -10,6 +17,10 @@ const navItems = [{
   label: 'Gameplay',
   href: '#gameplay',
   section: 'gameplay'
+}, {
+  label: 'Android',
+  href: '#android',
+  section: 'android'
 }, {
   label: 'Pacotes',
   href: '#pacotes',
@@ -119,7 +130,7 @@ const faq = [{
   answer: 'O pagamento é processado pelo checkout seguro da InfinitePay. Nenhum dado de cartão passa por este site.'
 }, {
   question: 'O jogo já está disponível?',
-  answer: 'O Autorama Racing está em desenvolvimento. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.'
+  answer: 'O Autorama Racing está em desenvolvimento. Uma versão de teste para Android já pode ser baixada nesta página. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.'
 }];
 function Icon({
   name,
@@ -460,6 +471,40 @@ function Gameplay() {
     href: "/assets/gameplay/autorama-gameplay-20260917.mp4",
     className: "text-link"
   }, "Abrir gameplay diretamente"))));
+}
+function AndroidDownload() {
+  return React.createElement("section", {
+    id: "android",
+    className: "section android",
+    "aria-labelledby": "android-title"
+  }, React.createElement("div", {
+    className: "section-inner android-inner"
+  }, React.createElement("div", {
+    className: "android-copy"
+  }, React.createElement("p", {
+    className: "kicker"
+  }, "Vers\xE3o de teste"), React.createElement("h2", {
+    id: "android-title",
+    className: "title"
+  }, "Jogue no Android."), React.createElement("p", {
+    className: "section-sub"
+  }, "Baixe a vers\xE3o de teste do Autorama Racing para celulares Android. O jogo est\xE1 em desenvolvimento e esta vers\xE3o pode apresentar falhas."), React.createElement("div", {
+    className: "android-actions"
+  }, React.createElement("a", {
+    href: androidBuild.url,
+    className: "btn btn-primary btn-cta",
+    rel: "noreferrer"
+  }, "Baixar APK", React.createElement("span", {
+    "aria-hidden": "true"
+  }, "\xBB")), React.createElement("span", {
+    className: "android-size"
+  }, androidBuild.size)), React.createElement("dl", {
+    className: "android-meta"
+  }, React.createElement("div", null, React.createElement("dt", null, "Vers\xE3o"), React.createElement("dd", null, androidBuild.version)), React.createElement("div", null, React.createElement("dt", null, "Requer"), React.createElement("dd", null, androidBuild.minAndroid, " ou superior, 64 bits")))), React.createElement("div", {
+    className: "android-steps"
+  }, React.createElement("h3", null, "Como instalar"), React.createElement("ol", null, React.createElement("li", null, "Toque em ", React.createElement("strong", null, "Baixar APK"), " no celular e aguarde o download terminar."), React.createElement("li", null, "Abra o arquivo baixado. Se o Android pedir, permita instalar apps desta origem."), React.createElement("li", null, "Abra o Autorama Racing e entre com sua conta.")), React.createElement("p", {
+    className: "android-hash"
+  }, "SHA-256 ", React.createElement("code", null, androidBuild.sha256)))));
 }
 function PackageCard({
   pack,
@@ -831,7 +876,7 @@ function App() {
     }, {
       rootMargin: '-35% 0px -20% 0px'
     });
-    for (const id of ['gameplay', 'pacotes', 'duvidas']) {
+    for (const id of ['gameplay', 'android', 'pacotes', 'duvidas']) {
       const section = document.getElementById(id);
       if (section) observer.observe(section);
     }
@@ -851,7 +896,7 @@ function App() {
   }, React.createElement(Header, {
     activeSection: activeSection,
     onNavigate: handleNavigate
-  }), React.createElement("main", null, React.createElement(Hero, null), React.createElement(Highlights, null), React.createElement(Gameplay, null), React.createElement(Packages, {
+  }), React.createElement("main", null, React.createElement(Hero, null), React.createElement(Highlights, null), React.createElement(Gameplay, null), React.createElement(AndroidDownload, null), React.createElement(Packages, {
     onChoose: setSelectedPackage
   }), React.createElement(Closing, {
     faqOpen: faqOpen,

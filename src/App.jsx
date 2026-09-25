@@ -7,9 +7,19 @@ import {
 
 const GAME_SITE_URL = 'https://www.autoramaracing.com/'
 
+// APK hospedado no GitHub Releases do repositório público da landing, fora do container.
+const androidBuild = {
+  version: '1.0.8 preview 1',
+  size: '338 MB',
+  minAndroid: 'Android 7.1',
+  url: 'https://github.com/AutoramaOrg/Landing_page_founder/releases/download/android-v1.0.8-preview.1/AutoramaRacing-1.0.8-preview1.apk',
+  sha256: '3ddecad018ef5be71c6f8d4983df8692bfe7d00f871c5fe9c7ecb1067e15dbfa',
+}
+
 const navItems = [
   { label: 'O jogo', href: GAME_SITE_URL, external: true },
   { label: 'Gameplay', href: '#gameplay', section: 'gameplay' },
+  { label: 'Android', href: '#android', section: 'android' },
   { label: 'Pacotes', href: '#pacotes', section: 'pacotes' },
   { label: 'Dúvidas', href: '#duvidas', section: 'duvidas' },
 ]
@@ -106,7 +116,7 @@ const faq = [
   {
     question: 'O jogo já está disponível?',
     answer:
-      'O Autorama Racing está em desenvolvimento. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.',
+      'O Autorama Racing está em desenvolvimento. Uma versão de teste para Android já pode ser baixada nesta página. Os pacotes de fundador garantem acesso antecipado e itens exclusivos de fundador.',
   },
 ]
 
@@ -437,6 +447,56 @@ function Gameplay() {
             </a>
           </p>
         )}
+      </div>
+    </section>
+  )
+}
+
+function AndroidDownload() {
+  return (
+    <section id="android" className="section android" aria-labelledby="android-title">
+      <div className="section-inner android-inner">
+        <div className="android-copy">
+          <p className="kicker">Versão de teste</p>
+          <h2 id="android-title" className="title">Jogue no Android.</h2>
+          <p className="section-sub">
+            Baixe a versão de teste do Autorama Racing para celulares Android. O jogo está em
+            desenvolvimento e esta versão pode apresentar falhas.
+          </p>
+
+          <div className="android-actions">
+            <a href={androidBuild.url} className="btn btn-primary btn-cta" rel="noreferrer">
+              Baixar APK
+              <span aria-hidden="true">»</span>
+            </a>
+            <span className="android-size">{androidBuild.size}</span>
+          </div>
+
+          <dl className="android-meta">
+            <div>
+              <dt>Versão</dt>
+              <dd>{androidBuild.version}</dd>
+            </div>
+            <div>
+              <dt>Requer</dt>
+              <dd>{androidBuild.minAndroid} ou superior, 64 bits</dd>
+            </div>
+          </dl>
+        </div>
+
+        <div className="android-steps">
+          <h3>Como instalar</h3>
+          <ol>
+            <li>Toque em <strong>Baixar APK</strong> no celular e aguarde o download terminar.</li>
+            <li>
+              Abra o arquivo baixado. Se o Android pedir, permita instalar apps desta origem.
+            </li>
+            <li>Abra o Autorama Racing e entre com sua conta.</li>
+          </ol>
+          <p className="android-hash">
+            SHA-256 <code>{androidBuild.sha256}</code>
+          </p>
+        </div>
       </div>
     </section>
   )
@@ -850,7 +910,7 @@ function App() {
       },
       { rootMargin: '-35% 0px -20% 0px' },
     )
-    for (const id of ['gameplay', 'pacotes', 'duvidas']) {
+    for (const id of ['gameplay', 'android', 'pacotes', 'duvidas']) {
       const section = document.getElementById(id)
       if (section) observer.observe(section)
     }
@@ -872,6 +932,7 @@ function App() {
           <Hero />
           <Highlights />
           <Gameplay />
+          <AndroidDownload />
           <Packages onChoose={setSelectedPackage} />
           <Closing faqOpen={faqOpen} onToggleFaq={() => setFaqOpen((value) => !value)} />
         </main>
