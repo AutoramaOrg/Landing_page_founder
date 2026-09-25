@@ -13,7 +13,7 @@
 
 ## Estado observado — frontend em 2026-09-17
 
-Publicação atual: [gameplay real](deploy/2026-09-17-founder-gameplay-release.md). As observações de backend, DNS e e-mail abaixo mantêm suas datas históricas; esta entrega alterou apenas a landing.
+Publicação atual: [Download Steam + APK](deploy/2026-09-25-download-release.md); anterior: [gameplay real](deploy/2026-09-17-founder-gameplay-release.md). As observações de backend, DNS e e-mail abaixo mantêm suas datas históricas; esta entrega alterou apenas a landing.
 
 SSH por chave para `yandias` está ativo. O Caddy existente responde pelo site principal e também
 pela landing, na rede Docker `horsepower-studio_default`; não houve reinício de VPS, Docker ou
@@ -35,7 +35,12 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa: release `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
+Landing ativa desde 2026-09-25: release `07e35a039e4dea8c097351bfd31e361bb25aaa4d`, imagem
+`sha256:5553f4f25f09f77dfae19f6bd4757edb3e333fee5b44feec0af774ee876e3d6c`, com a seção Download (Steam +
+APK servido de `/home/yandias/autorama-founder/downloads`, montado somente leitura). Builds Android novas são
+publicadas com `npm run publish:android`, sem redeploy ([runbook](deploy/RUNBOOK.md#publicar-nova-build-android)).
+
+Release anterior (rollback imediato): `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
 `sha256:42aac57266e25039860f0640fbbf972ffcbab5f688d810299e1db88fc3841e63` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
 `b731e3bc551e2a18500c2baa4c569b49483a43fd2cc6c6be42bd8a94709b86a5`. Bronze 4900, Prata 8900

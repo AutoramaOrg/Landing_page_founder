@@ -81,6 +81,22 @@ ou título de aba isolado não confirma que o checkout está utilizável.
 Pagamento real depende de execução pelo titular; documentar o que foi simulado e o que foi
 observado. Só então gerar nova release com compras habilitadas e repetir smoke na borda.
 
+## Publicar nova build Android
+
+O APK não entra na imagem. A landing lê `/downloads/android.json` e serve os arquivos de
+`/home/yandias/autorama-founder/downloads` (montado somente leitura desde a release `07e35a0`).
+Para colocar uma build nova no ar, sem deploy da landing:
+
+```sh
+npm run publish:android -- --apk <caminho/do/arquivo.apk> --version "1.0.8 preview 3"
+```
+
+O script calcula tamanho e SHA-256, envia o arquivo como `.incoming-*` (oculto para o Nginx), confere o
+hash no VPS, renomeia para `AutoramaRacing-<versão>.apk` e troca o manifesto de forma atômica,
+guardando o anterior em `.android.json.prev`. No fim, valida manifesto e APK pelo domínio público.
+Um nome já publicado nunca é substituído por conteúdo diferente: cada build precisa de uma versão nova.
+APKs antigos permanecem na pasta até limpeza manual. Reverter: `cp -p .android.json.prev android.json`.
+
 ## Rollback avaliado (ainda não ensaiado no VPS)
 
 Se a landing falhar, manter/reimplantar a release com compras desativadas e remover somente o
