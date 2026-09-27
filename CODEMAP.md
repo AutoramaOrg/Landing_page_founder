@@ -23,9 +23,10 @@
 Fluxo: pacote + e-mail → create-checkout → catálogo do servidor → InfinitePay → pedido pending;
 retorno/webhook → payment_check autoritativo → valor exato → pedido paid → outbox de notificações.
 
-Estrutura da página após o redesign de 2026-09-10: header → hero → faixa de destaques → gameplay real → pacotes →
+Estrutura da página: header → hero → faixa de destaques → gameplay real → download → pacotes →
 faixa final com FAQ → rodapé enxuto. O visual anterior fica na tag `design/pre-redesign-20260910`.
 
 - [Gameplay real](obsidian-docs/03-Componentes/Gameplay-Real.md): origem, cortes, assets e player sob demanda em `#gameplay`.
 
-- [Release de gameplay](deploy/2026-09-17-founder-gameplay-release.md): publicação ativa, evidências e rollback.
+- [Release de gameplay](deploy/2026-09-17-founder-gameplay-release.md): publicação histórica.
+- [Reabertura do checkout](deploy/2026-09-27-checkout-reopen.md): publicação ativa, evidências e rollback.

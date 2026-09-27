@@ -2,14 +2,14 @@
 
 ## Estado atual
 
-- **Status:** ativo no ambiente de Desenvolvimento para homologação.
+- **Status:** vendas reabertas em Produção em 2026-09-27; [evidências e rollback](../../deploy/2026-09-27-checkout-reopen.md).
 - **Código da landing:** `src/App.jsx` coleta o e-mail e `src/checkout.js` chama as Edge Functions.
 - **Backend:** repositório irmão `../autorama-supabase`.
 - **Desenvolvimento local:** Autorama Desenvolvimento (`wqzcimuetknagejrkuqh`).
 - **Build público:** exclusivo para Autorama Producao (`nmenoqjgjtrpvowguvlg`), compras desativadas por padrão.
-- **Produção remota:** checkout ainda não instalado; ver `PROJECT_PROFILE.md` e `deploy/RUNBOOK.md` na raiz.
-- **Recebedor aprovado:** `$power-horse-p86`; configuração remota de Produção ainda pendente.
-- **Catálogo local:** Bronze R$ 49, Prata R$ 89, Ouro R$ 149. Desenvolvimento remoto ainda usa Bronze R$ 1 até novo deploy.
+- **Produção remota:** criação de checkout e rejeição de retorno forjado verificadas em 2026-09-27; ver `PROJECT_PROFILE.md` e `deploy/RUNBOOK.md` na raiz.
+- **Recebedor:** `$power-horse-p86`, Horse Power Tech, confirmado nas páginas InfinitePay em 2026-09-27.
+- **Catálogo em Produção:** Bronze R$ 49, Prata R$ 89, Ouro R$ 149, verificado no checkout. Desenvolvimento não reinspecionado nesta operação.
 
 Ao escolher Bronze, Prata ou Ouro, a página abre um modal e solicita um e-mail válido. O cliente envia
 `{ package_id, email }`; preço, catálogo, credenciais e criação do pedido ficam no backend. A resposta
@@ -19,12 +19,12 @@ Depois do pagamento, os parâmetros de retorno não são tratados como prova. A 
 `founder-payment-status`, que consulta a InfinitePay antes de exibir a confirmação.
 
 O código local exige booleanos literais de sucesso/pagamento e valor inteiro exato do pedido na
-resposta autoritativa; ausência de valor é rejeitada. Esse endurecimento ainda não foi publicado.
+resposta autoritativa; ausência de valor é rejeitada. A validação desta reabertura não efetuou pagamento real.
 Contrato conferido na [documentação oficial](https://www.infinitepay.io/checkout-documentacao).
 
 `VITE_CHECKOUT_ENABLED=true` libera a UI após homologação; não é controle de acesso do backend.
-Não enviar valores ou credenciais em `VITE_*`. O modal não promete notificação por e-mail enquanto
-Resend não foi validado; entrega manual ainda exige rotina operacional antes de abrir vendas.
+Não enviar credenciais em `VITE_*`. O modal informa prazo de até dois dias úteis para entrega.
+O histórico de validação de e-mail está em `PROJECT_PROFILE.md`; não foi repetido nesta reabertura.
 
 ## Segurança
 

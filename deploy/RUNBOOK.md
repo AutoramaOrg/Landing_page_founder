@@ -71,6 +71,12 @@ Verificar propagação e emissão de TLS; não desativar verificação de certif
 
 ## 5. Smoke e ativação
 
+Para preservar vendas abertas em atualizações futuras, gere o artefato explicitamente com
+`VITE_CHECKOUT_ENABLED=true` e `VITE_SUPABASE_PROJECT_REF=nmenoqjgjtrpvowguvlg` no ambiente do build.
+Um `npm run build` sem o primeiro parâmetro desabilita compras por padrão. Registre esses valores
+públicos junto ao SHA e ao hash do artefato; confirme no navegador os três botões habilitados após
+qualquer deploy. Não altere o padrão fechado de `src/checkout-config.js`.
+
 Conferir HTTP/HTTPS do domínio principal antes e depois; validar HTTPS do subdomínio, health,
 headers, assets, navegação desktop/mobile e ausência de porta 8080 acessível externamente.
 Testar CORS não autorizado, pacote/e-mail inválidos e retorno de pagamento forjado sem mutação.

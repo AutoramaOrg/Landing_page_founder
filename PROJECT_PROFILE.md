@@ -11,9 +11,9 @@
 - Landing pública: `https://autorama.horsepower-studio.com/`.
 - Domínio de envio verificado: `send.autorama.horsepower-studio.com`.
 
-## Estado observado — frontend em 2026-09-17
+## Estado observado — frontend em 2026-09-27
 
-Publicação atual: [Download Steam + APK](deploy/2026-09-25-download-release.md); anterior: [gameplay real](deploy/2026-09-17-founder-gameplay-release.md). As observações de backend, DNS e e-mail abaixo mantêm suas datas históricas; esta entrega alterou apenas a landing.
+Publicação atual: [reabertura do checkout](deploy/2026-09-27-checkout-reopen.md), com compras habilitadas e downloads preservados. A release de Download de 25/09 foi encontrada com os três botões desabilitados. As observações de DNS e e-mail abaixo mantêm suas datas históricas; esta entrega alterou apenas o build da landing.
 
 SSH por chave para `yandias` está ativo. O Caddy existente responde pelo site principal e também
 pela landing, na rede Docker `horsepower-studio_default`; não houve reinício de VPS, Docker ou
@@ -35,12 +35,14 @@ Resend foi configurado com chave limitada a envio e ao domínio verificado; os s
 `compras@send.autorama.horsepower-studio.com` para `contact@autoramaracing.com` foi observado
 como `delivered` no painel. As chaves efêmeras usadas no smoke foram revogadas.
 
-Landing ativa desde 2026-09-25: release `07e35a039e4dea8c097351bfd31e361bb25aaa4d`, imagem
-`sha256:5553f4f25f09f77dfae19f6bd4757edb3e333fee5b44feec0af774ee876e3d6c`, com a seção Download (Steam +
+Landing ativa desde 2026-09-27: fonte `a9a9dc2bf82c9b5f40f2b0192037a8f1a7880210`, variante `checkout-20260927`, imagem
+`sha256:7110b8b00e5d73a3ab5c3ab43bcb87665486bf365fac5d058416705c74c27d50`, build com `VITE_CHECKOUT_ENABLED=true`, com a seção Download (Steam +
 APK servido de `/home/yandias/autorama-founder/downloads`, montado somente leitura). Builds Android novas são
 publicadas com `npm run publish:android`, sem redeploy ([runbook](deploy/RUNBOOK.md#publicar-nova-build-android)).
 
-Release anterior (rollback imediato): `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
+Rollback imediato: release `07e35a039e4dea8c097351bfd31e361bb25aaa4d`, imagem `sha256:5553f4f25f09f77dfae19f6bd4757edb3e333fee5b44feec0af774ee876e3d6c`; preserva downloads e desabilita compras.
+
+Release histórica de gameplay: `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
 `sha256:42aac57266e25039860f0640fbbf972ffcbab5f688d810299e1db88fc3841e63` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
 `b731e3bc551e2a18500c2baa4c569b49483a43fd2cc6c6be42bd8a94709b86a5`. Bronze 4900, Prata 8900
