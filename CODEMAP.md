@@ -3,6 +3,7 @@
 - [PROJECT_PROFILE.md](PROJECT_PROFILE.md): ambientes confirmados, gates e estado operacional.
 - [src/App.jsx](src/App.jsx): página, preços de exibição, modal de e-mail e resultado do pagamento.
 - [src/App.js](src/App.js): gerado por `scripts/compile-jsx.mjs`; não editar diretamente.
+- [estabelecimentos/index.html](estabelecimentos/index.html), [src/EstabelecimentosApp.jsx](src/EstabelecimentosApp.jsx) e [src/estabelecimentos.css](src/estabelecimentos.css): pré-venda das ações dos estabelecimentos (Pista, Paint Shop, Mecânica, Posto) com explicação animada. Sem preço até a tokenomics v1; lista pelo WhatsApp. `src/EstabelecimentosApp.js` é gerado.
 - [src/index.css](src/index.css): design tokens, layout responsivo e componentes visuais da página.
 - [public/fonts/](public/fonts/): Inter e Archivo em woff2 auto-hospedados (OFL 1.1), sem CDN.
 - [src/checkout-config.js](src/checkout-config.js): seleção explícita do ambiente e gate público.
