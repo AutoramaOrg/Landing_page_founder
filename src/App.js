@@ -21,6 +21,9 @@ const navItems = [{
   href: '#pacotes',
   section: 'pacotes'
 }, {
+  label: 'Patrocinadores',
+  href: '/patrocinadores/'
+}, {
   label: 'Dúvidas',
   href: '#duvidas',
   section: 'duvidas'

@@ -15,6 +15,7 @@ const navItems = [
   { label: 'Gameplay', href: '#gameplay', section: 'gameplay' },
   { label: 'Download', href: '#download', section: 'download' },
   { label: 'Pacotes', href: '#pacotes', section: 'pacotes' },
+  { label: 'Patrocinadores', href: '/patrocinadores/' },
   { label: 'Dúvidas', href: '#duvidas', section: 'duvidas' },
 ]
 

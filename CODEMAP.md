@@ -3,6 +3,8 @@
 - [PROJECT_PROFILE.md](PROJECT_PROFILE.md): ambientes confirmados, gates e estado operacional.
 - [src/App.jsx](src/App.jsx): página, preços de exibição, modal de e-mail e resultado do pagamento.
 - [src/App.js](src/App.js): gerado por `scripts/compile-jsx.mjs`; não editar diretamente.
+- [patrocinadores/index.html](patrocinadores/index.html), [src/SponsorApp.jsx](src/SponsorApp.jsx) e [src/sponsors.css](src/sponsors.css): página de patrocinadores, instruções de envio do logo e link para o WhatsApp oficial. `src/SponsorApp.js` é gerado pelo compilador JSX.
+- [vite.config.js](vite.config.js): build de duas páginas, `/` e `/patrocinadores/`.
 - [src/index.css](src/index.css): design tokens, layout responsivo e componentes visuais da página.
 - [public/fonts/](public/fonts/): Inter e Archivo em woff2 auto-hospedados (OFL 1.1), sem CDN.
 - [src/checkout-config.js](src/checkout-config.js): seleção explícita do ambiente e gate público.
@@ -25,6 +27,8 @@ retorno/webhook → payment_check autoritativo → valor exato → pedido paid �
 
 Estrutura da página: header → hero → faixa de destaques → gameplay real → download → pacotes →
 faixa final com FAQ → rodapé enxuto. O visual anterior fica na tag `design/pre-redesign-20260910`.
+
+A página de patrocinadores explica reconhecimento de marca, canais de contato/vendas, engajamento e comunidade com quatro diagramas SVG selecionáveis e animação CSS. Mostra a jornada do jogador e orienta o envio do logo pelo WhatsApp ao final. Inclui pausa global das animações e preferência por movimento reduzido. Não recebe nem armazena arquivos no site; enviar um logo não ativa patrocínio automaticamente. Ver [documentação da página](obsidian-docs/03-Componentes/Pagina-Patrocinadores.md).
 
 - [Gameplay real](obsidian-docs/03-Componentes/Gameplay-Real.md): origem, cortes, assets e player sob demanda em `#gameplay`.
 

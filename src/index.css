@@ -1539,7 +1539,7 @@ body {
   .header-nav {
     display: flex;
     align-items: center;
-    gap: 2.3rem;
+    gap: clamp(0.9rem, 1.8vw, 2rem);
   }
 
   .header-cta {

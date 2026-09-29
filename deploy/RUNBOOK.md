@@ -87,6 +87,12 @@ ou título de aba isolado não confirma que o checkout está utilizável.
 Pagamento real depende de execução pelo titular; documentar o que foi simulado e o que foi
 observado. Só então gerar nova release com compras habilitadas e repetir smoke na borda.
 
+## Página de patrocinadores
+
+Antes de publicar uma imagem que inclua `/patrocinadores/`, confirmar com a equipe que o número do WhatsApp em `src/SponsorApp.jsx` continua sendo o canal correto. O site não recebe anexos. A equipe deve verificar arquivos recebidos com antivírus antes de abrir ou converter o material, conforme [Página de patrocinadores](../obsidian-docs/03-Componentes/Pagina-Patrocinadores.md).
+
+No smoke da imagem candidata e, depois, do domínio público, verificar `/`, `/patrocinadores/`, o redirecionamento de `/patrocinadores`, os links de navegação e o destino `wa.me`. Confirmar que POST à landing continua negado. O rollback é a imagem anterior da landing; não há migração ou backend para esta página.
+
 ## Publicar nova build Android
 
 O APK não entra na imagem. A landing lê `/downloads/android.json` e serve os arquivos de
