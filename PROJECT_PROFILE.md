@@ -40,6 +40,15 @@ Landing ativa desde 2026-09-25: release `07e35a039e4dea8c097351bfd31e361bb25aaa4
 APK servido de `/home/yandias/autorama-founder/downloads`, montado somente leitura). Builds Android novas são
 publicadas com `npm run publish:android`, sem redeploy ([runbook](deploy/RUNBOOK.md#publicar-nova-build-android)).
 
+Download Android atualizado em 03/10/2026 para **1.0.8 preview 4**, código 13.
+Manifesto público `/downloads/android.json`; APK de 287120020 bytes, SHA-256
+`e3edaccf52ef7a1489f41179b23dc626102343a636ff55ccc76ded2ce537a7d8`.
+O download HTTPS completo foi conferido. Fonte do jogo:
+`a98fea8835ce8ac8a3bda9024c84e0762ef0e953` (AutoramaOrg/Autorama).
+Pacote e certificado preservados da preview 3; `.android.json.prev` ainda aponta
+para ela. Publicação somente de APK/manifesto, sem redeploy do frontend.
+Teste no jogo e aparelho pelo usuário.
+
 Release anterior (rollback imediato): `32f821229ecb80834bbbe299b3111dd56609769b`, imagem
 `sha256:42aac57266e25039860f0640fbbf972ffcbab5f688d810299e1db88fc3841e63` e container
 `autorama-founder-landing-1`. O artefato publicado teve SHA-256
